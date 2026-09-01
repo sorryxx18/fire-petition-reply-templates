@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>火災預防陳情案件回覆範本庫</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif; }
+  .blank-input { border-bottom: 2px solid #3b82f6; background: #eff6ff; padding: 0 4px; font-weight: 600; min-width: 60px; display: inline-block; }
+</style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold text-slate-800 mb-1">火災預防陳情案件回覆範本庫</h1>
+    <p class="text-slate-500 text-sm mb-6">依陳情情境搜尋、填寫並產生正式回覆；案例參考可查閱過往實際回覆寫法。</p>
+
+    <div class="flex gap-2 mb-6 border-b border-slate-200 flex-wrap">
+      <button id="tabBtnGen" onclick="switchTab('gen')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-blue-600 text-blue-600">範本產生器</button>
+      <button id="tabBtnCases" onclick="switchTab('cases')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">案例參考</button>
+      <button id="tabBtnRegs" onclick="switchTab('regs')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">法規追蹤</button>
+      <button id="tabBtnStats" onclick="switchTab('stats')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">使用統計</button>
+    </div>
+
+    <!-- 範本產生器 Tab -->
+    <div id="genTab">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-4">
+        <input id="genSearchBox" type="text" placeholder="輸入關鍵字、場所、法規搜尋標準範本..."
+          class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-400">
+      </div>
+      <div id="genLoadingMsg" class="text-center text-slate-400 py-8">載入中...</div>
+      <div id="genList" class="grid gap-2 sm:grid-cols-2 mb-6"></div>
+
+      <div id="generatorPanel" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+        <div class="flex justify-between items-start mb-3">
+          <div>
+            <h2 id="genTitle" class="text-lg font-bold text-slate-800"></h2>
+            <p id="genMeta" class="text-xs text-slate-400 mt-1"></p>
+          </div>
+          <button onclick="closeGenerator()" class="text-slate-400 text-sm">✕ 關閉</button>
+        </div>
+
+        <div id="genReviewFlags" class="hidden mb-3 rounded-xl bg-amber-50 border border-amber-200 p-3 text-sm text-amber-700"></div>
+
+        <label class="block text-sm font-medium text-slate-700 mb-1">案號（必填）</label>
+        <input id="genCaseNumber" type="text" placeholder="例如：115年O月OO日OO字第OOOOOOOO號"
+          class="w-full border border-slate-300 rounded-xl px-3 py-2 mb-4 text-sm">
+
+        <label class="block text-sm font-medium text-slate-700 mb-1">承辦人</label>
+        <input id="genHandler" type="text" placeholder="您的姓名"
+          class="w-full border border-slate-300 rounded-xl px-3 py-2 mb-4 text-sm">
+
+        <div id="placeholderFields" class="space-y-3 mb-4"></div>
+
+        <label class="block text-sm font-medium text-slate-700 mb-1">預覽（藍色為待填欄位，全部填完才能產生）</label>
+        <div id="previewBox" class="w-full border border-slate-300 rounded-xl px-4 py-3 mb-2 text-sm leading-relaxed whitespace-pre-wrap bg-slate-50"></div>
+        <p id="validationMsg" class="text-xs text-red-500 mb-4 hidden">還有欄位尚未填寫，請完成後再產生正式回覆。</p>
+
+        <button id="produceBtn" onclick="produceReply()" class="w-full bg-blue-600 text-white rounded-xl py-2.5 font-medium">產生正式回覆（複製到剪貼簿）</button>
+      </div>
+    </div>
+
+    <!-- 案例參考 Tab -->
+    <div id="casesTab" class="hidden">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-4">
+        <input id="caseSearchBox" type="text" placeholder="輸入關鍵字、場所、法規搜尋案例..."
+          class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-400">
+      </div>
+      <div id="caseLoadingMsg" class="text-center text-slate-400 py-8">載入中...</div>
+      <div id="caseList" class="space-y-2"></div>
+    </div>
+
+    <!-- 法規追蹤 Tab -->
+    <div id="regsTab" class="hidden">
+      <p class="text-slate-500 text-sm mb-4">法規異動後，把該法規標記「待覆核」，系統會列出所有引用該法規的範本，提醒逐一檢查是否需要更新文字。</p>
+      <div id="regsLoadingMsg" class="text-center text-slate-400 py-8">載入中...</div>
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100 text-slate-600 text-left">
+            <tr>
+              <th class="px-4 py-2.5 font-semibold">法規名稱</th>
+              <th class="px-4 py-2.5 font-semibold">狀態</th>
+              <th class="px-4 py-2.5 font-semibold">引用此法規的範本</th>
+              <th class="px-4 py-2.5 font-semibold">操作</th>
+            </tr>
+          </thead>
+          <tbody id="regsTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 使用統計 Tab -->
+    <div id="statsTab" class="hidden">
+      <p class="text-slate-500 text-sm mb-4">依使用次數排序，「平均修改幅度」越高代表這則範本常被大改，可能該更新內容。</p>
+      <div id="statsLoadingMsg" class="text-center text-slate-400 py-8">載入中...</div>
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100 text-slate-600 text-left">
+            <tr>
+              <th class="px-4 py-2.5 font-semibold">範本</th>
+              <th class="px-4 py-2.5 font-semibold">使用次數</th>
+              <th class="px-4 py-2.5 font-semibold">平均修改幅度</th>
+            </tr>
+          </thead>
+          <tbody id="statsTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
