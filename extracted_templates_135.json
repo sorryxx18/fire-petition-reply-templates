@@ -1,0 +1,3864 @@
+[
+  {
+    "id": "fire-equipment-compliant",
+    "source_number": "1",
+    "title": "1、消防安全設備 合格",
+    "category": "消防安全設備",
+    "status": "合格",
+    "keywords": [
+      "消防安全設備",
+      "檢查合格",
+      "用途列管",
+      "用火用電",
+      "維護管理"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "消防安全設備檢查",
+      "related_agencies": []
+    },
+    "legal_references": [],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      },
+      {
+        "key": "regulated_use",
+        "label": "列管用途",
+        "source_pattern": "以○○○用途列管",
+        "type": "text"
+      }
+    ],
+    "response_text": "本局權管事項為消防安全設備檢查，於○○○年○月○○日派員前往，該址為○○○，依現場實際使用情形，以○○○用途列管，依法應設置之消防安全設備，檢查結果符合規定；為維護公共安全，已當場宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實消防預防措施與應變機制。"
+  },
+  {
+    "id": "fire-equipment-noncompliant-correction",
+    "source_number": "2",
+    "title": "2、消防安全設備 不合格（限改）",
+    "category": "消防安全設備",
+    "status": "不合格（限改）",
+    "keywords": [
+      "消防安全設備",
+      "不合格",
+      "限期改善",
+      "滅火器",
+      "住宅用火災警報器",
+      "複查"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "消防安全設備檢查",
+      "related_agencies": []
+    },
+    "legal_references": [],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      },
+      {
+        "key": "regulated_use",
+        "label": "列管用途",
+        "source_pattern": "以○○○用途列管",
+        "type": "text"
+      },
+      {
+        "key": "noncompliant_items",
+        "label": "檢查缺失內容",
+        "source_pattern": "滅火器不合規定及未設置住宅用火災警報器",
+        "type": "text",
+        "default_text": "滅火器不合規定及未設置住宅用火災警報器"
+      }
+    ],
+    "response_text": "本局權管事項為消防安全設備檢查，於○○○年○月○○日派員前往，該址為○○○，依現場實際使用情形，以○○○用途列管，依法應設置之消防安全設備；檢查結果計有滅火器不合規定及未設置住宅用火災警報器，已當場開立限期改善通知單限期改善在案，將持續追蹤列管至複查合格；為維護公共安全，已當場宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "fire-equipment-noncompliant-citation",
+    "source_number": "2",
+    "title": "2、消防安全設備 不合格（舉發）",
+    "category": "消防安全設備",
+    "status": "不合格（舉發）",
+    "keywords": [
+      "消防安全設備",
+      "不合格",
+      "舉發",
+      "限期改善",
+      "火警自動警報設備",
+      "複查"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "消防安全設備檢查",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "消防法"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      },
+      {
+        "key": "regulated_use",
+        "label": "列管用途",
+        "source_pattern": "以○○○用途列管",
+        "type": "text"
+      },
+      {
+        "key": "noncompliant_items",
+        "label": "檢查缺失內容",
+        "source_pattern": "住宅用火災警報器未設置及火警自動警報設備不合規定",
+        "type": "text",
+        "default_text": "住宅用火災警報器未設置及火警自動警報設備不合規定"
+      }
+    ],
+    "response_text": "本局權管事項為消防安全設備檢查，於○○○年○月○○日派員前往，該址為○○○，依現場實際使用情形，以○○○用途列管，現場計有住宅用火災警報器、火警自動警報設備等不符規定，已當場開立舉發違反消防法案件及限期改善通知單在案，並將持續追蹤列管至複查合格；為維護公共安全，已當場宣導場所人員注意用火用電安全，並做好各項消防安全設備維護管理及落實消防預防措施與應變機制。"
+  },
+  {
+    "id": "fire-equipment-no-entry",
+    "source_number": "3",
+    "title": "3、消防安全設備 無法進入",
+    "category": "消防安全設備",
+    "status": "無法進入",
+    "keywords": [
+      "消防安全設備",
+      "無法進入",
+      "大門深鎖",
+      "張貼通知",
+      "住宅用火災警報器"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "消防安全設備檢查",
+      "related_agencies": []
+    },
+    "legal_references": [],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "到場日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "locked_location",
+        "label": "無法進入位置",
+        "source_pattern": "現場1樓大門",
+        "type": "text",
+        "default_text": "現場1樓大門"
+      }
+    ],
+    "response_text": "本局權管事項為消防安全設備檢查，於○○○年○月○日派員前往，現場1樓大門深鎖無法進入，已張貼「臺北市政府消防局住宅用火災警報器安裝通知單」，如發現有違規之行為將依規定查處。"
+  },
+  {
+    "id": "fire-equipment-advocacy",
+    "source_number": "4",
+    "title": "4、消防安全設備 宣導",
+    "category": "消防安全設備",
+    "status": "宣導",
+    "keywords": [
+      "消防安全設備",
+      "宣導",
+      "住宅用火災警報器",
+      "住戶",
+      "用火用電"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "消防安全設備檢查",
+      "related_agencies": []
+    },
+    "legal_references": [],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "到場日期",
+        "source_pattern": "○○○年○○月○○日",
+        "type": "date"
+      }
+    ],
+    "response_text": "本局權管事項為消防安全設備檢查，於○○○年○○月○○日派員前往，已當場宣導住戶裝設住宅用火災警報器及注意用火用電安全。"
+  },
+  {
+    "id": "fire-equipment-out-of-jurisdiction",
+    "source_number": "5",
+    "title": "5、消防安全設備 非本局權管",
+    "category": "消防安全設備",
+    "status": "非本局權管",
+    "keywords": [
+      "非本局權管",
+      "堆積雜物",
+      "權責機關",
+      "移請回復",
+      "行政程序法"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "消防安全設備檢查",
+      "related_agencies": [
+        "本市／本府其他權責機關（○○○局／處）"
+      ]
+    },
+    "legal_references": [
+      "行政程序法"
+    ],
+    "placeholders": [
+      {
+        "key": "complaint_matter",
+        "label": "非本局權管的陳情事項",
+        "source_pattern": "該址堆積雜物部分",
+        "type": "text",
+        "default_text": "該址堆積雜物部分"
+      },
+      {
+        "key": "government_level",
+        "label": "權責機關層級",
+        "source_pattern": "本市/府",
+        "type": "choice",
+        "options": [
+          "本市",
+          "本府"
+        ]
+      },
+      {
+        "key": "agency_name",
+        "label": "權責機關名稱",
+        "source_pattern": "○○○",
+        "type": "text"
+      },
+      {
+        "key": "agency_type",
+        "label": "機關類型",
+        "source_pattern": "局/處",
+        "type": "choice",
+        "options": [
+          "局",
+          "處"
+        ]
+      }
+    ],
+    "response_text": "本局權管事項為消防安全設備檢查，有關您反映該址堆積雜物部分，經本局了解，係屬本市/府○○○局/處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "lpg-dealer-compliant",
+    "source_number": "6",
+    "title": "6、瓦斯桶（瓦斯行） 合格",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "合格",
+    "keywords": [
+      "瓦斯桶",
+      "瓦斯行",
+      "液化石油氣",
+      "儲氣量",
+      "第73條",
+      "空桶"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "液化石油氣安全管理",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法第73條"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "dealer_name",
+        "label": "瓦斯行名稱",
+        "source_pattern": "○○○瓦斯行",
+        "type": "text"
+      },
+      {
+        "key": "cylinder_size_1",
+        "label": "第一種瓦斯桶公斤數",
+        "source_pattern": "○公斤裝",
+        "type": "number"
+      },
+      {
+        "key": "cylinder_count_1",
+        "label": "第一種瓦斯桶桶數",
+        "source_pattern": "○桶",
+        "type": "number"
+      },
+      {
+        "key": "cylinder_size_2",
+        "label": "第二種瓦斯桶公斤數",
+        "source_pattern": "○公斤裝",
+        "type": "number"
+      },
+      {
+        "key": "cylinder_count_2",
+        "label": "第二種瓦斯桶桶數",
+        "source_pattern": "○桶",
+        "type": "number"
+      },
+      {
+        "key": "empty_cylinder_count",
+        "label": "空桶桶數",
+        "source_pattern": "空桶○桶",
+        "type": "number"
+      }
+    ],
+    "response_text": "本局權管事項為液化石油氣安全管理，於○○○年○月○日派員前往，該址為○○○瓦斯行，現場擺放瓦斯桶○公斤裝○桶、○公斤裝○桶及空桶○桶，其儲氣量未違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」第73條規定。另為維護公共安全，已當場宣導業者勿超量儲放瓦斯桶及空桶應儘速送回處理場所處置，並提醒用火及用電安全等注意事項。"
+  },
+  {
+    "id": "lpg-dealer-noncompliant",
+    "source_number": "7",
+    "title": "7、瓦斯桶（瓦斯行） 不合格",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "不合格",
+    "keywords": [
+      "瓦斯桶",
+      "瓦斯行",
+      "超量儲放",
+      "舉發",
+      "限期改善",
+      "第73條"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "液化石油氣安全管理",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法第73條",
+      "消防法"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "dealer_name",
+        "label": "瓦斯行名稱",
+        "source_pattern": "○○○瓦斯行",
+        "type": "text"
+      },
+      {
+        "key": "cylinder_size",
+        "label": "瓦斯桶公斤數",
+        "source_pattern": "○公斤裝",
+        "type": "number"
+      },
+      {
+        "key": "cylinder_count",
+        "label": "瓦斯桶桶數",
+        "source_pattern": "○桶",
+        "type": "number"
+      },
+      {
+        "key": "empty_cylinder_count",
+        "label": "空桶桶數",
+        "source_pattern": "空桶○桶",
+        "type": "number"
+      }
+    ],
+    "response_text": "本局權管事項為液化石油氣安全管理，於○○○年○月○日派員前往，該址為○○○瓦斯行，現場擺放瓦斯桶○公斤裝○桶及空桶○桶，其儲氣量已違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」第73條規定，已當場開立舉發違反消防法案件及限期改善通知單在案，並將持續追蹤列管至複查合格；另為維護公共安全，已宣導業者勿超量儲放瓦斯桶，並提醒用火及用電安全等注意事項。"
+  },
+  {
+    "id": "lpg-use-nonmanifold-compliant",
+    "source_number": "8",
+    "title": "8、瓦斯桶（使用場所） 合格（非串接）",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "合格（非串接）",
+    "keywords": [
+      "瓦斯桶",
+      "使用場所",
+      "非串接",
+      "液化石油氣",
+      "80公斤",
+      "備用瓦斯桶"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "液化石油氣安全管理",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      },
+      {
+        "key": "in_use_cylinder_count",
+        "label": "使用中瓦斯桶桶數",
+        "source_pattern": "○桶",
+        "type": "number"
+      },
+      {
+        "key": "in_use_cylinder_size",
+        "label": "使用中瓦斯桶公斤數",
+        "source_pattern": "○公斤裝",
+        "type": "number"
+      },
+      {
+        "key": "spare_cylinder_count",
+        "label": "備用瓦斯桶桶數",
+        "source_pattern": "備用瓦斯桶○桶",
+        "type": "number"
+      },
+      {
+        "key": "spare_cylinder_size",
+        "label": "備用瓦斯桶公斤數",
+        "source_pattern": "○公斤",
+        "type": "number"
+      }
+    ],
+    "response_text": "本局權管事項為液化石油氣安全管理，於○○○年○月○日派員前往，該址為○○○，現場共擺放○桶○公斤裝瓦斯桶各自連接爐具使用，備用瓦斯桶○桶○公斤，串接使用量未達80公斤，未違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」；為維護公共安全，已當場宣導場所使用燃氣器具時應注意用火用電安全，並定期自行檢查瓦斯桶及管線安全等注意事項。"
+  },
+  {
+    "id": "lpg-use-manifold-compliant",
+    "source_number": "8",
+    "title": "8、瓦斯桶（使用場所） 合格（串接）",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "合格（串接）",
+    "keywords": [
+      "瓦斯桶",
+      "使用場所",
+      "串接",
+      "安全設施",
+      "氣體漏氣警報器",
+      "80公斤"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "液化石油氣安全管理",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      },
+      {
+        "key": "manifold_cylinder_count",
+        "label": "串接瓦斯桶桶數",
+        "source_pattern": "○桶",
+        "type": "number"
+      },
+      {
+        "key": "manifold_cylinder_size",
+        "label": "串接瓦斯桶公斤數",
+        "source_pattern": "○公斤裝",
+        "type": "number"
+      },
+      {
+        "key": "spare_cylinder_count",
+        "label": "備用瓦斯桶桶數",
+        "source_pattern": "備用瓦斯桶○桶",
+        "type": "number"
+      },
+      {
+        "key": "spare_cylinder_size",
+        "label": "備用瓦斯桶公斤數",
+        "source_pattern": "○公斤",
+        "type": "number"
+      },
+      {
+        "key": "safety_facilities",
+        "label": "已設安全設施",
+        "source_pattern": "嚴禁煙火標示、滅火器、固定裝置（鐵鍊）、防止日光直射措施及氣體漏氣警報器等",
+        "type": "multiselect",
+        "default_text": "嚴禁煙火標示、滅火器、固定裝置（鐵鍊）、防止日光直射措施及氣體漏氣警報器等"
+      }
+    ],
+    "response_text": "本局權管事項為液化石油氣安全管理，於○○○年○月○日派員前往，該址為○○○，現場共擺放○桶○公斤裝瓦斯桶串接爐具，備用瓦斯桶○桶○公斤，串接使用量未達80公斤，其安全設施設有嚴禁煙火標示、滅火器、固定裝置（鐵鍊）、防止日光直射措施及氣體漏氣警報器等，並放置於通風良好處，未違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」；為維護公共安全，已向場所宣導注意燃氣器具使用時應注意用火用電安全，及經常自行檢查瓦斯桶及管線等事項。"
+  },
+  {
+    "id": "lpg-use-manifold-noncompliant",
+    "source_number": "9",
+    "title": "9、瓦斯桶（使用場所） 不合格（串接）",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "不合格（串接）",
+    "keywords": [
+      "瓦斯桶",
+      "串接",
+      "通風裝置",
+      "嚴禁煙火標示",
+      "舉發",
+      "80公斤"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "液化石油氣安全管理",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法",
+      "消防法"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      },
+      {
+        "key": "manifold_cylinder_count",
+        "label": "串接瓦斯桶桶數",
+        "source_pattern": "○桶",
+        "type": "number"
+      },
+      {
+        "key": "manifold_cylinder_size",
+        "label": "串接瓦斯桶公斤數",
+        "source_pattern": "○公斤裝",
+        "type": "number"
+      },
+      {
+        "key": "spare_cylinder_count",
+        "label": "備用瓦斯桶桶數",
+        "source_pattern": "備用瓦斯桶○桶",
+        "type": "number"
+      },
+      {
+        "key": "spare_cylinder_size",
+        "label": "備用瓦斯桶公斤數",
+        "source_pattern": "○公斤",
+        "type": "number"
+      },
+      {
+        "key": "missing_safety_facilities",
+        "label": "欠缺安全設施",
+        "source_pattern": "未設有防止氣體滯留之有效通風裝置，未有嚴禁煙火標示",
+        "type": "multiselect",
+        "default_text": "未設有防止氣體滯留之有效通風裝置，未有嚴禁煙火標示"
+      }
+    ],
+    "response_text": "本局權管事項為液化石油氣安全管理，於○○○年○月○日派員前往，該址為○○○，現場共擺放○桶○公斤裝瓦斯桶串接爐具，備用瓦斯桶○桶○公斤，串接使用量達80公斤以上，已違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」，檢查結果計有未設有防止氣體滯留之有效通風裝置，未有嚴禁煙火標示，已當場開立舉發違反消防法案件及限期改善通知單在案，並將持續追蹤列管至複查合格；另為維護公共安全，已當場向場所宣導注意燃氣器具使用時應注意用火用電安全，及經常自行檢查瓦斯桶及管線等事項。"
+  },
+  {
+    "id": "fireworks-sale-compliant",
+    "source_number": "10",
+    "title": "10、爆竹煙火（販賣場所） 合格",
+    "category": "爆竹煙火",
+    "status": "合格",
+    "keywords": [
+      "爆竹煙火",
+      "販賣場所",
+      "合格標示",
+      "管制量",
+      "安全管理"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "爆竹煙火販賣場所安全管理",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "爆竹煙火管理條例"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      }
+    ],
+    "response_text": "本局權管事項為爆竹煙火販賣場所安全管理，於○○○年○月○日派員前往，該址為○○○，現場販售一般爆竹煙火數量未達管制標準且均有合格標示；為維護公共安全，已當場宣導業者如販售一般爆竹煙火勿超過爆竹煙火管理條例規定之管制量及販賣未張貼合格標示爆竹煙火，以免受罰，並注意用火用電等安全事項。"
+  },
+  {
+    "id": "fireworks-sale-noncompliant",
+    "source_number": "11",
+    "title": "11、爆竹煙火（販賣場所） 不合格",
+    "category": "爆竹煙火",
+    "status": "不合格",
+    "keywords": [
+      "爆竹煙火",
+      "販賣場所",
+      "未有合格標示",
+      "第9條",
+      "舉發",
+      "限期改善"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "爆竹煙火販賣場所安全管理",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "爆竹煙火管理條例第9條",
+      "消防法"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      },
+      {
+        "key": "violation",
+        "label": "違規情形",
+        "source_pattern": "現場販售一般爆竹煙火未有合格標示",
+        "type": "text",
+        "default_text": "現場販售一般爆竹煙火未有合格標示"
+      }
+    ],
+    "response_text": "本局權管事項為爆竹煙火販賣場所安全管理，於○○○年○月○日派員前往，該址為○○○，現場販售一般爆竹煙火未有合格標示，已違反「爆竹煙火管理條例」第9條規定，已當場開立舉發違反消防法案件及限期改善通知單在案，並將持續追蹤列管至複查合格；另為維護公共安全，已宣導業者勿販售超過管制量之一般爆竹煙火及未張貼合格標示，並提醒用火用電等安全事項。"
+  },
+  {
+    "id": "fireworks-not-found",
+    "source_number": "12",
+    "title": "12、爆竹煙火 未發現",
+    "category": "爆竹煙火",
+    "status": "未發現",
+    "keywords": [
+      "爆竹煙火",
+      "未發現",
+      "施放",
+      "宣導",
+      "公共危險罪嫌",
+      "警察機關"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "爆竹煙火施放安全管理",
+      "related_agencies": [
+        "警察機關"
+      ]
+    },
+    "legal_references": [
+      "公共危險罪嫌（原文用語）"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "到場日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      }
+    ],
+    "response_text": "本局權管事項為爆竹煙火施放安全管理，於○○○年○月○日派員前往，該址未發現有人施放爆竹煙火；為預防火災及維護公共安全，已當場向場所宣導施放爆竹煙火安全管理，勿任意施放爆竹煙火，若因施放爆竹煙火而引發火災，恐涉及公共危險罪嫌，請警察機關依法處理。"
+  },
+  {
+    "id": "fireworks-advocacy-procession",
+    "source_number": "13",
+    "title": "13、爆竹煙火宣導 繞境活動",
+    "category": "爆竹煙火",
+    "status": "繞境活動宣導",
+    "keywords": [
+      "爆竹煙火",
+      "繞境活動",
+      "宮廟",
+      "電子音效",
+      "宣導",
+      "公共危險罪嫌"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "爆竹煙火施放安全管理",
+      "related_agencies": [
+        "警察機關"
+      ]
+    },
+    "legal_references": [
+      "公共危險罪嫌（原文用語）"
+    ],
+    "placeholders": [
+      {
+        "key": "event_date_first",
+        "label": "活動日期（第一段）",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "event_date_repeated",
+        "label": "活動日期（原文重複段）",
+        "source_pattern": "○○○年○月○日",
+        "type": "date",
+        "ambiguous": true
+      },
+      {
+        "key": "temple_name",
+        "label": "宮廟名稱",
+        "source_pattern": "○○宮",
+        "type": "text"
+      }
+    ],
+    "response_text": "本局權管事項為爆竹煙火施放安全管理，有關您反映之活動經查係○○○年○月○日本市○○○年○月○日本市○○宮廟遶境活動，為預防火災及維護公共安全，本局於活動前宣導廟方（壇位）勿違規儲放爆竹煙火及減少燃放爆竹煙火等事項，儘量以播放爆竹煙火電子音效替代，並告知若因施放爆竹煙火而引發火災，將依公共危險罪嫌，請警察機關依法處理。"
+  },
+  {
+    "id": "fireworks-advocacy-temple",
+    "source_number": "13",
+    "title": "13、爆竹煙火宣導 廟宇",
+    "category": "爆竹煙火",
+    "status": "廟宇宣導",
+    "keywords": [
+      "爆竹煙火",
+      "廟宇",
+      "遶境活動",
+      "電子音效",
+      "加強宣導",
+      "公共危險罪嫌"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "爆竹煙火施放安全管理",
+      "related_agencies": [
+        "警察機關"
+      ]
+    },
+    "legal_references": [
+      "公共危險罪嫌（原文用語）"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "本次到場日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所或廟宇名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      },
+      {
+        "key": "prior_advocacy_date",
+        "label": "前次宣導日期",
+        "source_pattern": "○○○年○月○日前",
+        "type": "date"
+      },
+      {
+        "key": "followup_advocacy_date",
+        "label": "接獲反映後加強宣導日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      }
+    ],
+    "response_text": "本局權管事項為爆竹煙火施放安全管理，於○○○年○月○日派員前往，該址為○○○，本局前於○○○年○月○日前派員宣導廟方轉知參與遶境活動民眾注意爆竹煙火施放安全，儘量以播放爆竹煙火電子音效替代，並告知若因施放爆竹煙火而引發火災，恐涉及公共危險罪嫌，請警察機關依法處理；接獲您反映後，又於○○○年○月○日派員加強宣導廟方。"
+  },
+  {
+    "id": "hazardous-material-compliant",
+    "source_number": "14",
+    "title": "14、危險物品 合格",
+    "category": "公共危險物品",
+    "status": "合格",
+    "keywords": [
+      "公共危險物品",
+      "儲存",
+      "管制量",
+      "公升",
+      "合格",
+      "用火用電"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "公共危險物品儲存安全管理",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      },
+      {
+        "key": "material_name",
+        "label": "危險物品名稱",
+        "source_pattern": "現場擺放○○○",
+        "type": "text"
+      },
+      {
+        "key": "total_volume_liters",
+        "label": "總量（公升）",
+        "source_pattern": "共○○○公升",
+        "type": "number"
+      }
+    ],
+    "response_text": "本局權管事項為公共危險物品儲存安全管理，於○○○年○月○日派員前往，該址為○○○，現場擺放○○○，共○○○公升，未達「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」管制量之規定；為維護公共安全，已當場宣導場所注意用火用電安全。"
+  },
+  {
+    "id": "hazardous-material-out-of-jurisdiction",
+    "source_number": "15",
+    "title": "15、危險物品 非權管",
+    "category": "公共危險物品",
+    "status": "非權管",
+    "keywords": [
+      "公共危險物品",
+      "非權管",
+      "化學物質",
+      "Difluoromethane",
+      "環境保護局",
+      "轉介"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "公共危險物品安全管理",
+      "related_agencies": [
+        "臺北市政府環境保護局"
+      ]
+    },
+    "legal_references": [
+      "公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法"
+    ],
+    "placeholders": [
+      {
+        "key": "chemical_name",
+        "label": "化學物質名稱",
+        "source_pattern": "Diflu○r○methane",
+        "type": "text",
+        "default_text": "Diflu○r○methane",
+        "ambiguous": true
+      },
+      {
+        "key": "referral_agency",
+        "label": "建議洽詢機關",
+        "source_pattern": "本府環境保護局",
+        "type": "text",
+        "default_text": "本府環境保護局"
+      },
+      {
+        "key": "referral_phone",
+        "label": "洽詢電話",
+        "source_pattern": "02-2720-8889",
+        "type": "tel",
+        "default_text": "02-2720-8889"
+      }
+    ],
+    "response_text": "本局權管事項為公共危險物品安全管理，您提供之照片所稱有毒易燃的化學物質Diflu○r○methane，非屬「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」規定之公共危險物品，建議您逕洽詢本府環境保護局（電話：02-2720-8889）。"
+  },
+  {
+    "id": "fire-safety-management-compliant",
+    "source_number": "16",
+    "title": "16、防火管理 合格",
+    "category": "防火管理",
+    "status": "合格",
+    "keywords": [
+      "防火管理",
+      "防火管理人",
+      "消防防護計畫",
+      "消防法第13條",
+      "一定規模以上建築物"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "防火管理",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "消防法第13條"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      }
+    ],
+    "response_text": "本局權管事項為防火管理，於○○○年○月○日派員前往，該址為○○○，屬消防法第13條規定一定規模以上之建築物，業已遴用防火管理人，訂定消防防護計畫，皆符合規定。"
+  },
+  {
+    "id": "fire-safety-management-noncompliant",
+    "source_number": "17",
+    "title": "17、防火管理 不合格",
+    "category": "防火管理",
+    "status": "不合格",
+    "keywords": [
+      "防火管理",
+      "未遴用防火管理人",
+      "未訂定消防防護計畫",
+      "限期改善",
+      "消防法第13條"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "防火管理",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "消防法第13條"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      },
+      {
+        "key": "management_type",
+        "label": "防火管理類型",
+        "source_pattern": "（共同）",
+        "type": "optional_text",
+        "options": [
+          "",
+          "共同"
+        ]
+      },
+      {
+        "key": "plan_type",
+        "label": "消防防護計畫類型",
+        "source_pattern": "（共同、施工中）",
+        "type": "choice",
+        "options": [
+          "",
+          "共同",
+          "施工中"
+        ]
+      },
+      {
+        "key": "violations",
+        "label": "不合規定事項",
+        "source_pattern": "未遴用（共同）防火管理人、未訂定（共同、施工中）消防防護計畫、未依消防防護計畫執行防火管理業務",
+        "type": "multiselect",
+        "default_text": "未遴用（共同）防火管理人、未訂定（共同、施工中）消防防護計畫、未依消防防護計畫執行防火管理業務"
+      }
+    ],
+    "response_text": "本局權管事項為防火管理，於○○○年○月○日派員前往，該址為○○○，屬消防法第13條規定一定規模以上之建築物，惟未遴用（共同）防火管理人、未訂定（共同、施工中）消防防護計畫、未依消防防護計畫執行防火管理業務，已當場開立限期改善通知單在案，並將持續追蹤列管至複查合格。"
+  },
+  {
+    "id": "disaster-center-duty-staff-compliant",
+    "source_number": "18",
+    "title": "18、防災中心服勤人員 合格",
+    "category": "防災中心服勤人員",
+    "status": "合格",
+    "keywords": [
+      "防災中心",
+      "服勤人員",
+      "消防安全管理",
+      "檢查合格",
+      "用火用電"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "消防安全管理",
+      "related_agencies": []
+    },
+    "legal_references": [],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      }
+    ],
+    "response_text": "本局權管事項為消防安全管理，於○○○年○月○日派員前往，該址為○○○，現場防災中心依規定設置有服勤人員，檢查結果符合規定；為維護公共安全，已當場宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實消防預防措施與應變機制。"
+  },
+  {
+    "id": "disaster-center-duty-staff-not-required",
+    "source_number": "19",
+    "title": "19、防災中心服勤人員 未達要件",
+    "category": "防災中心服勤人員",
+    "status": "未達要件",
+    "keywords": [
+      "防災中心",
+      "服勤人員",
+      "未達要件",
+      "建物層數",
+      "消防法第13-1條"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "消防安全管理",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "消防法第13-1條"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      },
+      {
+        "key": "building_floors",
+        "label": "建物層數",
+        "source_pattern": "○○層建物",
+        "type": "number"
+      }
+    ],
+    "response_text": "本局權管事項為消防安全管理，於○○○年○月○日派員前往，該址為○○○，為○○層建物，未達消防法第13-1條應設置服勤人員之要件。"
+  },
+  {
+    "id": "disaster-center-duty-staff-noncompliant",
+    "source_number": "20",
+    "title": "20、防災中心服勤人員 不合格",
+    "category": "防災中心服勤人員",
+    "status": "不合格",
+    "keywords": [
+      "防災中心",
+      "服勤人員",
+      "未依規定鄰用",
+      "異動未備查",
+      "限期改善",
+      "複查"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "消防安全管理",
+      "related_agencies": []
+    },
+    "legal_references": [],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      },
+      {
+        "key": "violations",
+        "label": "不合規定事項",
+        "source_pattern": "未依規定鄰用服勤人員、服勤人員異動未向所在地主管機關備查",
+        "type": "multiselect",
+        "default_text": "未依規定鄰用服勤人員、服勤人員異動未向所在地主管機關備查",
+        "ambiguous": true
+      }
+    ],
+    "response_text": "本局權管事項為消防安全管理，於○○○年○月○日派員前往，該址為○○○，檢查結果計有未依規定鄰用服勤人員、服勤人員異動未向所在地主管機關備查不合規定，已當場開立限期改善通知單在案，並將持續追蹤至複查合格；為維護公共安全，已當場宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實消防預防措施與應變機制。"
+  },
+  {
+    "id": "flame-retardant-item-not-required",
+    "source_number": "21",
+    "title": "21、防焰物品 未達要件",
+    "category": "防焰物品",
+    "status": "未達要件",
+    "keywords": [
+      "防焰物品",
+      "地墊",
+      "二平方公尺",
+      "防焰標示",
+      "防焰性能認證實施辦法第2條"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "消防安全檢查",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "防焰性能認證實施辦法第2條"
+    ],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      }
+    ],
+    "response_text": "本局權管事項為消防安全檢查，於○○○年○月○日派員前往，該址為○○○，依防焰性能認證實施辦法第2條規定，需附有防焰標示之地墊應為面積二平方公尺以上之地坪鋪設物，經查現場使用之地墊檢查結果尚符合規定；"
+  },
+  {
+    "id": "flame-retardant-item-compliant",
+    "source_number": "22",
+    "title": "22、防焰物品 合格",
+    "category": "防焰物品",
+    "status": "合格",
+    "keywords": [
+      "防焰物品",
+      "地毯",
+      "窗簾",
+      "防焰標示",
+      "合格",
+      "用火用電"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "防焰物品管理",
+      "related_agencies": []
+    },
+    "legal_references": [],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○○○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "place_name",
+        "label": "場所名稱",
+        "source_pattern": "該址為○○○",
+        "type": "text"
+      },
+      {
+        "key": "flame_retardant_item",
+        "label": "防焰物品種類",
+        "source_pattern": "地毯（窗簾）",
+        "type": "choice",
+        "options": [
+          "地毯",
+          "窗簾"
+        ]
+      }
+    ],
+    "response_text": "本局權管事項為防焰物品管理，於○○○年○月○日派員前往，該址為○○○，檢查結果計有地毯（窗簾）防焰標示物品等符合規定；為維護公共安全，已當場宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實消防預防措施與應變機制。"
+  },
+  {
+    "id": "flame-retardant-item-noncompliant",
+    "source_number": "23",
+    "title": "23、防焰物品 不合格",
+    "category": "防焰物品",
+    "status": "不合格",
+    "keywords": [
+      "防焰物品",
+      "地毯",
+      "窗簾",
+      "未使用防焰標示",
+      "限期改善",
+      "複查"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "防焰物品管理",
+      "related_agencies": []
+    },
+    "legal_references": [],
+    "placeholders": [
+      {
+        "key": "inspection_date",
+        "label": "檢查日期",
+        "source_pattern": "○年○月○日",
+        "type": "date"
+      },
+      {
+        "key": "flame_retardant_item",
+        "label": "不合規定防焰物品種類",
+        "source_pattern": "地毯（窗簾）",
+        "type": "choice",
+        "options": [
+          "地毯",
+          "窗簾"
+        ]
+      }
+    ],
+    "response_text": "本局權管事項為防焰物品管理，上揭場所本局於○年○月○日派員前往，檢查結果計有地毯（窗簾）未使用防焰標示物品等不合規定，已當場開立限期改善通知單在案，並將持續追蹤列管至複查合格。"
+  },
+  {
+    "id": "fire-equipment-maintenance-reporting-rules",
+    "source_number": "24",
+    "title": "24、檢修申報 詢問檢修申報規定",
+    "category": "消防安全設備檢修申報",
+    "status": "詢問檢修申報規定",
+    "keywords": [
+      "檢修申報",
+      "集合住宅",
+      "管理權人",
+      "區分所有權人",
+      "整棟共同申報",
+      "共用部分"
+    ],
+    "authority": {
+      "lead_agency": "臺北市政府消防局",
+      "scope": "消防安全設備檢查",
+      "related_agencies": []
+    },
+    "legal_references": [
+      "消防法",
+      "消防機關受理集合住宅消防安全設備檢修申報作業處理原則"
+    ],
+    "placeholders": [],
+    "response_text": "本局權管事項為消防安全設備檢查，依「消防法」規定場所管理權人應設置並維護其消防安全設備，並委由消防專技人員檢修及申報；另「消防機關受理集合住宅消防安全設備檢修申報作業處理原則」規定集合住宅專有部分、約定專用部分之修繕、管理、維護，由各該區分所有權人或約定專用部分之使用人為之，並負擔其費用。據此集合住宅專有部分、約定專用部分消防安全設備檢修申報之管理權人，係屬區分所有權人或約定專用部分之使用人；集合住宅之消防安全設備檢修，其系統性設備之設置含括專有部分、約定專用部分、共用部分、約定共用部分，其檢修申報以輔導其透過區分所有權人會議決議，採以整棟共同申報為原則，如採個別申報方式者，建築物共用部分應一併申報。"
+  },
+  {
+    "id": "uploaded-1-1",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "1",
+    "title": "百變全球餐飲｜液化石油氣及消防設備缺失處理",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "缺失處理",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "4桶20公斤合計為80公斤；違規結論仍應依現場連接型態、安全設施及現行法規逐項確認"
+    ],
+    "response_text": "有關您反映本市信義區中坡南路255號一事，本局說明如下：\n本局權管事項為液化石油氣安全管理及消防安全設備檢查，於115年6月3日派員前往，該址為百變全球餐飲，依現場實際使用情形，以飲食店用途列管。液化石油氣安全管理部分，現場共擺放4桶20公斤裝瓦斯桶串接爐具，串接使用量達80公斤以上，已違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」，檢查結果計有未設置嚴禁煙火標示、未設置防止氣體滯留之有效通風裝置及未設置固定措施，已當場開立舉發違反消防法案件及限期改善通知單在案；另消防安全設備檢查部分，檢查結果計有滅火器、出口標示燈、緊急照明設備等不合規定，及未依規定設置住宅用火災警報器，已當場開立限期改善通知單在案，將持續追蹤列管缺失項目至複查合格。另為維護公共安全，已宣導場所使用燃氣器具時應注意用火用電安全，定期自主檢查瓦斯桶及管線安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "uploaded-1-2",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "2",
+    "title": "迷魂湯小吃店｜液化石油氣及消防設備符合規定",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "符合規定",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [],
+    "response_text": "有關您反映本市信義區崇德街22號1樓一事，本局說明如下：\n本局權管事項為液化石油氣安全管理及消防安全設備檢查，於115年6月2日派員前往，該址為迷魂湯小吃店，依現場實際使用情形，以飲食店用途列管。液化石油氣安全管理部分，現場共擺放2桶20公斤裝瓦斯桶串接爐具，串接使用量未達80公斤，未違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」；消防安全設備檢查部分，依法應設置之消防安全設備，檢查結果均符合規定。為維護公共安全，已宣導場所使用燃氣器具時應注意用火用電安全，定期自主檢查瓦斯桶及管線安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "uploaded-1-3",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "3",
+    "title": "廟會遶境爆竹施放｜許可查核及法規說明",
+    "category": "爆竹煙火",
+    "status": "許可查核／法規說明",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "正式使用前請核對爆竹施放許可、法定禁止場所及安全距離等個案事實"
+    ],
+    "response_text": "有關您反映115年6月7日於本市大安區仁愛路及延吉街口一事，本局說明如下：\n本局權管事項為爆竹煙火施放安全管理，於115年6月7日派員前往，發現為廟會遶境活動施放爆竹，經確認該活動已事先申請遶境活動及爆竹施放許可。有關該活動係本市松山慈祐宮辦理「丙午年財團法人台北市松山慈祐宮媽祖過爐中崙庄祈福遶境大典」遶境活動，依「爆竹煙火管理條例」第15條第1項規定：「下列場所及其基地內，不得施放爆竹煙火：一、石油煉製工廠。二、加油站、加氣站、漁船加油站。三、儲油設備之油槽區。四、彈藥庫、火藥庫。五、可燃性氣體儲槽。六、公共危險物品與可燃性高壓氣體製造、儲存及處理場所。七、爆竹煙火製造、儲存及販賣場所。」，該址非屬禁止施放之場所；惟為預防火災及維護公共安全，本局業於活動前宣導廟方（壇位）勿違規儲放爆竹煙火及減少燃放爆竹煙火等事項，儘量以播放爆竹煙火電子音效替代，並提醒主辦單位做好相關安全維護事項，並派員協助活動安全警戒，以確保活動及民眾安全。"
+  },
+  {
+    "id": "uploaded-1-4",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "4",
+    "title": "查無瓦斯桶放置｜現場宣導",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "未發現／宣導",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [],
+    "response_text": "有關您反映大安區羅斯福路4段123巷21弄巷口一事，本局說明如下：\n本局權管事項為液化石油氣安全管理，於115年6月9日派員前往，未發現瓦斯桶放置情形；為維護公共安全，已向現場相關人員宣導液化石油氣容器應依規定妥善存放及使用，避免於公共通行空間堆置，確實落實安全管理措施，以降低災害發生風險，保障民眾生命財產安全。"
+  },
+  {
+    "id": "uploaded-1-5",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "5",
+    "title": "地址釐清後查獲液化石油氣缺失｜缺失處理",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "缺失處理",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "原稿「備用瓦斯桶3桶60公斤」可能指每桶60公斤或合計60公斤，使用前請核對容器規格與數量"
+    ],
+    "response_text": "有關您反映本市大安區新生南路2段30巷一事，本局說明如下：\n本局權管事項為液化石油氣安全管理及消防安全設備檢查，於115年6月11日派員前往，該址為阿嬤G排店，使用天然氣，未發現瓦斯桶放置情形；另依您陳述內容，研判該商家地址應為新生南路2段28號「八仙小吃店」，轉角處瓦斯桶為其所有，依現場實際使用情形，以飲食店用途列管。查八仙小吃店液化石油氣安全管理部分，現場共擺放4桶20公斤裝瓦斯桶串接爐具，備用瓦斯桶3桶60公斤，串接使用量達80公斤以上，已違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」，檢查結果計有未設置嚴禁煙火標示、未設置氣體漏氣警報裝置、容器直立放置未有防止傾倒之固定措施等缺失項目，已當場開立舉發違反消防法案件及限期改善通知單在案，本局將持續追蹤列管缺失項目至複查合格；另有關消防安全設備部分，依現場實際使用情形，依法應設置之消防安全設備，檢查結果均符合規定。另為維護公共安全，已宣導場所使用燃氣器具時應注意用火用電安全，定期自主檢查瓦斯桶及管線安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "uploaded-1-6",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "6",
+    "title": "液化石油氣容器保證金｜查察及消費說明",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "查察說明",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "本案兩則保證金案例所載契約名稱不同，正式使用前請核對現行契約名稱、條次及適用要件"
+    ],
+    "response_text": "有關您反映本市南港區東新街80巷9弄11號1樓一事，本局說明如下：\n本局權管事項為液化石油氣安全管理，於115年6月11日派員前往，該址為友人煤氣企業股份有限公司，該瓦斯行已退還2桶液化石油氣容器保證金計新臺幣600元，依「家用液化石油氣定型化契約」第五條規定，液化石油氣容器保證金每支不得低於新臺幣300元，消費者如持有其他足資證明保證金金額之文件，則應依該文件內容辦理；為確保您的消費權益，建議消費時應向瓦斯行索取相關單據及簽訂定型化契約，以避免發生消費爭議之情事，如有相關消費爭議逕洽消費者保護諮詢專線1950、消費網（https://appeal.cpc.ey.gov.tw/WWW/Default.aspx）消費爭議申訴反映。"
+  },
+  {
+    "id": "uploaded-1-7",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "7",
+    "title": "深杯子大安店｜液化石油氣符合、消防設備缺失",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "部分缺失處理",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "瓦斯漏氣警報器及緊急遮斷裝置之設置要件，應依串接量、場所配置及現行法規確認"
+    ],
+    "response_text": "有關您反映大安區東豐街11號一事，本局說明如下：\n本局權管事項為液化石油氣安全管理及消防安全設備檢查，於115年6月16日派員前往，該址為深杯子大安店，依現場實際使用情形，以餐廳用途列管。液化石油氣安全管理部分，現場共擺放1桶20公斤裝瓦斯桶串接爐具，備用瓦斯桶1桶20公斤，串接使用量未達80公斤，未違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」，且未達應設置瓦斯漏氣警報器及緊急遮斷裝置之標準；消防安全設備檢查部分，檢查結果計有滅火器、出口標示燈、緊急照明設備等不符合規定，已當場開立限期改善通知單在案，並將持續追蹤列管至複查合格。為維護公共安全，已宣導場所使用燃氣器具時應注意用火用電安全，定期自主檢查瓦斯桶及管線安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "uploaded-1-8",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "8",
+    "title": "容器保證金｜查察說明及移請法務局",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "查察說明＋移請",
+    "related_agencies": [
+      "本府法務局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "容器保證金實際退還金額認定",
+        "agency": "本府法務局"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市南港區東新街80巷9弄11號1樓一事，本局說明如下：\n本局權管事項為液化石油氣安全管理，於115年6月11日派員前往，該址為友人煤氣企業股份有限公司，該瓦斯行已退還2桶液化石油氣容器保證金，計新臺幣600元。建議您向瓦斯行購買液化石油氣時，皆應與瓦斯行簽訂定型化契約，透過契約簽訂才可以保障買賣雙方權益。依「家用液化石油氣供氣定型化契約範本」第五條，如果您於簽訂契約前已持有瓦斯桶時，可與瓦斯行透過推定方式決定該容器之保證金價格（液化石油氣容器保證金每支不得低於新臺幣300元）；如您持有其他足資證明保證金金額之文件，則應依該文件內容辦理。\n另有關您反映容器保證金實際退還金額認定部分，經本局了解，係屬本府法務局權責，已依行政程序法規定，移請該機關回復您；或可逕洽消費者保護諮詢專線1950、消費網（https://appeal.cpc.ey.gov.tw/WWW/Default.aspx）消費爭議申訴反映。"
+  },
+  {
+    "id": "uploaded-1-9",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "9",
+    "title": "地址釐清後檢查｜液化石油氣及消防設備符合規定",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "符合規定",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "原稿「安全設施設置」語句未完整，使用前請依現場紀錄確認安全設施設置情形"
+    ],
+    "response_text": "有關您反映本市大安區大安路1段28號一事，本局說明如下：\n本局權管事項為液化石油氣安全管理及消防安全設備檢查，於115年6月29日派員前往，該址為大安小吃店，使用天然氣，未發現瓦斯桶放置情形；依您陳述內容，研判該商家地址應為大安路1段22號「劉記小吃店」，依現場實際使用情形，以飲食店用途列管。查劉記小吃店液化石油氣安全管理部分，現場共擺放7桶16公斤裝瓦斯桶串接爐具，串接使用量達80公斤以上，安全設施設置，未違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」；有關消防安全設備部分，依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已宣導場所使用燃氣器具時應注意用火用電安全，定期自主檢查瓦斯桶及管線安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "uploaded-1-10",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "10",
+    "title": "阮小越越南料理｜改善要求及跨機關移請",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "現場輔導＋移請",
+    "related_agencies": [
+      "本市建築管理工程處",
+      "本府環境保護局環保稽查大隊",
+      "本市勞動力重建運用處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "堆積雜物",
+        "agency": "本市建築管理工程處"
+      },
+      {
+        "matter": "環境衛生",
+        "agency": "本府環境保護局環保稽查大隊"
+      },
+      {
+        "matter": "非法移工",
+        "agency": "本市勞動力重建運用處"
+      }
+    ],
+    "review_flags": [
+      "未達80公斤不等同場所配置當然符合規定；本案另有移置戶外要求，正式使用前請核對輔導依據及改善情形"
+    ],
+    "response_text": "有關您反映本市信義區中坡北路35號B1一事，本局說明如下：\n本局權管事項為液化石油氣安全管理及消防安全設備檢查，於115年7月3日派員前往，該址為阮小越越南料理，依現場實際使用情形，以飲食店用途列管。液化石油氣安全管理部分，現場共擺放3桶20公斤及1桶16公斤裝瓦斯桶串接爐具，串接使用量未達80公斤，已請業者將瓦斯桶移置1樓戶外通風良好處；另有關消防安全設備部分，依法應設之消防安全設備，檢查結果均符合規定。為維護公共安全，本局已向場所業者加強宣導，應注意用火、用電安全，定期自主檢查液化石油氣容器、調整器及配管等設備是否正常，並持續落實消防安全設備維護管理、火災預防措施及緊急應變機制，以降低火災風險，維護場所及民眾安全。\n另有關堆積雜物、環境衛生及非法移工部分，係分屬本市建築管理工程處、環保稽查大隊及勞動力重建運用處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "uploaded-1-11",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "11",
+    "title": "路邊攤瓦斯桶｜查察宣導及跨機關移請",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "未營業／符合規定＋移請",
+    "related_agencies": [
+      "本府環境保護局",
+      "本府環境保護局環保稽查大隊",
+      "本府衛生局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "法定或公告禁菸場所違規吸菸",
+        "agency": "本府衛生局"
+      },
+      {
+        "matter": "菸蒂亂丟",
+        "agency": "本府環境保護局"
+      },
+      {
+        "matter": "一般環境髒亂",
+        "agency": "本府環境保護局環保稽查大隊"
+      },
+      {
+        "matter": "攤販食品衛生",
+        "agency": "本府衛生局"
+      }
+    ],
+    "review_flags": [
+      "一般戶外吸菸本身未必違反菸害防制法；須先確認是否為法定或公告禁菸場所，再保留衛生局或該場域受委任機關",
+      "一般環境髒亂與攤販食品衛生已依權責拆分，正式使用前須依陳情事實保留適用事項"
+    ],
+    "response_text": "有關您反映本市信義區吳興街269巷2、4、6號一事，本局說明如下：\n本局權管事項為液化石油氣安全管理，於115年7月7日派員前往，吳興街269巷4、6號未發現瓦斯桶放置情形，吳興街269巷2號前為路邊攤販，現場未營業，攤位前共擺放1桶20公斤裝瓦斯桶串接爐具、備用瓦斯桶2桶20公斤，串接使用量未達80公斤，未違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」；為維護公共安全，已向現場相關人員宣導液化石油氣容器應依規定妥善存放及使用，避免於公共通行空間堆置，確實落實安全管理措施，以降低災害發生風險，維護公共安全。\n另有關民眾吸菸、菸蒂亂丟、環境衛生部分，係分屬本府警察局、環境保護局及衛生局權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "uploaded-1-12",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "12",
+    "title": "小貨車烤鴨攤未發現｜後續檢查及移請",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "未發現＋移請",
+    "related_agencies": [
+      "本府警察局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "公共道路旁營業",
+        "agency": "本府警察局"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市信義區莊敬路336號一事，本局說明如下：\n本局權管事項為液化石油氣安全管理，於115年7月16日下午及晚上不同時段派員前往，現場均未發現停放小貨車烤鴨攤，未來如有發現，將針對瓦斯桶使用情形進行檢查。\n另有關公共道路旁營業部分，係屬本市警察局權責，本局已依行政程序，通知前述機關依權責評估卓處。"
+  },
+  {
+    "id": "uploaded-1-13",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "13",
+    "title": "老邱原汁牛肉麵｜瓦斯安全符合、消防設備缺失",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "部分缺失處理",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "原稿開頭疑漏「有」字，草稿已修正",
+      "原稿「安全設施設置」語句未完整，使用前請依現場紀錄確認安全設施設置情形"
+    ],
+    "response_text": "關您反映本市信義區松仁路217號1樓一事，本局說明如下：\n本局權管事項為液化石油氣安全管理及消防安全設備檢查，於115年7月21日派員前往，該址為老邱原汁牛肉麵，依現場實際使用情形，以飲食店用途列管。液化石油氣安全管理部分，現場共擺放3桶50公斤裝瓦斯桶串接爐具，串接使用量達80公斤以上，安全設施設置，未違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」；另消防安全設備檢查部分，檢查結果計有滅火器不符合規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格；有關瓦斯味及配管的部分，經電洽政大行瓦斯配管有限公司表示，已於115年7月20日前往巡查及檢測，並無發現配管異常及瓦斯外洩情事。為維護公共安全，已宣導場所使用燃氣器具時應注意用火用電安全，定期自主檢查及留意瓦斯桶及管線安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "uploaded-1-14",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "14",
+    "title": "小貨車烤鴨攤｜液化石油氣符合及移請",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "符合規定＋移請",
+    "related_agencies": [
+      "本府警察局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "小貨車於公共道路旁營業",
+        "agency": "本府警察局"
+      }
+    ],
+    "review_flags": [
+      "原稿「依行政程序。通知」標點有誤，草稿已修正"
+    ],
+    "response_text": "有關您反映本市信義區莊敬路336號一事，本局說明如下：\n本局權管事項為液化石油氣安全管理，復於115年7月25及26日派員前往，於7月26日有停放小貨車烤鴨攤，現場係使用1桶20公斤裝瓦斯桶串接爐具，串接使用量未達80公斤，未違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」；為維護公共安全，已宣導場所使用燃氣器具時應注意用火用電安全，定期自主檢查瓦斯桶及管線安全，做好各項安全設備維護管理及落實火災預防措施與應變機制。\n另有關小貨車於公共道路旁營業部分，係屬本府警察局權責，本局已依行政程序。通知前述機關依權責評估卓處。"
+  },
+  {
+    "id": "uploaded-1-15",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "15",
+    "title": "陳記豬肝湯｜液化石油氣及消防設備符合、消防通道說明",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "符合規定＋法規說明",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "原稿使用「分別串接爐具」語意可能指各自連接，正式使用前請確認連接型態及串接使用量認定"
+    ],
+    "response_text": "有關您反映大安區復興南路1段253巷46號一事，本局說明如下：\n本局權管事項為液化石油氣安全管理及消防安全設備檢查，於115年7月27日派員前往，該址為陳記豬肝湯，依現場實際使用情形，以飲食店用途列管。液化石油氣安全管理部分，現場共擺放2桶20公斤裝瓦斯桶分別串接爐具，串接使用量未達80公斤，未違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」；另消防安全設備檢查部分，依法應設置之消防安全設備，檢查結果均符合規定，另現場並未發現出入口有堆積雜物影響逃生之情形。為維護公共安全，已宣導場所定期自主檢查瓦斯桶及管線安全、避免於公共通行空間堆置雜物，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關消防通道部分，為利消防及救援車輛通行與執行救災任務，本局已訂定「臺北市政府消防通道劃設及管理作業程序」及「臺北市政府消防車輛救災活動空間改善計畫」，經本局派員前往現場勘查及查詢臺北地政雲，復興南路1段253巷非屬前開規定對象。"
+  },
+  {
+    "id": "uploaded-1-16",
+    "source_file": "危物回復範本修正2(1).txt",
+    "source_number": "16",
+    "title": "食品廚房｜液化石油氣未達80公斤、住警器缺失及多機關移辦",
+    "category": "液化石油氣（瓦斯桶）",
+    "status": "部分缺失處理＋移請",
+    "related_agencies": [
+      "本市建築管理工程處",
+      "本市商業處",
+      "本府衛生局",
+      "本府環境保護局環保稽查大隊",
+      "本市勞動力重建運用處",
+      "本府工務局衛生下水道工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "違建及用途變更",
+        "agency": "本市建築管理工程處"
+      },
+      {
+        "matter": "營業登記",
+        "agency": "本市商業處"
+      },
+      {
+        "matter": "食品業者登錄及食品衛生",
+        "agency": "本府衛生局"
+      },
+      {
+        "matter": "環境髒亂",
+        "agency": "本府環境保護局環保稽查大隊"
+      },
+      {
+        "matter": "非法聘僱外國人",
+        "agency": "本市勞動力重建運用處"
+      },
+      {
+        "matter": "污水排入公共污水下水道之接管、水質及使用管理",
+        "agency": "本府工務局衛生下水道工程處"
+      },
+      {
+        "matter": "餐飲廢污水排入道路側溝、雨水溝或其他水體造成污染",
+        "agency": "本府環境保護局環保稽查大隊"
+      }
+    ],
+    "review_flags": [
+      "3桶20公斤加1桶16公斤之串接量為76公斤；未達80公斤不代表所有儲放與使用事項當然符合規定",
+      "本案同時包含限期改善、已移請與建議逕洽三種處理狀態，正式使用前須依實際作業紀錄分別確認",
+      "污水事項須先確認排放去向；公共污水下水道使用管理與排入道路側溝、雨水溝或其他水體污染之權責不同"
+    ],
+    "response_text": "有關您反映本市大安區通化街183巷5號一事，本局說明如下：\n本局權管事項為液化石油氣安全管理及消防安全設備檢查，於115年7月7日派員前往，該址為食品廚房，依現場實際使用情形，以餐廳用途列管。液化石油氣安全管理部分，現場共擺放3桶20公斤裝瓦斯桶及1桶16公斤裝瓦斯桶串接爐具，串接使用量未達80公斤，未違反「公共危險物品及可燃性高壓氣體製造儲存處理場所設置標準暨安全管理辦法」；消防安全設備檢查部分，檢查結果計有住宅用火災警報器不合規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格；為維護公共安全，已宣導場所使用燃氣器具時應注意用火用電安全，定期自主檢查瓦斯桶及管線安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n有關您反映違建、用途變更、營業登記、食品業者登錄、食品衛生、環境髒亂及非法聘僱外國人等事項，係分屬本市建築管理工程處、本市商業處、本府衛生局、本府環境保護局環保稽查大隊及本市勞動力重建運用處權責，已依行政程序法規定，移請該等機關回復您；另有關汙水排放等事項，係屬本市衛生下水道工程處權責，建議您逕洽市民熱線1999轉衛生下水道工程處，由該機關回復您。"
+  },
+  {
+    "id": "latest-daan-1",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "1",
+    "source_region": "大安",
+    "reply_format": "official_letter",
+    "supersedes": null,
+    "title": "公寓大廈消防設備、119出勤及救災進入說明",
+    "category": "消防安全設備",
+    "status": "符合規定＋法規說明",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "一樓平台外推下陷及地下室安全門上鎖",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "正式函復格式；平台結構及安全門權責須依本案資料確認"
+    ],
+    "response_text": "有關貴會反映本市大安區忠孝東路4段220號消防安全設備一事，詳如說明，請查照。\n說明：　\n一、復貴會115年1月19日阿波羅潘字第1150119003號函。\n二、本局權管事項為消防安全設備檢查，於115年1月22日派員前往，依法應設置之消防安全設備，檢查結果符合規定。\n三、查本局119前於115年1月9及12日受理民眾報案，兩案本局均派遣人車前往處理，現場均未發現有火災情形。另本局為執行火災或其他緊急事故災害搶救，現場如有必要，消防人員將適時破壞並進入。\n四、有關「一樓平台外推下陷」及「地下室安全門上鎖」部分，涉及建築物結構安全及公寓大廈管理條例規定，係屬本市建築管理工程處權責。"
+  },
+  {
+    "id": "latest-daan-2",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "2",
+    "source_region": "大安",
+    "reply_format": "official_letter",
+    "supersedes": "uploaded-3-2",
+    "title": "外牆金屬廣告物｜消防設備符合及建築權責",
+    "category": "消防安全設備",
+    "status": "符合規定＋權責說明",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "外牆金屬廣告物是否堵塞或遮蔽建築開口",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "原稿來文字號重複，正式使用前須補正；外牆開口認定與副知程序須依個案確認"
+    ],
+    "response_text": "有關貴會反映本市大安區忠孝東路4段2號2樓之5住戶於外牆設置金屬廣告物，疑影響消防安全及逃生乙案，詳如說明，請查照。\n說明：　\n一、復貴會115年4月1日東方字第115年第1150401號書函。\n二、本局權管事項為消防安全設備檢查，於115年4月8日派員前往，現場設有滅火器、室內消防栓設備、火警自動警報設備、手動報警設備、緊急廣播設備、緊急照明設備及緊急電源插座，檢查結果符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n三、另有關貴會反映外牆設置金屬廣告物，疑有影響避難逃生或妨礙搶救進出之情形，經本局依「違章建築妨礙消防（救災）安全認定原則」派員現場查勘，尚未發現符合該認定原則第1、2點所列情形；至於是否涉及堵塞或遮蔽依建築技術規則規定設置之各類開口，係屬本市建築管理工程處權責，同函副知該機關回復貴會。"
+  },
+  {
+    "id": "latest-daan-3",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "3",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-19",
+    "title": "台大集思會議中心｜設備與避難動線查察",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "現場樓梯狹窄及避難逃生疑義",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區羅斯福路4段85號B1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月5日派員前往，該址為台大集思會議中心，依法應設置之消防安全設備，檢查結果符合規定，現場避難逃生動線暢通，未見阻礙情形，且該處貨梯非屬緊急升降機。有關通往安全門之各出口均未上鎖，可直達一樓對外出口，無須經由一樓店家出入口通行。為維護公共安全，已宣導現場人員注意活動期間人員管制及動線，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映現場樓梯狹窄及避難逃生疑義部分，係屬本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-4",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "4",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-16",
+    "title": "舞鶴村居酒屋｜住宅用火災警報器缺失",
+    "category": "消防安全設備",
+    "status": "缺失處理",
+    "related_agencies": [
+      "本府衛生局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "環境衛生",
+        "agency": "本府衛生局"
+      }
+    ],
+    "review_flags": [
+      "住宅用火災警報器適用性須依實際使用範圍及現行規定確認"
+    ],
+    "response_text": "有關您反映本市大安區和平東路3段212巷27號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月4日派員前往，該址為舞鶴村居酒屋，依現場實際使用情形，以飲食店用途列管，檢查結果計有住宅用火災警報器不合規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映衛生環境部分，係屬本府衛生局權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-5",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "5",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-20",
+    "title": "空店面未進駐、未施工｜現場宣導及移辦",
+    "category": "消防安全設備",
+    "status": "未發現／未能查察",
+    "related_agencies": [
+      "本府環境保護局環保稽查大隊",
+      "本市建築管理工程處",
+      "本府警察局大安分局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "噪音問題、未申請室內裝修許可及現場警察局處理情形",
+        "agency": "本府環境保護局環保稽查大隊、本市建築管理工程處及本府警察局大安分局"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區忠孝東路4段218-1號1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月6日派員前往，該址尚無場所進駐使用，且未發現施工行為。為維護場所公共安全，已宣導現場人員注意用火用電安全，並應維持逃生避難動線及消防安全設備周邊適當淨空，以避免影響災害搶救及人員避難安全。\n另有關您反映噪音問題、未申請室內裝修許可及現場警察局處理情形部分，係分屬本府環保稽查大隊、本市建築管理工程處及本府警察局(大安分局)權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-6",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "6",
+    "source_region": "大安",
+    "reply_format": "official_letter",
+    "supersedes": "uploaded-4-15",
+    "title": "施工中消防防護計畫｜查察與法規說明",
+    "category": "防火管理",
+    "status": "查察說明",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [],
+    "review_flags": [
+      "施工中消防防護計畫之適用規模、法源及實際施工狀態須人工確認"
+    ],
+    "response_text": "有關貴會反映本市大安區忠孝東路4段218-1號1樓店面違法施工、未依建築法第77條之2及消防法第13條申請審查許可一事，詳如說明，請查照。\n說明：　\n一、復貴會115年5月7日阿波羅潘字第1150507001號函\n二、本局權管事項為消防安全設備檢查，於115年5月6日派員前往，現場未發現施工行為，亦未影響大樓既設消防安全設備功能。另有關施工期間消防安全管理部分，依消防法第13條規定，施工中如達一定規模者，管理權人應訂定施工中消防防護計畫，並落實用火用電管理、自衛消防編組及避難逃生安全維護等措施，經查現場尚無場所進駐使用，後續本局將持續追蹤列管，並視場所使用情形依法辦理消防安全管理事項。\n三、有關未經許可下擅自進行內部牆面裝修及變更分間牆及人行騎樓裝設固定隔屏，室內裝修材料未採用耐燃材料、影響防火區劃及避難逃生動線部分，係屬本市建築管理工程處權責。"
+  },
+  {
+    "id": "latest-daan-7",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "7",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-25",
+    "title": "正昇文具行｜消防設備缺失及逃生移辦",
+    "category": "消防安全設備",
+    "status": "缺失處理",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "單一出口、沒有逃生通道",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區羅斯福路3段277號B1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月12日派員前往，該址為正昇文具行，依現場實際使用情形，以商場用途列管，檢查結果計有滅火器、避難方向指示燈及緊急照明設備不合規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映單一出口、沒有逃生通道部分，係屬本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-8",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "8",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-26",
+    "title": "貳號吉合運動場館｜用途函釋及設備符合",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市商業處",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "未登記營業場所及未變動用途",
+        "agency": "本市商業處及本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "運動場館用途分類與函釋適用性須依主管機關最新認定確認"
+    ],
+    "response_text": "有關您反映本市大安區光復南路260巷52號B1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月14日派員前往，該址為貳號吉合，依本府體育局認定為競技及休閒運動場館，因於各類場所消防安全設備設置標準第12條場所分類中尚無明確對應項目，爰內政部前於105年6月29日內授消字第1050822690號函釋，明定其適用原則及消防安全設備設置方式，故以訓練班用途列管，依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映未登記營業場所及用途不符部分，係屬本市商業處及建築管理工程處權責，該機關表示業已受理相同案址陳情案件，將由該機關回復您。"
+  },
+  {
+    "id": "latest-daan-9",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "9",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-22",
+    "title": "診所與辦公室｜多樓層用途及設備查察",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本府衛生局",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "是否合法設立、使用情形與原核准用途不符、擅自隔間、妨礙逃生通道",
+        "agency": "本府衛生局及本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "6樓用途尚待主管機關認定，消防設備結論須註明目前認定基礎"
+    ],
+    "response_text": "有關您反映本市大安區忠孝東路4段1號5樓及6樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，分別於115年5月14日、15日派員前往，該址5樓為光澤診所，已取得本府衛生局醫療機構開業執照登記，並以診所用途列管，該址6樓為晶俐生物科技有限公司，依現場實際使用情形，以辦公室用途列管，俟本府主管機關（衛生局）認定實際用途後，將據以檢討消防安全設備事宜，依法應設置之消防安全設備，檢查結果均符合規定。為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映是否合法設立、使用情形與原核准用途不符、擅自隔間、妨礙逃生通道部分，係分屬本府衛生局及本市建築管理處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-10",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "10",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-23",
+    "title": "通化街大樓｜檢修申報複查及店面無法進入",
+    "category": "消防安全設備檢修申報",
+    "status": "複查合格＋無法進入",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "來源含承辦人及電話，正式使用前須更新聯絡資訊"
+    ],
+    "response_text": "有關您反映本市大安區通化街213號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，該大樓業於115年1月28日委託專技人員辦理115年度消防安全設備檢修申報，本局於115年5月15日針對申報結果辦理複查，結果符合規定。\n至於通化街213號1樓店家部分，本局於115年5月15日及18日派員前往，現場均大門深鎖無法進入，後續將持續追蹤檢查，如發現有違規行為，將依現場實際用途及面積要求辦理檢修申報及檢討設置消防安全設備。\n若針對檢修申報方式仍有不清楚，可洽本局第二救災救護大隊大安中隊蔡宗佑小隊長（聯絡電話：02-27297668轉5210）為您說明。"
+  },
+  {
+    "id": "latest-daan-11",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "11",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-17",
+    "title": "正昇文具行｜缺失追蹤及裁罰說明",
+    "category": "消防安全設備",
+    "status": "缺失處理",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "消防法第37條罰鍰、按次處罰及停業文字屬高風險法律結論，須依現行法規核對"
+    ],
+    "response_text": "有關您反映本市大安區羅斯福路3段277號B1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月12日派員前往，該址為正昇文具行，依現場實際使用情形，以商場用途列管，檢查結果計有滅火器、避難方向指示燈及緊急照明設備不合規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格。若該場所於限期改善期限屆滿，經本局複查仍未改善完成，將依消防法第37條規定，處管理權人新臺幣2萬元以上30萬元以下罰鍰，並得按次處罰，並得予以30日以下停業或停止其使用之處分。"
+  },
+  {
+    "id": "latest-daan-12",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "12",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-12",
+    "title": "紅花鐵板燒｜防焰物品符合規定",
+    "category": "防焰物品",
+    "status": "符合規定",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區忠孝東路3段300號10樓一事，本局說明如下：\n本局權管事項為防焰物品管理，於115年5月18日派員前往，該址為紅花鐵板燒，依現場實際使用情形，以餐廳用途列管，依法應設置之防焰物品計有地毯及窗簾，檢查結果均符合規定。為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "latest-daan-13",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "13",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-18",
+    "title": "永業書店｜消防設備缺失及跨機關移辦",
+    "category": "消防安全設備",
+    "status": "缺失處理",
+    "related_agencies": [
+      "本市建築管理工程處",
+      "本市大安地政事務所"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "招牌設置、單一出入口及私人土地還是公有土地",
+        "agency": "本市建築管理工程處及本市大安地政事務所"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區永康街6巷16號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月19日派員前往，該址為永業書店，依現場實際使用情形，以商場用途列管，檢查結果計有滅火器及出口標示燈不合規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映招牌設置、單一出入口及私人土地還是公有土地部分，係屬本市建築管理工程處及本市大安地政事務所權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-14",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "14",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-11",
+    "title": "密室逃脫場館｜設備符合及跨機關移辦",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本府文化局",
+      "本市商業處",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "密室逃脫場所營業管理",
+        "agency": "本府文化局"
+      },
+      {
+        "matter": "商業登記",
+        "agency": "本市商業處"
+      },
+      {
+        "matter": "地下室逃生門上鎖及建築防火避難設施",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區安和路1段112巷27號B1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月20日由本府專案小組辦理現場聯合稽查，該址為笨蛋工作室，依法應設置之消防安全設備，檢查結果符合規定。為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映密室逃脫主管機關、商業登記、地下室逃生門上鎖部分，係分屬本府文化局、本市商業處及建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-15",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "15",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-21",
+    "title": "富裕自由商旅｜旅館設備符合及跨機關移辦",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市建築管理工程處",
+      "本府觀光傳播局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "未依核准登記、未申請空間擴建及旅館業管理規定",
+        "agency": "本市建築管理工程處及本府觀光傳播局"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區忠孝東路4段235號7樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月20日派員前往，該址為富裕自由商旅有限公司，依經濟部商工登記公示資料查詢顯示所營業事業資料為一般旅館業，故以旅館用途列管，依法應設置之消防安全設備，檢查結果均符合規定。為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映未核准登記、未申請空間擴建及旅館業管理規定部分，係分屬本市建築管理處及本府觀光傳播局權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-16",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "16",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-13",
+    "title": "安琥餐飲｜設備符合及多機關移辦",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市商業處",
+      "本府環境保護局環保稽查大隊",
+      "本府警察局大安分局",
+      "本府衛生局",
+      "本府都市發展局",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "商業登記及營業項目",
+        "agency": "本市商業處"
+      },
+      {
+        "matter": "營業設備或音樂等持續且可量測噪音",
+        "agency": "本府環境保護局環保稽查大隊"
+      },
+      {
+        "matter": "酒客人聲或深夜喧嘩等不具持續性聲音",
+        "agency": "本府警察局大安分局"
+      },
+      {
+        "matter": "餐飲食品衛生",
+        "agency": "本府衛生局"
+      },
+      {
+        "matter": "土地使用分區",
+        "agency": "本府都市發展局"
+      },
+      {
+        "matter": "建築物核准用途及使用管理",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區安和路2段189巷18號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月21日派員前往，該址為安琥餐飲，依本市商業處115年4月29日訪視結果為現場經營經濟部公司行號及有限合夥營業項目代碼表定義之「餐館業」及「飲料店業」，故以餐廳用途列管，依法應設置之消防安全設備，檢查結果均符合規定。為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映營業登記項目、噪音污染、深夜喧嘩、食品衛生、土地使用分區及建築管理事項部分，係分屬本市商業處、環保稽查大隊、警察局（大安分局）、衛生局、都市發展局及建築管理工程處權責，已依行政程序法規定，移請相關機關回復您。"
+  },
+  {
+    "id": "latest-daan-17",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "17",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-14",
+    "title": "運動場館裝修材質｜設備符合及建管移辦",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "天花板、隔間等是否符合營業用防火材質，及防火區劃是否完善",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區光復南路260巷52號B1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月14日派員前往，該址為貳號吉合，依本府體育局認定為競技及休閒運動場館，因於各類場所消防安全設備設置標準第12條場所分類中尚無明確對應項目，爰內政部前於105年6月29日內授消字第1050822690號函釋，明定其適用原則及消防安全設備設置方式，故以訓練班用途列管，依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映天花板及隔間等是否符合營業用防火材質，防火區劃是否完善部分，係屬本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-18",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "18",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-24",
+    "title": "健身休閒中心｜消防設備及防火管理缺失",
+    "category": "防火管理",
+    "status": "缺失處理",
+    "related_agencies": [
+      "本市建築管理工程處",
+      "本府體育局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "建築物公共安全檢查申報及建築防火避難設施",
+        "agency": "本市建築管理工程處"
+      },
+      {
+        "matter": "健身或運動場館營業類型及營業管理",
+        "agency": "本府體育局"
+      }
+    ],
+    "review_flags": [
+      "健身場所用途分類、設備及防火管理缺失之法規適用須逐項確認"
+    ],
+    "response_text": "有關您反映本市大安區復興南路2段157號地下1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查及防火管理，於115年5月27日派員前往，依內政部105年6月29日內授消字第1050822690號函釋，暫以各類場所消防安全設備設置標準第12條第2款第3目之健身休閒中心列管，檢查結果計有火警自動警報設備、緊急廣播設備、室內排煙設備及未依規定遴用防火管理人等不合規定，已當場開立舉發違反消防法案件及限期改善通知單在案，將持續追蹤列管至複查合格；為維護公共安全，已當場宣導場所人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映公共安全檢查申報、防火逃生規範及用途認定部分，係分屬本市建築管理工程處及本府體育局權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-19",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "19",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-27",
+    "title": "餐廳地下室｜設備符合及排煙設置說明",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "非法隔間及沒有施工許可",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "排煙設備不得只以單一面積自動判斷，須確認樓層、用途及其他法定要件"
+    ],
+    "response_text": "有關您反映本市大安區新生南路2段30巷21號1樓及地下1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月26日派員前往，該址為MaisonVanille（梅頌凡尼爾工坊有限公司），現場未發現施工行為，依現場實際使用情形，以餐廳用途列管，依法應設置之消防安全設備，檢查結果符合規定；另地下室使用面積約為60平方公尺，未達各類場所消防安全設備設置標準第28條排煙設備之設置要件。為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映非法隔間及沒有施工許可部分，係屬本市建築管理工程處權責，已依行政程序法規定，移請相關機關回復您。"
+  },
+  {
+    "id": "latest-daan-20",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "20",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-28",
+    "title": "地址釐清健身場所｜設備符合及動線宣導",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市建築管理工程處",
+      "本府體育局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "逃生動線及梯間堆積雜物",
+        "agency": "本市建築管理工程處"
+      },
+      {
+        "matter": "健身或運動場館營業類型及營業管理",
+        "agency": "本府體育局"
+      }
+    ],
+    "review_flags": [
+      "原稿「現場未發現」缺受詞，且正確地址及用途分類須人工確認"
+    ],
+    "response_text": "有關您反映本市大安區敦化南路1段219號2樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月5日派員前往，現場未發現，另與您電話聯繫確認後，正確地址應為敦化南路1段219號地下1樓「赫威體適能有限公司」，依內政部105年6月29日內授消字第1050822690號函釋，以訓練班用途˙列管，依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，針對您反映事項，本局亦於5月27日派員宣導健身器材及雜物勿占用逃生動線與樓梯間，應保持避難通道暢通，避免影響火災避難逃生。\n另有關您反映逃生動線、梯間堆積雜物及用途認定部分，係分屬本市建築管理工程處及本府體育局權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-21",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "21",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-29",
+    "title": "訓練班｜設備符合及撒水設置說明",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本府都市發展局",
+      "本府體育局",
+      "本府環境保護局環保稽查大隊",
+      "本市商業處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "土地使用分區",
+        "agency": "本府都市發展局"
+      },
+      {
+        "matter": "健身中心營業管理",
+        "agency": "本府體育局"
+      },
+      {
+        "matter": "營業設備或音樂等持續且可量測噪音",
+        "agency": "本府環境保護局環保稽查大隊"
+      },
+      {
+        "matter": "商業登記",
+        "agency": "本市商業處"
+      }
+    ],
+    "review_flags": [
+      "自動撒水設備不得只以單一面積自動判斷，須確認完整法定要件；噪音須先確認是否屬持續且可量測之營業設備或音樂聲"
+    ],
+    "response_text": "有關您反映本市大安區復興南路1段122巷10號2樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月29日派員前往，依內政部105年6月29日內授消字第1050822690號函釋，以訓練班用途列管，依法應設置之消防安全設備，經檢查結果均符合規定；現場使用面積約120平方公尺，尚未達各類場所消防安全設備設置標準第17條自動撒水設備之設置要件。為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映土地使用分區、健身中心營業管理、噪音擾鄰及商業登記部分，係分屬本府都市發展局、體育局、環保稽查大隊及本市商業處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-22",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "22",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-2-1",
+    "title": "榮榮園餐廳｜設備、防焰與跨機關回復",
+    "category": "防焰物品",
+    "status": "符合規定＋法規說明",
+    "related_agencies": [
+      "本府教育局",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "補習班是否合法設立及地下室僅一處出入口、避難逃生及隔間、天花板裝修材質",
+        "agency": "本府教育局及本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "防焰物品不適用結論及地下樓層條件須人工確認"
+    ],
+    "response_text": "有關您反映本市大安區安和路1段102巷9號1樓及B1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，因本次陳情內容反映本局檢查結果，本局再於115年7月16日派員前往，該址為榮榮園餐廳，依現場實際用途，以餐廳用途列管，依法應設置之消防安全設備，檢查結果仍符合規定；另有關您反映之消防通道部分，按其文意應指避難逃生通道，係規範於建築技術規則各章節中，權管機關為本市建築管理工程處，將由該機關為您說明。防焰物品部分，依消防法第11條規定，地面樓層達11層以上之建築物、地下建築物及中央主管機關指定之場所，應使用防焰標示之地毯、窗簾、布幕、展示用廣告板及其他指定防焰物品之義務，本案場所非屬前開規定對象，爰不適用之，依法尚無需使用防焰物品。\n有關您反映補習班是否合法設立及地下室僅一處出入口、避難逃生及隔間、天花板裝修材質部份，係分屬本府教育局及本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-23",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "23",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-2-10",
+    "title": "溪仔邊烤肉飯｜設備符合及油煙等移辦",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本府環境保護局環保稽查大隊",
+      "本府都市發展局",
+      "本市商業處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "廚房油煙或異味排放",
+        "agency": "本府環境保護局環保稽查大隊"
+      },
+      {
+        "matter": "土地使用分區",
+        "agency": "本府都市發展局"
+      },
+      {
+        "matter": "商業登記",
+        "agency": "本市商業處"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區大安路1段213號1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年8月3日派員前往，該址為溪仔邊烤肉飯，依現場實際使用情形，以餐廳用途列管，依法應設置之消防安全設備，檢查結果均符合規定。為維護公共安全，已宣導現場人員注意用火用電安全及定期清洗排油煙管，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映廚房油煙經管道間飄入住家、土地使用分區及商業登記等事項，係分屬本府環境保護局環保稽查大隊、都市發展局及本市商業處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-24",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "24",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-2-7",
+    "title": "豚太郎美食屋｜消防設備缺失及跨機關移辦",
+    "category": "消防安全設備",
+    "status": "缺失處理",
+    "related_agencies": [
+      "本市建築管理工程處",
+      "本府衛生局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "逃生門被雜物堵住、湯內有蟑螂跟頭髮衛生有問題等",
+        "agency": "本市建築管理工程處及本府衛生局"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區臥龍街13號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月31日派員前往，該址為豚太郎美食屋，依現場實際使用情形，以飲食店用途列管，檢查結果計有滅火器及住宅用火災警報器等不符規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映逃生門被雜物堵住、湯內有蟑螂跟頭髮衛生有問題等事項，係分屬本市建築管理工程處及本府衛生局權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-25",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "25",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-2-9",
+    "title": "集合住宅消防栓複查｜符合及建管說明",
+    "category": "消防安全設備",
+    "status": "複查合格",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "未依原核准竣工圖說合法使用及建築物公共安全",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區信義路4段149、151號地下2樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，前於115年7月9日開立限期改善通知單在案，復於7月30日派員前往複查，複查結果符合規定，室內消防栓箱門均可正常開啟；為維護公共安全，已當場宣導管委會應保持消防安全設備前方淨空，勿停放車輛，以免影響消防安全設備操作，並應做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映未依原核准竣工圖說合法使用及建築物公共安全部分，係屬本市建築管理工程處權責，前於案件編號W10-1150629-00316辦理時，已依行政程序法規定，移請該機關回復您，經洽本市建築管理工程處表示已回復您，後續若還有相關疑慮，亦可撥市民熱線1999轉該機關洽詢。"
+  },
+  {
+    "id": "latest-daan-26",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "26",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-2-8",
+    "title": "上達基教會施工中｜施工消防安全管理",
+    "category": "消防安全設備",
+    "status": "施工中／追蹤",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "原地址與實際地址不同，須先確認查察對象及施工許可資料"
+    ],
+    "response_text": "有關您反映本市大安區忠孝東路4段170巷17弄4號1樓、4號、6號、8號B1一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年8月5日派員前往，依您陳述內容研判實際地址應為大安區忠孝東路4段170巷17弄4號1樓，該址為上達基教會，現場裝修施工中，依該址公告之室內裝修施工許可證所示，施工期間至115年11月28日止，本局將持續追蹤，並視實際使用情形，據以辦理相關消防安全管理事宜。為維護公共安全，已當場宣導施工人員於施工期間應注意用火用電安全，落實施工現場消防安全管理，並應於施工現場設置適當數量之滅火器，以利火災初期應變使用，確保施工期間消防安全。"
+  },
+  {
+    "id": "latest-daan-27",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "27",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": "uploaded-2-6",
+    "title": "鴻利華廈安全梯上鎖｜設備符合及通報建管",
+    "category": "消防通道／避難逃生",
+    "status": "符合規定＋通報",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "通報依據、機關名稱、聯絡人、電話及網址須更新確認"
+    ],
+    "response_text": "有關您反映本市大安區信義路4段265巷21弄10號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年8月5日派員前往，該址為鴻利華廈，依現場實際使用情形，以集合住宅用途列管，依法應設置之消防安全設備，檢查結果均符合規定；現場發現安全梯有上鎖之情形，已依內政部營建署「加強建築物公共安全檢查及取締執行要點」第6點規定通報本市建築管理工程處（下稱建管處）處理，後續處理進度，建議您逕洽建管處公寓大廈科承辦人林冠宇，聯絡電話1999轉2742；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關逃生避難部分，依據內政部消防署的火災逃生避難原則，火場逃生的最佳策略是離開建築物，而離開建築物最好的方法就是往1樓往外逃生，相關資訊可至內政部消防署消防防災館－防災知識一起學－火災知識－災時－火災逃生避難原則查詢（網址：https://www.tfdp.com.tw/cht/index.php?code=list&flag=detail&ids=55&article_id=152）。"
+  },
+  {
+    "id": "latest-daan-28",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "28",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "永康街裝修中｜施工安全及都市、建築權責",
+    "category": "消防安全設備",
+    "status": "施工中／追蹤＋移辦",
+    "related_agencies": [
+      "本府都市發展局",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "土地使用分區",
+        "agency": "本府都市發展局"
+      },
+      {
+        "matter": "裝修許可及外推構造",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "施工狀態、現場滅火器及後續追蹤均屬個案事實；都市與建築權責須逐項配對"
+    ],
+    "response_text": "有關您反映本市大安區永康街34之5號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月1日派員前往，現場裝修施工中，無場所進駐使用，施工現場備有滅火器，本局將持續追蹤列管，並視實際使用情形，據以辦理相關消防安全管理事宜。為維護公共安全，已當場宣導施工人員於施工期間應注意用火用電安全，落實施工現場消防安全管理。\n另有關您反映土地使用分區、裝修許可、外推構造部分，係分屬本府都市發展局、本市建築管理工程處權責，爰依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-29",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "29",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "阮景正女裝社｜設備缺失及營業、稅務、建築移辦",
+    "category": "消防安全設備",
+    "status": "缺失處理＋移辦",
+    "related_agencies": [
+      "財政部臺北國稅局",
+      "本府都市發展局",
+      "本市商業處",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "未開立統一發票或營業稅疑義",
+        "agency": "財政部臺北國稅局"
+      },
+      {
+        "matter": "土地使用分區及營業地址使用疑義",
+        "agency": "本府都市發展局"
+      },
+      {
+        "matter": "營業登記及公司登記",
+        "agency": "本市商業處"
+      },
+      {
+        "matter": "室內裝修及格局變更",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "原稿所載「財政部北區國稅局」與臺北市轄區不一致，草稿改列財政部臺北國稅局；稅務、商業、都市及建築事項仍須逐項確認"
+    ],
+    "response_text": "有關您反映本市大安區安和路1段12號1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月3日派員前往，該址為阮景正女裝社，依現場實際使用情形，以商場用途列管，依法應設置之消防安全設備，檢查結果計有出口標示燈、緊急照明設備、滅火器及住宅用火災警報器等不合規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映營業登記、公司登記（商業登記）、營業地址是否合法、疑似未開發票、店鋪裝修是否申報室內裝修申請或是變更既有格局圖等項目，係分屬本市財政部北區國稅局、都市發展局、商業處及建管處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-30",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "30",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "新生南路裝修中｜都市、建築、商業與警政移辦",
+    "category": "消防安全設備",
+    "status": "施工中／追蹤＋移辦",
+    "related_agencies": [
+      "本府都市發展局",
+      "本市建築管理工程處",
+      "本市商業處",
+      "本府警察局大安分局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "土地使用分區",
+        "agency": "本府都市發展局"
+      },
+      {
+        "matter": "建築用途、室內裝修、隔間變更、公寓大廈門禁及住戶管理爭議",
+        "agency": "本市建築管理工程處"
+      },
+      {
+        "matter": "商業登記",
+        "agency": "本市商業處"
+      },
+      {
+        "matter": "人聲喧嘩等妨害居住安寧",
+        "agency": "本府警察局大安分局"
+      }
+    ],
+    "review_flags": [
+      "同址另有排油煙版本；都市、建築、商業與警政事項須依本案陳情內容分流"
+    ],
+    "response_text": "有關您反映本市大安區新生南路3段88號2樓之1一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月3日派員前往，現場裝修施工中，無場所進駐使用，施工現場已備有滅火器，本局將持續追蹤列管，並視實際使用情形，據以辦理相關消防安全管理事宜。為維護公共安全，已當場宣導施工人員於施工期間應注意用火用電安全，落實施工現場消防安全管理。\n另有關您反映土地使用分區是否合法、建築物用途及違規使用疑義、商業登記合法性、室內裝修及隔間變更疑義、居住安寧及門禁管理問題及公寓大廈管理住戶爭議事項部分，係分屬本府都市發展局、本市建築管理工程處、本府商業處及本府警察局權責，爰依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-31",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "31",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "新生南路裝修中｜排油煙及多機關移辦",
+    "category": "消防安全設備",
+    "status": "施工中／追蹤＋移辦",
+    "related_agencies": [
+      "本府都市發展局",
+      "本市商業處",
+      "本府環境保護局環保稽查大隊",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "土地使用分區",
+        "agency": "本府都市發展局"
+      },
+      {
+        "matter": "商業登記",
+        "agency": "本市商業處"
+      },
+      {
+        "matter": "排油煙設備及污染疑義",
+        "agency": "本府環境保護局環保稽查大隊"
+      },
+      {
+        "matter": "建築用途、室內裝修、隔間變更及公寓大廈管理",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "同址另有居住安寧版本；排油煙、都市、建築及商業事項須依本案內容分流"
+    ],
+    "response_text": "有關您反映本市大安區新生南路3段88號2樓之1一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月3日派員前往，現場裝修施工中，無場所進駐使用，施工現場已備有滅火器，本局將持續追蹤列管，並視實際使用情形，據以辦理相關消防安全管理事宜。為維護公共安全，已當場宣導施工人員於施工期間應注意用火用電安全，落實施工現場消防安全管理。\n另有關您反映土地使用分區是否合法、建築物用途及違規使用疑義、商業登記合法性、室內裝修及隔間變更疑義、排油煙設備是否合法及門禁管理問題及公寓大廈管理住戶爭議事項部分，係分屬本府都市發展局、本府商業處、本府環保局及本市建築管理工程處權責，爰依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-32",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "32",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "正昇文具行與永業書店｜兩址消防設備符合",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "原稿有重複逗號，草稿已修正；兩個地址、兩次查察及兩場所結果須分別核對"
+    ],
+    "response_text": "有關您反映本市大安區羅斯福路3段277號B1樓及永康街6巷16號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月22日派員前往羅斯福路3段277號B1樓，該址為正昇文具行，依現場實際使用情形，以商場用途列管，依法應設置之消防安全設備，，檢查結果均符合規定；115年6月1日派員前往大安區永康街6巷16號，該址為永業書店，依現場實際使用情形，以商場用途列管，依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "latest-daan-33",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "33",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "住宅兩度無法進入｜投遞指導單及追蹤",
+    "category": "消防安全設備",
+    "status": "無法進入／追蹤",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "來源含承辦人及電話，正式使用前須更新或移除；無法進入不得推定設備符合規定"
+    ],
+    "response_text": "有關您反映本市大安區羅斯福路3段269巷32號2樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，分別於115年6月10日上午及6月11日下午派員前往，惟現場大門深鎖無法進入，無人應門、亦未聽聞住宅用火災警報器作動或低電量警示聲響；另已於該戶1樓信箱投遞行政指導單及防火宣導單，並留置本局第二救災救護大隊大安中隊聯絡資訊（聯絡電話：02-27297668轉5210），供住戶聯繫詢問。本局將持續追蹤列管，如發現有違規情形，將依規定查處。"
+  },
+  {
+    "id": "latest-daan-34",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "34",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "中南大廈｜設備符合及梯間淨空宣導",
+    "category": "消防通道／避難逃生",
+    "status": "符合規定＋移辦",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "逃生動線及梯間堆積雜物",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "原稿「勿」字重複，草稿已修正；樓梯間及公共區域權責須依實際空間確認"
+    ],
+    "response_text": "有關您反映本市大安區東豐街7號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月12日派員前往，該址為中南大廈，現場依法應設之消防安全設備，檢查結果符合規定；為維護公共安全，已當場宣導總幹事及保全人員勿於樓梯間及公共區域勿堆置物品，應確實維持避難逃生動線暢通，以避免影響火災發生時之避難逃生安全。\n另有關您反映逃生動線、梯間堆積雜物部分，係分屬本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-35",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "35",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "登琪爾停業整修｜施工防護與復業追蹤",
+    "category": "防火管理",
+    "status": "停業整修／追蹤＋移辦",
+    "related_agencies": [
+      "本市建築管理工程處",
+      "本市商業處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "地下室用途、建築物公共安全檢查申報、違章隔間及變更使用",
+        "agency": "本市建築管理工程處"
+      },
+      {
+        "matter": "商業登記及營業項目",
+        "agency": "本市商業處"
+      }
+    ],
+    "review_flags": [
+      "施工中消防防護計畫、停業整修、火災毀損設備修復及復業條件均須依個案事實與法規確認"
+    ],
+    "response_text": "有關您反映本市敦化南路1段225號B1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月16日派員前往，該址為登琪爾開發股份有限公司，已暫停營業，經聯繫場所防火管理人到場後，已當場宣導場所於停業整修期間，應依消防法第13條及「施工中消防防護計畫指導須知」等相關規定，辦理施工期間消防安全管理事宜，本局將持續追蹤列管，以維護場所施工安全及公共安全；另宣導場所復業前應完成火災毀損消防安全設備之修復，並經檢查符合相關消防法令規定後始得恢復營業。\n有關您反映地下室用途合法性、公共安全檢查申報、違章隔間、變更使用，係屬本市建築管理工程處權責，爰依行政程序法規定，移請該機關回復您；另有關商業登記、營業項目部分，係屬本市商業處權責，建議您逕洽市民熱線1999轉本市商業處，由該機關回復您。"
+  },
+  {
+    "id": "latest-daan-36",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "36",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "金華街裝修中｜施工安全及多機關移辦",
+    "category": "消防安全設備",
+    "status": "施工中／追蹤＋移辦",
+    "related_agencies": [
+      "本府都市發展局",
+      "本市建築管理工程處",
+      "本市商業處",
+      "本府環境保護局",
+      "本府衛生局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "土地使用分區",
+        "agency": "本府都市發展局"
+      },
+      {
+        "matter": "夾層增建、室內裝修、天花板高度及逃生空間",
+        "agency": "本市建築管理工程處"
+      },
+      {
+        "matter": "商業登記",
+        "agency": "本市商業處"
+      },
+      {
+        "matter": "公共區域鼠蟑孳生源及環境病媒",
+        "agency": "本府環境保護局"
+      },
+      {
+        "matter": "餐飲食品作業場所內病媒出沒及食品衛生",
+        "agency": "本府衛生局"
+      }
+    ],
+    "review_flags": [
+      "裝修施工、夾層、土地使用、商業及衛生事項須逐項拆分；公共區域病媒與餐飲食品作業場所病媒之權責不同"
+    ],
+    "response_text": "有關您反映本市大安區金華街223之13號1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月23日派員前往，現場裝修施工中，無場所進駐使用，施工現場備有滅火器，本局將持續追蹤列管，並視實際使用情形，據以辦理相關消防安全管理事宜。為維護公共安全，已當場要求應依規定檢討設置消防安全設備，並宣導施工人員於施工期間應注意用火用電安全，落實施工現場消防安全管理。\n有關您反映夾層是否涉及違法增建、室內裝修許可、天花板過低及逃生空間不足、土地使用分區是否符合規定，以及商業登記等事項，係分屬本府都市發展局、本市建築管理工程處及商業處權責，已依行政程序法相關規定，移請該機關回復您；另有關老鼠及蟑螂孳生疑慮、餐飲業食品衛生等事項，係屬本府衛生局權責，建議您逕洽市民熱線1999轉本府衛生局，由該機關回復您。"
+  },
+  {
+    "id": "latest-daan-37",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "37",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "信友大樓｜緊急電源插座說明及建管移辦",
+    "category": "消防安全設備",
+    "status": "符合規定＋法規說明",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "大樓公共設施管理及公寓大廈管理",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "是否應設供消防搶救使用之緊急電源插座，須依用途、樓層、面積、圖說及現行設置標準確認"
+    ],
+    "response_text": "有關您反映本市大安區復興南路2段292號12樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月23日派員前往，該址為信友大樓，依法應設置之消防安全設備，檢查結果均符合規定；另查該址依法無須設置供消防搶救使用之緊急電源插座，有關您指稱施工時使用之電源，非屬消防用緊急電源；為維護公共安全，已宣導施工人員於施工期間應注意用火用電安全，並落實施工現場消防安全管理及火災預防措施，以確保消防安全設備維持正常功能。\n另有關您反映大樓公共設施管理、公寓大廈管理條例相關事項部分，係屬本市建築管理工程處權責，爰依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-38",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "38",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "澤之湯體重管理中心｜設備符合及建管移辦",
+    "category": "消防安全設備",
+    "status": "符合規定＋移辦",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "違法隔間及室內裝修合法性",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區忠孝東路4段1號7樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月24日派員前往，該址為澤之湯體重管理中心，依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映違法隔間及室內裝修是否合法部分，係屬本市建築管理工程處權責，爰依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-39",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "39",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "彩券行與檳榔攤｜消防設備符合",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "彩券行及檳榔攤以辦公室用途列管之認定基礎須依主管機關與現場資料確認"
+    ],
+    "response_text": "有關您反映本市大安區通化街163號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月24日派員前往，該址為億連發彩券行及中日檳榔攤，依現場實際使用情形，以辦公室用途列管，依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "latest-daan-40",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "40",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "聿盛大安門市｜地址釐清及多機關移辦",
+    "category": "消防安全設備",
+    "status": "符合規定＋地址釐清＋移辦",
+    "related_agencies": [
+      "本府衛生局",
+      "本市商業處",
+      "本府都市發展局",
+      "本府環境保護局環保稽查大隊",
+      "本府警察局大安分局",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "室內吸菸及水煙",
+        "agency": "本府衛生局"
+      },
+      {
+        "matter": "營業登記",
+        "agency": "本市商業處"
+      },
+      {
+        "matter": "土地使用分區",
+        "agency": "本府都市發展局"
+      },
+      {
+        "matter": "營業設備或音樂等持續且可量測噪音",
+        "agency": "本府環境保護局環保稽查大隊"
+      },
+      {
+        "matter": "酒客人聲或深夜喧嘩等不具持續性聲音",
+        "agency": "本府警察局大安分局"
+      },
+      {
+        "matter": "建築物使用用途、室內裝修及公共安全",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "原陳情地址疑將51-1號1樓誤寫為51樓；營業設備或音樂噪音與酒客人聲喧嘩須依聲音態樣分流"
+    ],
+    "response_text": "有關您反映本市大安區敦化南路1段160巷4號51樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月24日派員前往，依您陳述內容研判實際地址應為大安區敦化南路1段160巷51-1號1樓，該址為聿盛企業股份有限公司大安門市部，依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n有關您反映室內吸菸及水煙、營業登記、土地使用區分、營業噪音及酒客喧嘩妨害安寧等事項，係分屬本市衛生局、商業處、都市發展局、警察局大安分局權責，已依行政程序法規定，移請該機關回復您；另有關建築物使用用途、室內裝修及公共安全部分，係屬本市建築管理工程處權責，建議您逕洽市民熱線1999轉本市建築管理工程處，由該機關回復您。"
+  },
+  {
+    "id": "latest-daan-41",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "41",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "銀河大廈｜頂樓花圃與救災動線說明",
+    "category": "消防安全設備",
+    "status": "符合規定＋現場勘察＋移辦",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "建築結構、耐震、防水、防火區劃、花圃合法性及公寓大廈管理",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "頂樓花圃未妨礙消防救災之結論僅限本次勘察；結構、防火區劃及公寓管理事項須由建管確認"
+    ],
+    "response_text": "有關您反映本市大安區信義路4段199巷21號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月25日派員前往，該址為銀河大廈，依現場實際使用情形，以集合住宅用途列管，依法應設置之消防安全設備，檢查結果均符合規定；有關您反映頂樓設置花圃影響消防救災動線一節，經勘察結果，未發現有妨礙消防人員救災之情形；另已宣導現場人員樓梯間不得隨意堆置物品或設置障礙物，以維護大樓公共安全。\n另有關您反映建築結構安全、建築耐震能力、屋頂防水層、防火區劃及防火填塞是否受損、設置大型花圃是否合法、公寓大廈管理維護責任等部分，係屬本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-42",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "42",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "UNITED ARROWS大安店｜零售場所設備符合",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "零售店以零售市場用途列管之認定基礎須依現場及主管機關資料確認"
+    ],
+    "response_text": "有關您反映本市大安區仁愛路4段71巷32號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月29日派員前往，該址為UNITEDARROWS大安店，依現場實際使用情形，以零售市場用途列管，現場依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "latest-daan-43",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "43",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "天恩長照中心｜檢修申報複查符合",
+    "category": "消防安全設備檢修申報",
+    "status": "檢修申報複查合格",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "來源含承辦人及電話，正式使用前須更新或移除；檢修人員資格名稱及申報資料須依現行法規核對"
+    ],
+    "response_text": "有關您反映本市大安區新生南路3段7之4號及9之4號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月30日派員前往，依您陳述內容研判實際地址應為上揭地址4樓，該址為臺北市私立天恩老人長期照顧中心，該場所業於115年4月17日委託消防專技人員辦理115年上半年度消防安全設備檢修申報，本局於115年6月30日針對申報結果複查，檢查結果符合規定。\n若針對檢修申報方式仍有不清楚地方，可逕洽本局第二救災救護大隊大安中隊蔡宗佑小隊長（聯絡電話：02-27297668轉5210）為您說明。"
+  },
+  {
+    "id": "latest-daan-44",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "44",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "良友機車行｜汽車修護場設備符合",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [],
+    "response_text": "有關您反映本市大安區通化街161號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月2日派員前往，該址為良友機車行，依現場實際使用情形，以汽車修護場用途列管，依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "latest-daan-45",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "45",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "雲門名廈｜消防設備缺失及停車位移辦",
+    "category": "消防安全設備",
+    "status": "缺失處理＋移辦",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "原核准圖說使用、法定停車位及建築物公共安全",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "不符規定設備、通知文件、改善期限及停車位移辦事項須依本案紀錄確認"
+    ],
+    "response_text": "有關您反映本市大安區信義路4段149、151號地下2樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月9日派員前往，該址為雲門名廈，檢查結果計有室內消防栓設備及火警自動警報設備等不符規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格；為維護公共安全，已當場宣導管委會應保持消防安全設備前方淨空，勿停放車輛，以免影響消防安全設備操作，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映現場未依原核准圖說使用、法定停車位設置及建築物公共安全違規等事項，係屬本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-46",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "46",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "古亭市場｜部分店家缺失、部分無法進入",
+    "category": "消防安全設備",
+    "status": "部分缺失／部分無法進入＋移辦",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "法定空地改裝店面及逃生動線受阻",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "同案多門牌包含缺失與無法進入兩種結果，不得合併為單一合格結論；來源含承辦人及電話"
+    ],
+    "response_text": "有關您反映本市大安區羅斯福路2段77巷2號、2-1號、6號、8號、10號、12號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，分別於115年7月9日上午及7月13日上午派員前往，該址為古亭市場（傳統市場），有關2號、2-1號及8號店家部分，檢查結果計有滅火器及住宅用火災警報器等不符規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格；為維護公共安全，已當場宣導店家注意用火用電安全，緊急時亦可使用里辦公處設置之滅火器，並落實火災預防措施與應變機制。\n有關6號、10號及12號店家部分，本局已二度派員前往，惟現場均未營業致無法進入，將持續追蹤，後續如發現有營業情形，您亦可電洽本局第二救災救護大隊大安中隊蔡宗佑小隊長（聯絡電話：02-27297668轉5210），本局將派員依規定查處。\n另有關您反映法定空地違規改裝成店面及逃生動線受阻等事項，係屬本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-47",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "47",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "活泉音樂教育｜辦公室列管及補習班移辦",
+    "category": "消防安全設備",
+    "status": "符合規定＋移辦",
+    "related_agencies": [
+      "本府教育局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "補習班是否合法設立",
+        "agency": "本府教育局"
+      }
+    ],
+    "review_flags": [
+      "主管機關尚未認定補習班前的列管用途僅為當時認定，不得沿用為永久結論"
+    ],
+    "response_text": "有關您反映本市大安區安和路1段102巷9號1樓消防安檢一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月9日派員前往，該址為活泉國際音樂教育有限公司，於主管機關尚未認定為補習班之前，依現場實際使用情形，以辦公室用途列管，現場應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n有關您反映補習班是否合法設立等事項，係屬本府教育局權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-48",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "48",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "雲門名廈｜限期改善與消防法第37條說明",
+    "category": "消防安全設備",
+    "status": "缺失處理＋法規說明",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "消防法第37條依營業或非營業場所分流；罰鍰、按次處罰及改善期限屬高風險法律與個案結論，須逐項核對"
+    ],
+    "response_text": "有關您反映本市大安區信義路4段149、151號地下2樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月9日派員前往，該址為雲門名廈，檢查結果計有室內消防栓設備及火警自動警報設備等不符規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格。倘該大樓於限期改善期限（115年7月29日）屆滿後，經本局複查仍未改善完成，將依消防法第37條規定，處管理權人新臺幣2萬元以上30萬元以下罰鍰，並得按次處罰。"
+  },
+  {
+    "id": "latest-daan-49",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "49",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "住宅大樓｜多項設備缺失及建管移辦",
+    "category": "消防安全設備",
+    "status": "缺失處理＋移辦",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "梯間鐵門、法定空地、違建、防火區劃、公安申報及室內裝修",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "設備缺失、限期改善與聯合稽查配合情形均須依本案紀錄確認"
+    ],
+    "response_text": "有關您反映本市大安區忠孝東路4段170巷6弄10號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月15日派員前往，檢查結果計有室內消防栓設備、手動報警設備、出口標示燈、緊急照明設備及消防送水口等不合規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格；另有關您陳情內容建請相關機關辦理聯合稽查一事，後續主管機關如有辦理聯合會勘，本局將配合辦理。為維護公共安全，本局已於該住宅大樓門口張貼宣導單，提醒住戶注意用火用電安全，並落實消防安全設備維護管理及各項消防預防措施。\n另有關您反映建築物梯間設鐵門、侵占法定空地、違建、防火區劃、建築物公安申報及室內裝修施工等相關事項，係屬本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-50",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "50",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "華城充電站｜戶外消防查察及多機關移辦",
+    "category": "消防安全設備",
+    "status": "符合規定＋現場勘察＋移辦",
+    "related_agencies": [
+      "本市建築管理工程處",
+      "本府產業發展局",
+      "台灣電力股份有限公司"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "法定空地及充電站建築設置合法性",
+        "agency": "本市建築管理工程處"
+      },
+      {
+        "matter": "充電基礎設施",
+        "agency": "本府產業發展局"
+      },
+      {
+        "matter": "供電申請、配電設備及供電審查",
+        "agency": "台灣電力股份有限公司"
+      }
+    ],
+    "review_flags": [
+      "戶外空地、充電站設置、巷道通行與消防車可進出結論均限本次現場情形；多機關權責須逐項確認"
+    ],
+    "response_text": "有關您反映本市大安區和平東路1段75巷、金山南路2段192巷一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月15日派員前往，依您陳述內容研判實際地址應為大安區金山南路2段192巷31號旁空地，該址為華城充電站，為戶外空地，現場已無施工作業，設有滅火器，檢查結果符合規定；另有關您反映巷道狹窄疑慮，經現場確認結果，該巷道可供2輛小型車輛會車，消防車亦可正常進出，尚無影響消防車救災通行之情形。\n有關您反映法定空地、充電站設置是否合法及充電基礎設施等事項，係分屬本市建築管理工程處及本府產業發展局權責，已依行政程序法規定，移請該機關回復您；另有關供電申請、配電設備、供電審查部分，係屬台灣電力股份有限公司權責，建議您逕洽市民熱線1999轉台灣電力股份有限公司，由該機關回復您。"
+  },
+  {
+    "id": "latest-daan-51",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "51",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "安仕達餐廳｜設備符合及衛生移辦",
+    "category": "消防安全設備",
+    "status": "符合規定＋移辦",
+    "related_agencies": [
+      "本府衛生局",
+      "本府環境保護局環保稽查大隊"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "餐飲食品作業場所內之食品及環境衛生",
+        "agency": "本府衛生局"
+      },
+      {
+        "matter": "場所周邊環境髒亂、廢棄物或污染",
+        "agency": "本府環境保護局環保稽查大隊"
+      }
+    ],
+    "review_flags": [
+      "食品作業場所內衛生與場所周邊環境髒亂之權責不同，須依陳情位置及污染態樣選擇機關"
+    ],
+    "response_text": "有關您反映本市大安區復興南路1段150號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月15日派員前往，該址為安仕達國際策略有限公司，依現場實際使用情形，以餐廳用途列管，現場應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映食品衛生及環境衛生等事項，係屬本府衛生局權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-52",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "52",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "這間咖啡店｜設備符合及公共空間移辦",
+    "category": "消防安全設備",
+    "status": "符合規定＋移辦",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "占用公共空間放置桌椅",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "公共空間放置桌椅之權責取決於實際空間性質，使用前須確認是否屬建築共用部分、騎樓或道路"
+    ],
+    "response_text": "有關您反映本市大安區信義路4段30巷39號1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月20日派員前往，該址為這間咖啡店，依現場實際使用情形，以咖啡廳用途列管，現場應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映占用公共空間放置桌椅事項，係屬本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-daan-53",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "53",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "玉順訓練班｜設備符合、防火管理缺失",
+    "category": "防火管理",
+    "status": "設備符合＋防火管理缺失",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "消防設備符合不代表防火管理符合；應實施防火管理的適用要件、未遴用事實及限改文件須分別確認"
+    ],
+    "response_text": "有關您反映本市大安區新生南路1段161之3號地下1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月17日派員前往，該址為玉順有限公司，依現場實際使用情形，以訓練班用途列管，現場應設置之消防安全設備，檢查結果均符合規定，惟該場所未依規定遴用防火管理人，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格；為維護公共安全，已當場宣導場所人員應依規定遴用防火管理人及辦理消防安全設備檢修申報，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "latest-daan-54",
+    "source_file": "陳情案回復範本大安(1).txt",
+    "source_number": "54",
+    "source_region": "大安",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "食品廚房｜住警器複查符合及多機關移辦",
+    "category": "消防安全設備",
+    "status": "複查合格＋移辦",
+    "related_agencies": [
+      "本府產業發展局",
+      "本府衛生局",
+      "本市建築管理工程處",
+      "本府環境保護局環保稽查大隊",
+      "本市勞動力重建運用處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "食品加工廠工廠登記",
+        "agency": "本府產業發展局"
+      },
+      {
+        "matter": "食品安全衛生",
+        "agency": "本府衛生局"
+      },
+      {
+        "matter": "建築物使用管理",
+        "agency": "本市建築管理工程處"
+      },
+      {
+        "matter": "抽油煙機噪音",
+        "agency": "本府環境保護局環保稽查大隊"
+      },
+      {
+        "matter": "非法聘僱外國人",
+        "agency": "本市勞動力重建運用處"
+      }
+    ],
+    "review_flags": [
+      "原稿機關簡稱及事項順序無法可靠一對一配對；草稿以常見權責拆分，正式使用前須逐項確認"
+    ],
+    "response_text": "有關您反映本市大安區通化街183巷5號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，本局前於115年7月7日派員前往，檢查結果計有住宅用火災警報器不符規定，已當場開立限期改善通知單在案，115年7月21日派員前往複查，檢查結果已符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映食品加工廠工廠登記、食品安全衛生、建築物使用管理、抽油煙機噪音及外籍移工非法僱用等部份，係分屬本府產業局、勞動局、建管處、衛生局及環保稽查大隊權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-1",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "1",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-2",
+    "title": "貓啡因商行黑龍分店｜設備符合及跨機關移辦",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市商業處",
+      "本市建築管理工程處",
+      "本市稅捐稽徵處",
+      "財政部臺北國稅局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "公司或商業登記",
+        "agency": "本市商業處"
+      },
+      {
+        "matter": "建築物公共安全檢查申報及室內裝修",
+        "agency": "本市建築管理工程處"
+      },
+      {
+        "matter": "稅務事項",
+        "agency": "【待確認：依稅目選擇本市稅捐稽徵處或財政部臺北國稅局】"
+      }
+    ],
+    "review_flags": [
+      "稅務事項須先確認稅目；地方稅由本市稅捐稽徵處、營業稅及統一發票等國稅由財政部臺北國稅局處理"
+    ],
+    "response_text": "有關您反映本市信義區松山路197號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月5日派員前往，該址為貓啡因商行黑龍分店，依現場實際用途，以飲食店用途列管，依法應設置之消防安全設備，檢查結果均符合規定；後續將依主管機關（本市商業處、建築管理工程處）認定使用態樣，據以要求業者另為檢討設置消防安全設備；為維護公共安全，已當場宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理。\n另有關您反映無商業登記、規避公安申報、室內裝修、稅務等部分，經本局了解，係分屬本市商業處、建築管理工程處、稅捐稽徵處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-2",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "2",
+    "source_region": "信義",
+    "reply_format": "official_letter",
+    "supersedes": "uploaded-5-3",
+    "title": "stancafe｜正式函復、設備符合及逃生權責",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "逃生動線",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關臺端陳情本市信義區忠孝東路5段71巷26號店家（stancafe）未見滅火器及逃生動線疑慮案，復如說明，請查照。\n說明：\n一、依臺端115年5月6日致內政部消防署署長信箱電子郵件及內政部消防署115年5月7日消署預字第11500604262號函辦理。\n二、本局權管事項為消防安全設備檢查，於115年5月8日派員前往，依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已當場宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n三、另有關您反映逃生動線部分，已由建築主管機關依權責卓處，建議您逕洽市民熱線1999轉本市建築管理工程處，由該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-3",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "3",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-4",
+    "title": "頂樓加蓋｜設備符合及跨機關移辦",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市稅捐稽徵處",
+      "財政部臺北國稅局",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "違章建築",
+        "agency": "本市建築管理工程處"
+      },
+      {
+        "matter": "稅捐事項",
+        "agency": "【待確認：依稅目選擇本市稅捐稽徵處或財政部臺北國稅局】"
+      }
+    ],
+    "review_flags": [
+      "稅捐事項須先確認稅目；地方稅與國稅不得僅依「稅捐」二字固定配對"
+    ],
+    "response_text": "有關您反映本市信義區莊敬路289巷7號6樓頂加一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月15日派員前往，依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已當場宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映稅捐、違建等部分，經本局了解，係分屬本市稅捐稽徵處、建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-4",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "4",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-5",
+    "title": "信義行政中心｜逃生門與通道權責移請",
+    "category": "消防通道／避難逃生",
+    "status": "移請／權責說明",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "逃生門上鎖及建築防火避難設施",
+        "agency": "本市建築管理工程處"
+      },
+      {
+        "matter": "現場開鎖及通道改善",
+        "agency": "【待確認：實際廳舍或樓層管理機關】"
+      }
+    ],
+    "review_flags": [
+      "逃生門及建築防火避難設施由建管處處理；現場開鎖及通道改善須確認實際廳舍或樓層管理機關"
+    ],
+    "response_text": "有關您反映本市信義區福德街86號8樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，該址為信義行政中心，有關逃生門上鎖及逃生通道不通部分，經本局了解，係分屬本市建築管理工程處及信義區公所權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-5",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "5",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-6",
+    "title": "薇薇歌坊｜設備符合及食品衛生移請",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本府衛生局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "食品衛生等問題",
+        "agency": "本府衛生局"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關您反映本市信義區松信路30號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月20日派員前往，該址為薇薇歌坊，依現場實際使用情形，以飲食店用途列管，依法應設之消防安全設備，檢查結果均符合規定；為維護公共安全，已當場宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映食品衛生等問題，經本局了解，係屬本府衛生局權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-6",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "6",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "倉庫場所｜設備符合及商業、建築權責",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市商業處",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "商業登記",
+        "agency": "本市商業處"
+      },
+      {
+        "matter": "使用執照及違規使用",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "場所名稱疑有罕見字，須與登記或現場資料核對"
+    ],
+    "response_text": "有關您反映本市信義區信義路5段150巷499號B1、B2樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月18日派員前往，該址為阿聯逎祭祀帝國有限公司，依現場實際使用情形，以倉庫用途列管，依法應設置之消防安全設備，檢查結果均符合規定。\n另有關您反映商業登記及使用執照部分，經本局了解，係分屬本市商業處及建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-7",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "7",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-7",
+    "title": "大巨蛋秀泰影城｜減光型引導燈說明",
+    "category": "消防安全設備",
+    "status": "法規與設備說明",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "減光型或消燈型引導燈之型式及連動方式須以設備圖說或檢查資料確認"
+    ],
+    "response_text": "有關您反映大巨蛋秀泰影城一事，本局說明如下：\n本局權管事項為消防安全設備檢查，前於115年4月8日派員前往，依法應設置之消防安全設備，檢查結果均符合規定。有關影城影廳出口標示燈及席位階梯照明（觀眾席引導燈）部分，係採用「減光型或消燈型引導燈具」，平時為降低亮度或不點燈狀態，藉由與火警自動警報設備連動，於火災或緊急狀況發生時，接受火警警報設備或緊急通報裝置發出之訊號，將立即切換成正常點燈狀態，標示避難出口及逃生動線，確保觀眾避難安全。"
+  },
+  {
+    "id": "latest-xinyi-8",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "8",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-8",
+    "title": "慈恩園生命紀念館｜設備符合及淨空宣導",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [],
+    "response_text": "有關您反映市信義區和平東路3段631巷49號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月22日派員前往，該址為慈恩園生命紀念館，依現場實際使用情形，以納骨堂（塔）用途列管，依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已當場宣導現場人員，應保持室內消防栓箱前淨空，不得堆放物品致遮蔽或妨礙使用，並應持續落實消防安全設備之維護管理工作，加強火災預防措施與應變機制。"
+  },
+  {
+    "id": "latest-xinyi-9",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "9",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-9",
+    "title": "艾克森科技｜設備符合及防火鐵捲門移請",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "防火鐵捲門故障",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "鐵捲門權責須先確認設備型態，不得一律視為防火避難設施"
+    ],
+    "response_text": "有關您反映本市信義區基隆路2段125號12樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月29日派員前往，該址為艾克森科技有限公司，依現場實際使用情形，以辦公室用途列管，依法應設置之消防安全設備，檢查結果均符合規定；為維護公共安全，已當場宣導現場人員，非緊急情況不得隨意按壓手動報警設備，鐵捲門下方不得堆放物品或設置其他障礙物，以確保其正常動作。\n另有關大樓鐵捲門係屬防火避難設施非消防安全設備，鐵捲門故障部分，係屬本市建築管理工程處權責，建議您逕洽市民熱線1999轉本市建築管理工程處，由該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-10",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "10",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-10",
+    "title": "森運動｜設備、防焰符合及多機關移請",
+    "category": "防焰物品",
+    "status": "符合規定",
+    "related_agencies": [
+      "本府體育局",
+      "本府環境保護局環保稽查大隊",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "健身中心最大容留人數揭露",
+        "agency": "本府體育局"
+      },
+      {
+        "matter": "室內空氣品質",
+        "agency": "本府環境保護局環保稽查大隊"
+      },
+      {
+        "matter": "逃生通道阻塞",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "最大容留人數、室內空氣品質及逃生通道阻塞已依權責拆分，仍須核對各項現場事實"
+    ],
+    "response_text": "有關您反映本市信義區基隆路2段23號B1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查及防焰物品管理，於115年6月30日派員前往，該址為森運動有限公司，依法應設置之消防安全設備及防焰物品，檢查結果均符合規定；為維護公共安全，已當場宣導現場人員，應保持消防安全設備周圍淨空，不得堆放物品致遮蔽或妨礙使用，並應持續落實消防安全設備之維護管理工作，加強火災預防措施與應變機制。\n另有關您反映未標示場館上限人數、室內空氣品質不佳及阻塞逃生通道部分，經本局了解，係分屬本府體育局、環境保護局環保稽查大隊及本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-11",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "11",
+    "source_region": "信義",
+    "reply_format": "official_letter",
+    "supersedes": "uploaded-5-11",
+    "title": "敦化大廈｜緊急電源與緊急發電機法規說明",
+    "category": "消防安全設備",
+    "status": "法規說明",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "本案實際地址位於大安區；緊急電源與緊急發電機法規說明須完成技術及法律複核"
+    ],
+    "response_text": "有關貴會所提敦化大廈集合住宅（本市大安區敦化南路2段63巷17號等址）是否依法應設「緊急發電機」一案，復如說明，請查照。\n說明：　\n一、依本局115年7月23日受理貴會115年7月22日函辦理。\n二、本局權管事項為消防安全設備檢查，查貴大廈領有70使字第0436號使用執照（67建字第0052號），應依建照當時法規「建築技術規則」設置並維護相關消防安全設備。\n三、依內政部63年2月15日台內營字第573693號令修訂之「建築技術規則建築設備篇」第7條規定，建築物設置之火警自動警報設備、緊急廣播設備、電動消防水泵或撒水水泵、排煙設備、緊急照明燈、出口標示燈及緊急用電源插座應連接緊急電源（由發電機或蓄電池供應）。\n四、有關貴會所提「緊急發電機」非屬消防安全設備，建請依本市建築管理工程處115年7月8日北市都建使字1156027771號函辦理。\n五、若仍有疑問，請洽本局第二救災救護大隊大安中隊蔡宗佑小隊長，聯絡電話：02-27084739。"
+  },
+  {
+    "id": "latest-xinyi-12",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "12",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-12",
+    "title": "世貿一館｜容留人數與大型活動安全管理",
+    "category": "消防安全設備",
+    "status": "符合規定＋活動管理",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "法定容留人數、保存資料及後續抽查承諾均屬個案事實，不得沿用"
+    ],
+    "response_text": "有關您反映本市信義區信義路5段5號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月6日派員前往，該址為臺北世界貿易中心展覽一館（世貿一館），依現場實際使用情形，以展覽館用途列管，依法應設置之消防安全設備，經檢查結果均符合規定；另有關您反映活動期間超過容留人數管制，經查該場所管理單位保存資料顯示，115年7月3日及4日活動期間，現場均有進行人數管控，實際容留人數未超過法定容留人數2萬9,000人。另為維護公共安全，本局已宣導場所管理單位應落實消防安全管理，確保避難逃生動線及安全出口保持暢通，不得堆置物品影響人員避難逃生；另於舉辦大型展覽或類似活動期間，應落實人流管理及緊急應變措施，以維護場所消防安全及民眾生命安全。本局亦將於日後辦理類似大型展覽活動時，不定期派員前往抽查消防安全管理情形，督導場所落實各項消防安全措施。"
+  },
+  {
+    "id": "latest-xinyi-13",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "13",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-13",
+    "title": "Bar浮｜設備符合及防火管理缺失",
+    "category": "防火管理",
+    "status": "缺失處理",
+    "related_agencies": [
+      "本府環境保護局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "大量亂扔菸蒂",
+        "agency": "本府環境保護局"
+      }
+    ],
+    "review_flags": [
+      "原稿防火管理句漏「未」，草稿已修正；仍須核對實際缺失及限改紀錄"
+    ],
+    "response_text": "有關您反映本市信義區基隆路2段131之5號1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月7日派員前往，該址為Bar 浮，依現場實際使用情形，以飲酒店用途列管，依法應設置之消防安全設備，檢查結果符合規定；另該址屬消防法第13條規定一定規模以上之建築物，屬應實施防火管理制度場所，惟依規定執行防火管理事項，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格。另為維護公共安全，已當場宣導場所管理權人應落實火災預防措施，加強勸導員工及消費者勿隨意丟棄菸蒂，並應於營業期間加強門口及周邊公共區域之環境巡查與清理，妥善處理菸蒂等可燃物，避免因遺留火源引發火災，以維護場所及周邊住戶生命財產安全。\n另有關您反映大量亂扔菸蒂部分，係屬本府環境保護局權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-14",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "14",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-14",
+    "title": "劉家宴｜設備符合及防火管理缺失",
+    "category": "防火管理",
+    "status": "缺失處理",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [],
+    "response_text": "有關您反映本市信義區松仁路101號2樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查及防火管理，於115年7月7日派員前往，該址為劉家宴，依現場實際使用情形，以餐廳用途列管，依法應設置之消防安全設備，檢查結果均符合規定；另該址屬消防法第13條規定一定規模以上之建築物，屬應實施防火管理制度場所，惟未依規定遴用防火管理人，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格。為維護公共安全，已當場宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實消防預防措施與應變機制。"
+  },
+  {
+    "id": "latest-xinyi-15",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "15",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-15",
+    "title": "樂車殿｜鋰電池安全宣導及占用移請",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本府警察局",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "占用一樓空間",
+        "agency": "【待確認：依占用位置選擇本府警察局或本市建築管理工程處】"
+      }
+    ],
+    "review_flags": [
+      "「占用1樓」事項過於模糊；道路或人行通行空間與大樓共同空間之權責不同，須先確認占用位置"
+    ],
+    "response_text": "有關您反映本市信義區松信路10號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月9日派員前往，該址為樂車殿，依法應設置之消防安全設備，檢查結果符合規定。為維護公共安全，已當場宣導現場人員注意用火用電安全及鋰電池使用注意事項，並應做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關占用1樓部分，經本局了解，係屬本府警察局權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-16",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "16",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-16",
+    "title": "六合市場大樓｜火警自動警報設備缺失",
+    "category": "消防安全設備",
+    "status": "缺失處理",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [],
+    "response_text": "有關您反映本市信義區松仁路240巷19號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月9日派員前往，該址為六合市場大樓，依現場實際使用情形，以辦公室用途列管，檢查結果計有火警自動警報設備不合規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格；為維護公共安全，已當場宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實消防預防措施與應變機制。"
+  },
+  {
+    "id": "latest-xinyi-17",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "17",
+    "source_region": "信義",
+    "reply_format": "official_letter",
+    "supersedes": "uploaded-5-17",
+    "title": "頂樓違建案件｜無法進入及移請建管",
+    "category": "消防安全設備",
+    "status": "無法進入",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "違章建築",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [],
+    "response_text": "有關臺端反映本市信義區信義路5段150巷14弄6、8、12號5樓等址頂樓搭設違建影響公共安全等情事一案，復如說明，請查照。\n說明：　\n一、依據臺北市陳情系統115年7月9日案件（案件編號：D10-1150709-00071）辦理。\n二、旨案本局權管事項為消防安全設備檢查，分別於115年7月9及13日派員前往，現場1樓大門均上鎖無法進入，按門鈴亦無人回應，於現場張貼「臺北市政府消防局出租供居住使用之建築物安裝住宅用火災警報器勸導單」進行宣導，將持續追蹤列管不定期派員前往檢查，如發現有違規之行為將依規定查處。\n三、另有關臺端反映違章建築部分，經本局了解，係屬本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-18",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "18",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-18",
+    "title": "信義國際社區｜滅火器缺失及充電樁移請",
+    "category": "消防安全設備",
+    "status": "缺失處理",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "公寓大廈社區充電樁設置管理",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "本案為公寓大廈社區充電設備，已依官方分工改配建管處；仍須確認是否涉及營利充換電站或供電申請"
+    ],
+    "response_text": "有關您反映本市信義區基隆路1段11號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月15日派員前往，該址為信義國際社區，依法應設置之消防安全設備，檢查結果計有滅火器不合規定，已當場開立限期改善通知單在案，將持續追蹤列管至複查合格；為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實消防預防措施與應變機制。\n另有關您反映違規裝設充電樁部分，經本局了解，係屬本府產業發展局權責，建議您逕洽市民熱線1999轉本府產業發展局，由該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-19",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "19",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": null,
+    "title": "臺北101美食街｜設備淨空及逃生動線查察",
+    "category": "消防通道／避難逃生",
+    "status": "符合規定／未發現",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [],
+    "response_text": "有關您反映臺北國際金融中心（TAIPEI101）美食街一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月15日派員前往，依法應設置之消防安全設備，檢查結果均符合規定，現場未發現消防安全設備遭遮蔽或妨礙使用，亦未發現樓梯間堆積雜物影響避難逃生動線之情形；為維護公共安全，已當場宣導現場人員，應保持消防安全設備前方淨空，不得堆放物品致遮蔽或妨礙使用，並應持續落實消防安全設備之維護管理工作，加強火災預防措施與應變機制。"
+  },
+  {
+    "id": "latest-xinyi-20",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "20",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-19",
+    "title": "兒童體能場館｜設備符合及營業權責移請",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本府體育局",
+      "本府教育局",
+      "本市商業處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "公司或商業登記",
+        "agency": "本市商業處"
+      },
+      {
+        "matter": "是否屬運動訓練班及其營業管理",
+        "agency": "本府體育局"
+      },
+      {
+        "matter": "是否符合短期補習班要件",
+        "agency": "本府教育局"
+      }
+    ],
+    "review_flags": [
+      "公司或商業登記、運動訓練班及短期補習班要件已分列，體育或教育主管機關仍須依課程與營運型態確認"
+    ],
+    "response_text": "有關您反映本市信義區松仁路258號1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月16日派員前往，該址為飛動不可兒童體能玩國企業社，依現場實際使用情形，以訓練班用途列管，依法應設置之消防安全設備，檢查結果符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並應做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映營業登記疑慮部分，經本局了解，係分屬本府體育局、教育局及本市商業處權責，已依行政程序法規定，移請該機關回復您"
+  },
+  {
+    "id": "latest-xinyi-21",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "21",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-20",
+    "title": "信義國際社區充電樁｜設備符合及建管移請",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "社區充電樁及總幹事執業疑義",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "同址充電樁案件另有產業發展局版本，須依陳情內容拆分並重新判斷權責"
+    ],
+    "response_text": "有關您反映本市信義區基隆路1段11號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月22日派員前往，該址為信義國際社區，依法應設置之消防安全設備，檢查結果已符合規定；為維護公共安全，已宣導現場人員注意用火用電安全，並參考「建築物附屬停車空間電動車輛充電使用安全指引」做好各項消防安全設備維護管理及落實消防預防措施與應變機制。\n另有關您反映社區違規裝設充電樁及無照總幹事執業等事項，經本局了解，係屬本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-22",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "22",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-21",
+    "title": "臺北101修改室｜逾期滅火器當場改善",
+    "category": "消防安全設備",
+    "status": "已當場改善",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "滅火器逾期之實際不合格項目名稱須依現場標示與紀錄確認"
+    ],
+    "response_text": "有關您反映本市信義區市府路45號2、3樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月28日派員前往，該址為101大樓，大樓商場2、3樓修改室各設置滅火器1具，其中2樓滅火器逾有效期限，已當場完成改善。另宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實消防預防措施與應變機制。"
+  },
+  {
+    "id": "latest-xinyi-23",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "23",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-22",
+    "title": "住家湯飲食店｜未營業無法進入及跨機關移請",
+    "category": "消防安全設備",
+    "status": "無法進入",
+    "related_agencies": [
+      "本市商業處",
+      "本府衛生局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "公司或商業登記",
+        "agency": "本市商業處"
+      },
+      {
+        "matter": "食品業者登錄、產品責任險及食品衛生安全",
+        "agency": "本府衛生局"
+      }
+    ],
+    "review_flags": [
+      "原稿查察年份為114年，須核對案件年度；住警器通知單適用性亦須確認"
+    ],
+    "response_text": "有關您反映本市信義區松山路465巷29弄14號1樓之3一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於114年7月30日及31日派員前往，該址為住家湯飲食店，現場未營業無法進入，已張貼「臺北市政府消防局住宅用火災警報器安裝通知單」進行宣導，將持續追蹤列管不定期派員前往檢查，如發現有違規之行為將依規定查處。\n另有關您反映未取得合法登記、未完成食品業者登錄產品責任險投保及食品安全問題部分，經本局了解，係分屬本市商業處及本府衛生局權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-24",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "24",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-23",
+    "title": "E.A.T時尚館｜消防設備變更與施工安全說明",
+    "category": "防火管理",
+    "status": "施工安全說明",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [],
+    "response_text": "有關您反映本市信義區忠孝東路5段353-375號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月31日派員前往，該址為E.A.T時尚館大樓，已於現場說明有關消防安全設備變更位置部分，應依消防法第7條相關規定，委託消防專技人員設計規劃上揭建築物之消防安全設備；另未來施工致影響既有消防安全設備功能時，應依規定製作施工中消防防護計畫書，並落實各項火災預防及應變措施，以維護施工期間消防安全。"
+  },
+  {
+    "id": "latest-xinyi-25",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "25",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-24",
+    "title": "新光三越A11｜設備、防焰符合及多機關移請",
+    "category": "防焰物品",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市建築管理工程處",
+      "本市稅捐稽徵處",
+      "財政部臺北國稅局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "室內裝修耐燃建材及隔間阻礙逃生",
+        "agency": "本市建築管理工程處"
+      },
+      {
+        "matter": "漏繳娛樂稅",
+        "agency": "本市稅捐稽徵處"
+      },
+      {
+        "matter": "未開立統一發票",
+        "agency": "財政部臺北國稅局"
+      }
+    ],
+    "review_flags": [
+      "未開立統一發票已改配財政部臺北國稅局；建材及地墊之防焰適用性仍須人工確認"
+    ],
+    "response_text": "有關您反映本市信義區松壽路11號6樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查及防焰物品管理，於115年7月31日派員前往，該址為新光三越百貨股份有限公司台北信義分公司（A11），依法應設置之消防安全設備及防焰物品，檢查結果均符合規定；現場場所隔間使用之建材及鋪設地墊材質，非屬消防法所定防焰物品（地毯、窗簾）。為維護公共安全，已當場宣導現場人員注意用火用電安全，並應做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映有關室內裝修是否使用耐燃建材、隔間阻礙逃生、漏繳娛樂稅及未開立發票等事項，係分屬本市建築管理工程處及稅捐稽徵處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-26",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "26",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-25",
+    "title": "住宅出租場所｜第一次無法進入及跨機關移請",
+    "category": "消防安全設備",
+    "status": "無法進入",
+    "related_agencies": [
+      "本府警察局信義分局",
+      "本府環境保護局環保稽查大隊",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "住戶爭執、人聲或其他不具持續性噪音",
+        "agency": "本府警察局信義分局"
+      },
+      {
+        "matter": "冷卻水塔、發電機或其他持續且可量測噪音",
+        "agency": "本府環境保護局環保稽查大隊"
+      },
+      {
+        "matter": "違規隔間或室內裝修",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "原稿僅寫噪音，須先區分不具持續性人聲與持續且可量測設備噪音，再保留適用之權責機關"
+    ],
+    "response_text": "有關您反映本市信義區松山路287巷27號4樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於114年12月9、10日派員前往，現場1樓大門深鎖無法進入，已張貼「臺北市政府消防局出租供居住使用之建築物安裝住宅用火災警報器勸導單」，並持續追蹤列管，如發現有違規之行為將依規定查處。\n另有關您反映該址經常與附近住戶產生爭執、噪音、隔間等相關部分，經本局了解係分屬本府警察局信義分局、環保局環保稽查大隊及本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-27",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "27",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-26",
+    "title": "住宅出租場所｜再次無法進入及跨機關移請",
+    "category": "消防安全設備",
+    "status": "無法進入",
+    "related_agencies": [
+      "本府警察局信義分局",
+      "本府環境保護局環保稽查大隊",
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "住戶爭執、人聲或其他不具持續性噪音",
+        "agency": "本府警察局信義分局"
+      },
+      {
+        "matter": "冷卻水塔、發電機或其他持續且可量測噪音",
+        "agency": "本府環境保護局環保稽查大隊"
+      },
+      {
+        "matter": "違規隔間或室內裝修",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "原稿僅寫噪音，須先區分不具持續性人聲與持續且可量測設備噪音，再保留適用之權責機關"
+    ],
+    "response_text": "有關您反映本市信義區松山路287巷27號4樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於114年12月15、16日再次派員前往，現場1樓大門深鎖無法進入，按門鈴依舊無人回應，已張貼「臺北市政府消防局出租供居住使用之建築物安裝住宅用火災警報器勸導單」，並持續追蹤列管，如發現有違規之行為將依規定查處；另有關場所持續無法進入，如臺端可提供相關聯絡方式，可直接聯繫本局承辦人，俾利後續追蹤列管。\n另有關您反映該址經常與附近住戶產生爭執、噪音、隔間等相關部分，經本局了解係分屬本府警察局信義分局、環境保護局環保稽查大隊及本市建築管理工程處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-xinyi-28",
+    "source_file": "陳情案回復範本信義(1).txt",
+    "source_number": "28",
+    "source_region": "信義",
+    "reply_format": "website",
+    "supersedes": "uploaded-5-27",
+    "title": "重複陳情｜行政程序法第173條說明",
+    "category": "消防安全設備",
+    "status": "重複陳情／法規說明",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "行政程序法第173條屬高風險終結陳情情境，須核對歷次回復、新事證及主管核准"
+    ],
+    "response_text": "有關您反映本市信義區松山路287巷27號4樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年1月25日已電話答復您查處結果，並於115年1月27日再派員前往現場，惟您尚未同意本局人員執行檢查。\n依「行政程序法」第173條第2款：「人民陳情案有同一事由，經予適當處理，並已明確答復後，而仍一再陳情者，得不予處理。」，您反映事項，本局前已處理並多次回復在案，惟查陳情內容無其他足以影響處理結果之新事證或資料補充，嗣後同一事由再陳情，將依上述規定不予回復。"
+  },
+  {
+    "id": "latest-nangang-1",
+    "source_file": "陳情案回復範本南港.txt",
+    "source_number": "1",
+    "source_region": "南港",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-5",
+    "title": "LaLaport緊急廣播設備缺失｜舉發、限改及運作宣導",
+    "category": "消防安全設備",
+    "status": "缺失處理",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "舉發法規名稱及處分文件須依實際案件與現行法規核對"
+    ],
+    "response_text": "有關您反映本市南港區經貿2路131號5樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月19日派員前往，依法應設置之消防設備，檢查結果計有緊急廣播設備不合規定，已當場開立舉發違反自治條例案件及限期改善通知單在案，將持續追蹤列管至複查合格；為維護公共安全，已宣導現場人員注意用火用電安全，且場所之火警警報設備及緊急廣播設備仍應維持正常監控及運作，不得任意關閉或妨礙其功能，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。"
+  },
+  {
+    "id": "latest-nangang-2",
+    "source_file": "陳情案回復範本南港.txt",
+    "source_number": "2",
+    "source_region": "南港",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-6",
+    "title": "LaLaport緊急廣播設備缺失｜精簡回復",
+    "category": "消防安全設備",
+    "status": "缺失處理",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "舉發法規名稱及處分文件須依實際案件與現行法規核對"
+    ],
+    "response_text": "有關您反映本市南港區經貿2路131號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年5月19日派員前往，依法應設置之消防設備，檢查結果計有緊急廣播設備不合規定，已當場開立舉發違反火災預防自治條例案件及限期改善通知單在案，將持續追蹤列管至複查合格；另為維護公共安全，已當場宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實消防預防措施與應變機制。"
+  },
+  {
+    "id": "latest-nangang-3",
+    "source_file": "陳情案回復範本南港.txt",
+    "source_number": "3",
+    "source_region": "南港",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-7",
+    "title": "LaLaport設備及防火管理缺失｜舉發、限改及移辦",
+    "category": "防火管理",
+    "status": "設備與防火管理缺失",
+    "related_agencies": [
+      "本府法務局消費者服務中心"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "一般消費爭議或消費者補償方案",
+        "agency": "本府法務局消費者服務中心"
+      }
+    ],
+    "review_flags": [
+      "設備及防火管理違規結論、舉發法源與火災當日紀錄須逐項確認；一般消費補償爭議已改配法務局消費者服務中心"
+    ],
+    "response_text": "有關您反映本市南港區經貿2路131號一事，本局說明如下:\n本局權管事項為消防安全設備檢查，於115年5月19日派員前往，依法應設置之消防安全設備，檢查結果計有緊急廣播設備不合規定，已當場開立舉發違反火災預防自治條例案件及限期改善通知單在案，將持續追蹤列管至複查合格。另該址屬消防法第13條規定一定規模以上之建築物，屬應實施防火管理制度場所，火災當天未依消防防護計畫執行防火管理事項，本局亦於5月19日開立舉發違反消防法案件及限期改善通知單在案，並要求場所管理權人應落實自衛消防編組人員執行緊急應變任務；另為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實火災預防措施與應變機制。\n另有關您反映消費者補償方案部分，係屬本府觀光傳播局權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-nangang-4",
+    "source_file": "陳情案回復範本南港.txt",
+    "source_number": "4",
+    "source_region": "南港",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-8",
+    "title": "LaLaport非火災訊號｜廣播與應變改善",
+    "category": "消防安全設備",
+    "status": "非火災事件／改善指導",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "逃生通道受阻",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "事件宜表述為非火災訊號；處理流程名稱、廣播次數與後續承諾須人工確認"
+    ],
+    "response_text": "有關您反映本市南港區經貿二路131號一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月1日派員前往，確認為當天晚上該址5樓「黑毛屋」櫃位於營業期間烹煮作業產生大量水蒸氣，導致火警探測器動作，防災中心接獲火警訊號後，立即派員前往現場查證，並透過廣播系統向民眾說明事件狀況，以避免造成不必要之恐慌。另有關威秀影城部分，於緊急廣播系統作動後，除同步透過樓管通報外，亦派員前往現場了解實際狀況，經確認現場係誤報且無公共安全疑慮後，由工作人員向民眾說明現場狀況並安撫民眾情緒。為維護公共安全，本局已指導業者於火警探測器動作時，應依「火警自動警報設備訊號確認建議處理流程」處理，除派員查看外，並應使用緊急廣播設備廣播火警訊號位置及安撫民眾（至少2次以上）；同時加強各營運單位橫向聯繫及員工防災教育訓練，並落實自衛消防編組應變作為，以提升緊急應變效率，針對該場所未來將加強抽查。\n另有關您反映逃生通道受阻部分，係屬本市建築管理處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-nangang-5",
+    "source_file": "陳情案回復範本南港.txt",
+    "source_number": "5",
+    "source_region": "南港",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-9",
+    "title": "誼光迷你倉｜設備符合及周邊淨空宣導",
+    "category": "消防安全設備",
+    "status": "未發現／未能查察",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [],
+    "response_text": "有關您反映本市南港區三重路19之6號1樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月2日派員前往，該址為誼光迷你倉，依現場實際使用情形，以倉庫用途列管，依法應設置之消防安全設備，檢查結果符合規定；另現場消防送水口或室內消防栓設備前方週遭未發現堆放雜物情形。為維護公共安全，已宣導管理權人應確實保持消防送水口或消防設備周邊淨空，不得堆積雜物、停放車輛或設置其他障礙物，以免影響消防人員操作及送水功能；並應落實各項消防安全設備之維護管理，持續加強火災預防措施及緊急應變機制，以確保場所消防安全。"
+  },
+  {
+    "id": "latest-nangang-6",
+    "source_file": "陳情案回復範本南港.txt",
+    "source_number": "6",
+    "source_region": "南港",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-3",
+    "title": "南港車站連通道攤位｜設備符合及跨機關移辦",
+    "category": "消防安全設備",
+    "status": "符合規定",
+    "related_agencies": [
+      "本市市場處",
+      "本市商業處",
+      "交通部鐵道局"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "攤販許可、納管及營業秩序",
+        "agency": "本市市場處"
+      },
+      {
+        "matter": "商業登記",
+        "agency": "本市商業處"
+      },
+      {
+        "matter": "連通道場地招租及攤位設置同意",
+        "agency": "交通部鐵道局"
+      }
+    ],
+    "review_flags": [
+      "連通道場地主管機關及攤位招租權責須依場地權屬確認"
+    ],
+    "response_text": "有關您反映臺鐵南港車站到捷運南港站B1連通道一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月8日派員前往，現場於連通道旁確有擺放攤位，場地主管機關經了解係屬交通部鐵道局，依法應設置之消防安全設備，檢查結果符合規定，現場擺放之物品並無影響消防安全設備之操作。為維護公共安全，已宣導現場人員及招租櫃位注意用火用電安全，做好各項消防安全設備維護管理及落實消防預防措施與應變機制，擺放物品不得影響消防安全設備操作，以確保場所消防安全。\n另有關您反映招租攤販及商業登記部分，係分屬本市市場處及商業處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-nangang-7",
+    "source_file": "陳情案回復範本南港.txt",
+    "source_number": "7",
+    "source_region": "南港",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-1",
+    "title": "消防設備室堆置雜物｜立即改善要求",
+    "category": "消防安全設備",
+    "status": "查有堆物／改善要求",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "原稿無法確認物品是否已當場移除，須選擇已改善或待追蹤"
+    ],
+    "response_text": "有關您反映本市南港區經貿2路66號11樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月12日派員前往，現場西側消防設備室確有堆置私人用品及雜物情形，已要求場所立即改善，將堆積物品移除；為維護公共安全，已宣導現場人員不得再占用消防設備室空間，擺放物品不得影響消防安全設備操作，以確保場所消防安全。"
+  },
+  {
+    "id": "latest-nangang-8",
+    "source_file": "陳情案回復範本南港.txt",
+    "source_number": "8",
+    "source_region": "南港",
+    "reply_format": "website",
+    "supersedes": "uploaded-4-2",
+    "title": "LaLaport空調機房｜設備符合及勞政移辦",
+    "category": "消防安全設備",
+    "status": "未發現／未能查察",
+    "related_agencies": [
+      "本市勞動檢查處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "工時及勞動基準法違規查察",
+        "agency": "本市勞動檢查處"
+      }
+    ],
+    "review_flags": [
+      "特殊滅火設備設置要件須人工確認；工時或勞基法違規查察由勞動檢查處辦理，若僅為法規諮詢則改洽勞動局"
+    ],
+    "response_text": "有關您反映本市南港區經貿2路131號3樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年6月30日派員前往，該址為空調機房，，依法應設置之消防安全設備，檢查結果符合規定，未發現設有桌椅供員工休息之情形；機房面積未達「各類場所消防安全設備設置標準」第18條應設置二氧化碳及乾粉滅火設備之要件。為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實消防預防措施與應變機制。\n另有關您反映工時及勞動基準法部分，係分屬本府勞動局及本市勞動檢查處權責，已依行政程序法規定，移請該機關回復您。"
+  },
+  {
+    "id": "latest-nangang-9",
+    "source_file": "陳情案回復範本南港.txt",
+    "source_number": "9",
+    "source_region": "南港",
+    "reply_format": "official_letter",
+    "supersedes": "uploaded-4-4",
+    "title": "LaLaport空調機房｜上級機關函交正式函復",
+    "category": "消防安全設備",
+    "status": "正式函復／符合規定",
+    "related_agencies": [],
+    "transfer_clauses": [],
+    "review_flags": [
+      "正式函復且由上級機關副知相關機關，不可改套一般行政程序法移辦句"
+    ],
+    "response_text": "有關臺端反映Mitsui Shopping Park LaLaport（本市南港區經貿2路131號）3樓空調機房設置保全人員備勤室，疑似違反消防法規案，復如說明，請查照。\n說明：　\n一、依據內政部消防署115年7月2日消署預字第11533138222號函交下臺端115年6月26日致內政部消防署署長信箱電子郵件辦理。\n二、本局權管事項為消防安全設備檢查，於115年6月30日派員前往，來信所陳述地點為空調機房，依法應設置之消防安全設備，檢查結果符合規定，且未發現設有桌椅供員工休息之情事。為維護公共安全，已宣導現場人員注意用火用電安全，並做好各項消防安全設備維護管理及落實消防預防措施與應變機制。\n三、另有關臺端反映違法建築法規及不重視勞工安全部分，業由內政部消防署副知相關主管機關，依權責處理後逕復臺端。"
+  },
+  {
+    "id": "latest-nangang-10",
+    "source_file": "陳情案回復範本南港.txt",
+    "source_number": "10",
+    "source_region": "南港",
+    "reply_format": "website",
+    "supersedes": "uploaded-2-5",
+    "title": "南港遠東智慧科學園區｜消防通道說明及建管移請",
+    "category": "消防通道／避難逃生",
+    "status": "符合規定＋法規說明",
+    "related_agencies": [
+      "本市建築管理工程處"
+    ],
+    "transfer_clauses": [
+      {
+        "matter": "通往地下室之安全出入口受阻",
+        "agency": "本市建築管理工程處"
+      }
+    ],
+    "review_flags": [
+      "地下停車場消防通道適用性及安全出入口現場情形須分別確認"
+    ],
+    "response_text": "有關您反映本市南港區南港路3段48號地下2樓一事，本局說明如下：\n本局權管事項為消防安全設備檢查，於115年7月3日派員前往，該址為南港遠東智慧科學園區，依法應設置之消防安全設備，檢查結果符合規定，且未發現有影響消防安全設備操作使用之情形；有關您反映之消防通道部分，依本局訂定之「臺北市政府消防通道劃設及管理作業程序」，消防通道係規範戶外道路，本案地下停車場非屬前開規定所稱之現有道路，爰不適用之。為維護公共安全，已宣導現場人員勿堆積雜物而影響消防安全設備之操作使用，並應維持消防安全設備正常功能，以確保火災發生時能有效發揮應有功能。\n另有關您反映大樓唯一通往地下室的安全出入口被完全擋住部分，係屬本市建築管理工程處權責，建議您逕洽市民熱線1999轉本市建築管理工程處，由該機關回復您。"
+  }
+]
