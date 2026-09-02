@@ -686,12 +686,14 @@ async function handleGoogleCredential(response) {
     const res = await fetch(`${GAS_URL}?action=checkUser&email=${encodeURIComponent(email)}`);
     const data = await res.json();
     if (!data.ok) {
-      alert('此Google帳號（' + email + '）不在白名單中，無法自動帶入承辦人資訊。');
+      alert('此Google帳號（' + email + '）不在白名單中，無法自動帶入承辦人資訊，先以測試模式繼續使用。');
+      unlockTestMode();
       return;
     }
     loggedInUser = { email: email, name: data.name, role: data.role };
     try { localStorage.setItem('petitionAppUser', JSON.stringify(loggedInUser)); } catch (e) {}
     updateLoginUi();
+    closeAccessGate();
   } catch (e) {
     alert('登入驗證失敗：' + e.message);
   }
@@ -729,7 +731,26 @@ function initGoogleSignIn_(retriesLeft) {
   google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredential });
   if (!loggedInUser) {
     google.accounts.id.renderButton(document.getElementById('googleSignInBtn'), { theme: 'outline', size: 'medium', text: 'signin' });
+    google.accounts.id.renderButton(document.getElementById('gateGoogleSignInBtn'), { theme: 'filled_blue', size: 'large', text: 'signin_with', width: 260 });
   }
+}
+
+// ---------- 進場關卡：登入過的人自動跳過，其他人每次瀏覽器session都要選登入或測試 ----------
+
+function closeAccessGate() {
+  document.getElementById('accessGate').classList.add('hidden');
+}
+
+function unlockTestMode() {
+  try { sessionStorage.setItem('testModeUnlocked', '1'); } catch (e) {}
+  closeAccessGate();
+}
+
+function checkAccessGate() {
+  const alreadyOk = !!loggedInUser || (() => {
+    try { return sessionStorage.getItem('testModeUnlocked') === '1'; } catch (e) { return false; }
+  })();
+  if (alreadyOk) closeAccessGate();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -738,6 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (saved) { loggedInUser = JSON.parse(saved); updateLoginUi(); }
   } catch (e) {}
 
+  checkAccessGate();
   initGoogleSignIn_(40); // ~6s of retrying at 150ms intervals before giving up
 });
 
