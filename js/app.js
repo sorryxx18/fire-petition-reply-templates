@@ -346,6 +346,35 @@ function readFileAsDataUrl(file) {
   });
 }
 
+// Resize/compress an image before upload — mobile screenshots can be several MB,
+// which caused "Failed to fetch" on phones (upload timeout / payload too large for
+// the backend's NVIDIA UrlFetchApp call). Downscaling + re-encoding as JPEG keeps
+// text legible for AI reading while cutting payload size drastically.
+function resizeImageToDataUrl(file, maxWidth = 1600, quality = 0.85) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > maxWidth) {
+          height = Math.round(height * maxWidth / width);
+          width = maxWidth;
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = () => reject(new Error('圖片解碼失敗'));
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 async function extractPdfText(file) {
   const buf = await readFileAsArrayBuffer(file);
   const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
@@ -362,12 +391,12 @@ async function pdfFirstPageToImage(file) {
   const buf = await readFileAsArrayBuffer(file);
   const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
   const page = await pdf.getPage(1);
-  const viewport = page.getViewport({ scale: 2 });
+  const viewport = page.getViewport({ scale: 1.5 });
   const canvas = document.createElement('canvas');
   canvas.width = viewport.width;
   canvas.height = viewport.height;
   await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
-  return canvas.toDataURL('image/png');
+  return canvas.toDataURL('image/jpeg', 0.85);
 }
 
 async function aiClassifySubmit() {
@@ -396,8 +425,9 @@ async function aiClassifySubmit() {
           payload = { imageDataUrl: imageDataUrl };
         }
       } else if (file.type.startsWith('image/')) {
-        statusEl.innerText = '正在讀取圖片...';
-        const imageDataUrl = await readFileAsDataUrl(file);
+        statusEl.innerText = '正在讀取並壓縮圖片...';
+        const imageDataUrl = await resizeImageToDataUrl(file);
+        statusEl.innerText = `圖片已壓縮至約 ${Math.round(imageDataUrl.length / 1024)} KB。`;
         payload = { imageDataUrl: imageDataUrl };
       } else {
         errorMsg.innerText = '不支援的檔案類型，請上傳PDF或圖片。';
@@ -436,7 +466,7 @@ async function aiClassifySubmit() {
   } catch (e) {
     loadingMsg.classList.add('hidden');
     document.getElementById('aiSubmitBtn').disabled = false;
-    errorMsg.innerText = '連線失敗：' + e.message;
+    errorMsg.innerText = '連線失敗：' + e.message + '（若持續失敗，可改用文字貼上，或换一張較小的圖片再試）';
     errorMsg.classList.remove('hidden');
   }
 }
