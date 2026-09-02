@@ -20,6 +20,7 @@ function switchTab(tab) {
       btn.classList.add('border-transparent', 'text-slate-400');
     }
   });
+  if (tab === 'ai') aiRefreshQuotaUi();
   if (tab === 'cases' && !casesLoaded) loadCases();
   if (tab === 'regs' && !regsLoaded) loadRegulations();
   if (tab === 'stats' && !statsLoaded) loadStats();
@@ -328,6 +329,47 @@ if (window.pdfjsLib) {
 
 let aiLastResult = null;
 
+// ---------- 每日AI判讀次數限制（前端localStorage倒數，以中原標準時間UTC+8為準）----------
+const AI_DAILY_LIMIT = 20;
+
+function aiTodayKey_() {
+  const taipeiNow = new Date(Date.now() + 8 * 3600 * 1000);
+  return 'aiUsage_' + taipeiNow.toISOString().slice(0, 10);
+}
+
+function aiGetUsedCount_() {
+  try {
+    return parseInt(localStorage.getItem(aiTodayKey_()) || '0', 10);
+  } catch (e) { return 0; }
+}
+
+function aiIncrementUsedCount_() {
+  try {
+    localStorage.setItem(aiTodayKey_(), String(aiGetUsedCount_() + 1));
+  } catch (e) {}
+}
+
+function aiRefreshQuotaUi() {
+  const used = aiGetUsedCount_();
+  const remaining = Math.max(0, AI_DAILY_LIMIT - used);
+  const msg = document.getElementById('aiQuotaMsg');
+  const btn = document.getElementById('aiSubmitBtn');
+  if (!msg || !btn) return;
+  msg.innerText = `今日AI判讀剩餘次數：${remaining} / ${AI_DAILY_LIMIT}（每日00:00台灣時間重置）`;
+  if (remaining <= 0) {
+    btn.disabled = true;
+    btn.classList.add('opacity-40');
+    msg.innerText = '今日AI判讀次數已用完，請明天再試（每日00:00台灣時間重置）。';
+    msg.classList.add('text-red-500');
+  } else {
+    btn.disabled = false;
+    btn.classList.remove('opacity-40');
+    msg.classList.remove('text-red-500');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', aiRefreshQuotaUi);
+
 function readFileAsArrayBuffer(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -407,6 +449,11 @@ async function aiClassifySubmit() {
   errorMsg.classList.add('hidden');
   resultPanel.classList.add('hidden');
 
+  if (aiGetUsedCount_() >= AI_DAILY_LIMIT) {
+    aiRefreshQuotaUi();
+    return;
+  }
+
   const file = document.getElementById('aiFileInput').files[0];
   const pastedText = document.getElementById('aiTextInput').value.trim();
 
@@ -462,6 +509,8 @@ async function aiClassifySubmit() {
       return;
     }
     aiLastResult = data;
+    aiIncrementUsedCount_();
+    aiRefreshQuotaUi();
     renderAiResult(data);
   } catch (e) {
     loadingMsg.classList.add('hidden');
