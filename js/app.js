@@ -718,18 +718,27 @@ function signOutUser() {
   updateLoginUi();
 }
 
+function initGoogleSignIn_(retriesLeft) {
+  if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID.startsWith('REPLACE_')) return;
+  // GSI's script tag loads with async/defer, so window.google.accounts.id may not exist
+  // yet when DOMContentLoaded fires — poll briefly instead of assuming it's ready.
+  if (!(window.google && window.google.accounts && window.google.accounts.id)) {
+    if (retriesLeft > 0) setTimeout(() => initGoogleSignIn_(retriesLeft - 1), 150);
+    return;
+  }
+  google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredential });
+  if (!loggedInUser) {
+    google.accounts.id.renderButton(document.getElementById('googleSignInBtn'), { theme: 'outline', size: 'medium', text: 'signin' });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   try {
     const saved = localStorage.getItem('petitionAppUser');
     if (saved) { loggedInUser = JSON.parse(saved); updateLoginUi(); }
   } catch (e) {}
 
-  if (window.google && window.google.accounts && GOOGLE_CLIENT_ID && !GOOGLE_CLIENT_ID.startsWith('REPLACE_')) {
-    google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredential });
-    if (!loggedInUser) {
-      google.accounts.id.renderButton(document.getElementById('googleSignInBtn'), { theme: 'outline', size: 'medium', text: 'signin' });
-    }
-  }
+  initGoogleSignIn_(40); // ~6s of retrying at 150ms intervals before giving up
 });
 
 // openGenerator also auto-fills 承辦人 when a user is already logged in (e.g. opening the
