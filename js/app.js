@@ -4,7 +4,7 @@ let currentPlaceholderValues = {};
 
 function renderTransferClausesHtml(clauses) {
   if (!clauses || !clauses.length) return '';
-  return '🔀 跨機關移辦/加會參考（依過往案例整理，請依實際案情判斷是否適用）：<br>' +
+  return '🔀 改分／加分其他局處參考（依過往案例整理，請依實際案情判斷是否適用）：<br>' +
     clauses.map(c => `・${escapeHtml(c.matter)} → ${escapeHtml(c.agency)}`).join('<br>');
 }
 
