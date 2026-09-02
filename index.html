@@ -11,18 +11,24 @@
   .blank-input { border-bottom: 2px solid #3b82f6; background: #eff6ff; padding: 0 4px; font-weight: 600; min-width: 60px; display: inline-block; }
 </style>
 </head>
-<body class="bg-slate-50 min-h-screen">
-  <div id="accessGate" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+<body class="bg-gradient-to-br from-pink-50 via-purple-50 to-teal-50 min-h-screen">
+  <div id="accessGate" class="fixed inset-0 z-50 bg-gradient-to-br from-fuchsia-950/80 via-purple-950/80 to-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 text-center">
+      <img src="assets/img/mascot-hero.jpg" alt="消防陳情小助理吉祥物" class="w-24 h-24 object-cover rounded-2xl mx-auto mb-3 shadow-sm">
       <h2 class="text-lg font-bold text-slate-800 mb-2">消防陳情小助理</h2>
       <p class="text-sm text-slate-500 mb-5">登入後可自動帶入承辦人資訊、之後也能查看個人使用紀錄；如果只是想先看看怎麼用，也可以直接測試，功能完全相同。</p>
       <div id="gateGoogleSignInBtn" class="flex justify-center mb-3"></div>
-      <button onclick="unlockTestMode()" class="w-full border border-slate-300 text-slate-600 rounded-xl py-2.5 text-sm font-medium hover:bg-slate-50">直接測試（不登入）</button>
+      <button onclick="unlockTestMode()" class="w-full border border-pink-200 text-pink-700 rounded-xl py-2.5 text-sm font-medium hover:bg-pink-50">直接測試（不登入）</button>
     </div>
   </div>
   <div class="max-w-5xl mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold text-slate-800 mb-1">消防陳情小助理</h1>
-    <p class="text-slate-500 text-sm mb-4">上傳或貼上陳情案件內容，AI協助判斷案情類別、提示是否應改分或加分其他局處；範本套版、案例參考為選用輔助功能。</p>
+    <div class="flex items-start gap-4 mb-4">
+      <img src="assets/img/mascot-hero.jpg" alt="消防陳情小助理吉祥物" class="hidden sm:block w-20 h-20 rounded-2xl object-cover shadow-sm flex-shrink-0">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-800 mb-1">消防陳情小助理</h1>
+        <p class="text-slate-500 text-sm">上傳或貼上陳情案件內容，AI協助判斷案情類別、提示是否應改分或加分其他局處；範本套版、案例參考為選用輔助功能。</p>
+      </div>
+    </div>
 
     <div class="flex items-center justify-between mb-6">
       <div id="googleSignInBtn"></div>
@@ -30,7 +36,7 @@
     </div>
 
     <div class="flex gap-2 mb-6 border-b border-slate-200 flex-wrap">
-      <button id="tabBtnAi" onclick="switchTab('ai')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-blue-600 text-blue-600">AI判讀</button>
+      <button id="tabBtnAi" onclick="switchTab('ai')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-pink-600 text-pink-600">AI判讀</button>
       <button id="tabBtnGen" onclick="switchTab('gen')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">範本套版（輔助）</button>
       <button id="tabBtnCases" onclick="switchTab('cases')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">案例參考</button>
       <button id="tabBtnRegs" onclick="switchTab('regs')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">法規追蹤</button>
@@ -41,7 +47,7 @@
     <div id="genTab" class="hidden">
       <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-4">
         <input id="genSearchBox" type="text" placeholder="輸入關鍵字、場所、法規搜尋標準範本..."
-          class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-400">
+          class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-pink-400">
       </div>
       <div id="genLoadingMsg" class="text-center text-slate-400 py-8">載入中...</div>
       <div id="genList" class="grid gap-2 sm:grid-cols-2 mb-6"></div>
@@ -73,7 +79,7 @@
         <div id="previewBox" class="w-full border border-slate-300 rounded-xl px-4 py-3 mb-2 text-sm leading-relaxed whitespace-pre-wrap bg-slate-50"></div>
         <p id="validationMsg" class="text-xs text-red-500 mb-4 hidden">還有欄位尚未填寫，請完成後再產生正式回覆。</p>
 
-        <button id="produceBtn" onclick="produceReply()" class="w-full bg-blue-600 text-white rounded-xl py-2.5 font-medium">產生正式回覆（複製到剪貼簿）</button>
+        <button id="produceBtn" onclick="produceReply()" class="w-full bg-pink-600 text-white rounded-xl py-2.5 font-medium">產生正式回覆（複製到剪貼簿）</button>
       </div>
     </div>
 
@@ -95,9 +101,12 @@
             class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm"></textarea>
         </div>
 
-        <button id="aiSubmitBtn" onclick="aiClassifySubmit()" class="w-full bg-blue-600 text-white rounded-xl py-2.5 font-medium">AI判讀</button>
+        <button id="aiSubmitBtn" onclick="aiClassifySubmit()" class="w-full bg-pink-600 text-white rounded-xl py-2.5 font-medium">AI判讀</button>
         <p id="aiQuotaMsg" class="text-center text-xs text-slate-400 mt-2"></p>
-        <p id="aiLoadingMsg" class="hidden text-center text-slate-400 text-sm mt-3">AI判讀中，PDF/圖片辨識可能需要一點時間...</p>
+        <div id="aiLoadingMsg" class="hidden text-center mt-3">
+          <img src="assets/img/mascot-ai-loading.jpg" alt="AI判讀中" class="w-24 h-24 object-cover rounded-2xl mx-auto mb-2 shadow-sm">
+          <p class="text-slate-400 text-sm">AI判讀中，PDF/圖片辨識可能需要一點時間...</p>
+        </div>
         <p id="aiErrorMsg" class="hidden text-center text-red-500 text-sm mt-3"></p>
       </div>
 
@@ -106,17 +115,20 @@
         <p class="text-xs text-slate-400 mb-4">請核對以下建議是否合理，AI僅供輔助判斷。</p>
 
         <div class="mb-3">
-          <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full" id="aiResultCategory"></span>
+          <span class="text-xs font-bold text-pink-600 bg-pink-50 px-2 py-0.5 rounded-full" id="aiResultCategory"></span>
         </div>
 
         <div id="aiResultTransferBox" class="hidden mb-4 rounded-xl bg-indigo-50 border border-indigo-200 p-3 text-sm text-indigo-700"></div>
 
-        <button id="aiGenerateReplyBtn" onclick="aiGenerateReplyDraft()" class="w-full bg-slate-800 text-white rounded-xl py-2.5 font-medium mb-2">AI直接生成回覆草稿</button>
-        <p id="aiGenerateLoadingMsg" class="hidden text-center text-slate-400 text-sm mb-2">AI撰寫草稿中...</p>
+        <button id="aiGenerateReplyBtn" onclick="aiGenerateReplyDraft()" class="w-full bg-violet-700 text-white rounded-xl py-2.5 font-medium mb-2">AI直接生成回覆草稿</button>
+        <div id="aiGenerateLoadingMsg" class="hidden text-center mb-2">
+          <img src="assets/img/mascot-ai-loading.jpg" alt="AI撰寫草稿中" class="w-20 h-20 object-cover rounded-2xl mx-auto mb-2 shadow-sm">
+          <p class="text-slate-400 text-sm">AI撰寫草稿中...</p>
+        </div>
         <div id="aiDraftBox" class="hidden mb-4">
           <p class="text-xs text-slate-400 mb-1">AI生成草稿（僅供參考，正式送出前務必自行核對修改）：</p>
           <textarea id="aiDraftText" rows="10" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm leading-relaxed"></textarea>
-          <button onclick="aiCopyDraft()" class="w-full bg-emerald-600 text-white rounded-xl py-2 text-sm font-medium mt-2">複製草稿到剪貼簿</button>
+          <button onclick="aiCopyDraft()" class="w-full bg-teal-600 text-white rounded-xl py-2 text-sm font-medium mt-2">複製草稿到剪貼簿</button>
         </div>
 
         <details class="mb-4" open>
@@ -130,7 +142,7 @@
           <p class="text-xs text-slate-500 mb-1">AI僅判斷案件類別，實際檢查結果（合格/不合格等）請自行下拉選擇：</p>
           <select id="aiTemplateSelect" onchange="aiOnTemplateSelectChange()" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm mb-3"></select>
           <div id="aiResultFields" class="space-y-1 mb-4 text-sm"></div>
-          <button id="aiApplyBtn" onclick="aiApplyToGenerator()" class="w-full bg-emerald-600 text-white rounded-xl py-2.5 font-medium">採用此範本，前往填寫</button>
+          <button id="aiApplyBtn" onclick="aiApplyToGenerator()" class="w-full bg-teal-600 text-white rounded-xl py-2.5 font-medium">採用此範本，前往填寫</button>
         </div>
       </div>
     </div>
@@ -139,7 +151,7 @@
     <div id="casesTab" class="hidden">
       <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-4">
         <input id="caseSearchBox" type="text" placeholder="輸入關鍵字、場所、法規搜尋案例..."
-          class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-400">
+          class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-pink-400">
       </div>
       <div id="caseLoadingMsg" class="text-center text-slate-400 py-8">載入中...</div>
       <div id="caseList" class="space-y-2"></div>
