@@ -40,8 +40,18 @@
 <body class="bg-gradient-to-br from-[var(--brand-bg-1)] via-[var(--brand-bg-2)] to-[var(--brand-bg-3)] min-h-screen">
   <div id="accessGate" class="fixed inset-0 z-50 bg-gradient-to-br from-fuchsia-950/80 via-purple-950/80 to-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 text-center">
-      <img src="assets/img/mascot-hero.jpg" data-mascot="hero" alt="消防陳情小助理吉祥物" class="w-24 h-24 object-cover rounded-2xl mx-auto mb-3 shadow-sm">
-      <h2 class="text-lg font-bold text-slate-800 mb-2">消防陳情小助理</h2>
+      <h2 class="text-lg font-bold text-slate-800 mb-1">消防陳情小助理</h2>
+      <p class="text-xs text-slate-400 mb-3">先選一個喜歡的風格（之後仍可在畫面下方更改）</p>
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <button type="button" onclick="selectGateTheme('a')" id="gateThemeCardA" class="border-2 border-slate-200 rounded-xl p-2 transition">
+          <img src="assets/img/mascot-hero.jpg" alt="粉紫風格" class="w-full aspect-[4/3] object-cover rounded-lg mb-1">
+          <span class="text-xs font-medium text-slate-600">粉紫風</span>
+        </button>
+        <button type="button" onclick="selectGateTheme('b')" id="gateThemeCardB" class="border-2 border-slate-200 rounded-xl p-2 transition">
+          <img src="assets/img/mascot-b-hero.jpg" alt="米色風格" class="w-full aspect-[4/3] object-cover rounded-lg mb-1">
+          <span class="text-xs font-medium text-slate-600">米色風</span>
+        </button>
+      </div>
       <p class="text-sm text-slate-500 mb-5">登入後可自動帶入承辦人資訊、之後也能查看個人使用紀錄；如果只是想先看看怎麼用，也可以直接測試，功能完全相同。</p>
       <div id="gateGoogleSignInBtn" class="flex justify-center mb-3"></div>
       <button onclick="unlockTestMode()" class="w-full border border-[var(--brand-primary-light)] text-[var(--brand-primary)] rounded-xl py-2.5 text-sm font-medium hover:bg-[var(--brand-primary-bg)]">直接測試（不登入）</button>
@@ -58,10 +68,7 @@
 
     <div class="flex items-center justify-between mb-6 flex-wrap gap-2">
       <div id="googleSignInBtn"></div>
-      <div class="flex items-center gap-3">
-        <button onclick="toggleTheme()" id="themeToggleBtn" class="text-xs border border-slate-200 text-slate-500 rounded-full px-3 py-1.5 hover:bg-slate-50">切換風格</button>
-        <div id="loggedInBadge" class="hidden text-sm text-slate-600">✅ 已登入：<span id="loggedInName" class="font-semibold"></span> <button onclick="signOutUser()" class="text-xs text-slate-400 underline ml-2">登出</button></div>
-      </div>
+      <div id="loggedInBadge" class="hidden text-sm text-slate-600">✅ 已登入：<span id="loggedInName" class="font-semibold"></span> <button onclick="signOutUser()" class="text-xs text-slate-400 underline ml-2">登出</button></div>
     </div>
 
     <div class="flex gap-2 mb-6 border-b border-slate-200 flex-wrap">
@@ -221,6 +228,10 @@
           <tbody id="statsTableBody"></tbody>
         </table>
       </div>
+    </div>
+
+    <div class="text-center mt-10 pb-4">
+      <button onclick="toggleTheme()" id="themeToggleBtn" class="text-xs text-slate-400 underline hover:text-slate-600">切換風格</button>
     </div>
   </div>
 

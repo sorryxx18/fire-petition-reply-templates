@@ -29,6 +29,14 @@ function mascotSrc(key) {
 function updateThemeToggleUi(theme) {
   const btn = document.getElementById('themeToggleBtn');
   if (btn) btn.innerText = theme === 'a' ? '切換風格（目前：粉紫）' : '切換風格（目前：米色）';
+  const cardA = document.getElementById('gateThemeCardA');
+  const cardB = document.getElementById('gateThemeCardB');
+  if (cardA && cardB) {
+    cardA.classList.toggle('border-[var(--brand-primary)]', theme === 'a');
+    cardA.classList.toggle('border-slate-200', theme !== 'a');
+    cardB.classList.toggle('border-[var(--brand-primary)]', theme === 'b');
+    cardB.classList.toggle('border-slate-200', theme !== 'b');
+  }
 }
 
 function applyTheme(theme) {
@@ -48,6 +56,11 @@ function toggleTheme() {
     applyTheme(next);
     document.body.style.opacity = '1';
   }, 200);
+}
+
+// Gate style cards apply immediately (no fade — the gate itself is the picker, not a live page transition)
+function selectGateTheme(theme) {
+  applyTheme(theme);
 }
 
 document.addEventListener('DOMContentLoaded', () => applyTheme(currentTheme()));
