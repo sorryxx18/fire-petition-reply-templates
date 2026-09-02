@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>火災預防陳情案件回覆範本庫</title>
+<title>消防局陳情案件AI判讀助手</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   body { font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif; }
@@ -12,12 +12,12 @@
 </head>
 <body class="bg-slate-50 min-h-screen">
   <div class="max-w-5xl mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold text-slate-800 mb-1">火災預防陳情案件回覆範本庫</h1>
-    <p class="text-slate-500 text-sm mb-6">依陳情情境搜尋、填寫並產生正式回覆；案例參考可查閱過往實際回覆寫法。</p>
+    <h1 class="text-2xl font-bold text-slate-800 mb-1">消防局陳情案件AI判讀助手</h1>
+    <p class="text-slate-500 text-sm mb-6">上傳或貼上陳情案件內容，AI協助判斷案情類別、提示跨機關移辦/加會參考；範本套版、案例參考為選用輔助功能。</p>
 
     <div class="flex gap-2 mb-6 border-b border-slate-200 flex-wrap">
-      <button id="tabBtnAi" onclick="switchTab('ai')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-blue-600 text-blue-600">AI輔助分類</button>
-      <button id="tabBtnGen" onclick="switchTab('gen')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">範本產生器</button>
+      <button id="tabBtnAi" onclick="switchTab('ai')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-blue-600 text-blue-600">AI判讀</button>
+      <button id="tabBtnGen" onclick="switchTab('gen')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">範本套版（輔助）</button>
       <button id="tabBtnCases" onclick="switchTab('cases')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">案例參考</button>
       <button id="tabBtnRegs" onclick="switchTab('regs')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">法規追蹤</button>
       <button id="tabBtnStats" onclick="switchTab('stats')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">使用統計</button>
@@ -66,7 +66,7 @@
     <!-- AI輔助分類 Tab -->
     <div id="aiTab">
       <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-4">
-        <p class="text-slate-500 text-sm mb-3">上傳陳情案件的PDF或照片，或直接貼上文字，AI會建議分類與對應範本、並嘗試自動填出關鍵欄位。<strong class="text-slate-700">AI僅供輔助判斷，正式回覆前務必自行核對案情、案號與法規依據。</strong></p>
+        <p class="text-slate-500 text-sm mb-3">上傳陳情案件的PDF或照片，或直接貼上文字。AI會判斷案情類別、提示是否需要跨機關移辦或加會其他局處，並可選用對應範本自動填出關鍵欄位。<strong class="text-slate-700">AI僅供輔助判斷，正式回覆與移辦決定前務必自行核對案情、案號與法規依據。</strong></p>
 
         <div class="mb-3">
           <label class="block text-sm font-medium text-slate-700 mb-1">上傳檔案（PDF或圖片）</label>
