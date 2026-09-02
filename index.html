@@ -112,8 +112,9 @@
 
         <div class="border-t border-slate-100 pt-4 mt-2">
           <p class="text-xs font-semibold text-slate-400 mb-2">輔助：對應範本套版（可選用）</p>
-          <p class="text-sm text-slate-800 font-semibold mb-1" id="aiResultTemplate"></p>
-          <p class="text-xs text-slate-500 mb-3" id="aiResultReasoning"></p>
+          <p class="text-xs text-slate-500 mb-1" id="aiResultReasoning"></p>
+          <p class="text-xs text-slate-500 mb-1">AI僅判斷案件類別，實際檢查結果（合格/不合格等）請自行下拉選擇：</p>
+          <select id="aiTemplateSelect" onchange="aiOnTemplateSelectChange()" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm mb-3"></select>
           <div id="aiResultFields" class="space-y-1 mb-4 text-sm"></div>
           <button id="aiApplyBtn" onclick="aiApplyToGenerator()" class="w-full bg-emerald-600 text-white rounded-xl py-2.5 font-medium">採用此範本，前往填寫</button>
         </div>

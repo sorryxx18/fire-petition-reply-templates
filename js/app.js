@@ -538,11 +538,23 @@ async function aiClassifySubmit() {
 function renderAiResult(data) {
   document.getElementById('aiDraftBox').classList.add('hidden');
   document.getElementById('aiResultCategory').innerText = data.category || '（無法判斷分類）';
-  document.getElementById('aiResultTemplate').innerText = data.template_id
-    ? '建議範本：' + (data.template_title || data.template_id)
-    : '找不到明確對應的範本，請自行到範本產生器搜尋。';
-  document.getElementById('aiResultReasoning').innerText = data.reasoning || '';
+  document.getElementById('aiResultReasoning').innerText = data.template_id
+    ? 'AI建議分類理由：' + (data.reasoning || '')
+    : '找不到明確對應的範本，請自行到範本套版搜尋。';
   document.getElementById('aiResultCaseText').innerText = data.caseText || '';
+
+  const selectEl = document.getElementById('aiTemplateSelect');
+  const options = data.category_options && data.category_options.length ? data.category_options
+    : (data.template_id ? [{ id: data.template_id, title: data.template_title, status: '' }] : []);
+  if (options.length) {
+    selectEl.classList.remove('hidden');
+    selectEl.innerHTML = options.map(o =>
+      `<option value="${escapeHtml(o.id)}" ${o.id === data.template_id ? 'selected' : ''}>${escapeHtml(o.title)}</option>`
+    ).join('');
+  } else {
+    selectEl.classList.add('hidden');
+    selectEl.innerHTML = '';
+  }
 
   const aiTransferBox = document.getElementById('aiResultTransferBox');
   const aiTransferHtml = renderTransferClausesHtml(data.transfer_clauses);
@@ -566,6 +578,18 @@ function renderAiResult(data) {
   document.getElementById('aiApplyBtn').classList.toggle('hidden', !data.template_id);
   document.getElementById('aiResultPanel').classList.remove('hidden');
   document.getElementById('aiResultPanel').scrollIntoView({ behavior: 'smooth' });
+}
+
+function aiOnTemplateSelectChange() {
+  if (!aiLastResult) return;
+  const selectEl = document.getElementById('aiTemplateSelect');
+  const selected = selectEl.options[selectEl.selectedIndex];
+  if (!selected) return;
+  aiLastResult.template_id = selected.value;
+  aiLastResult.template_title = selected.innerText;
+  // fields were extracted for the AI-suggested variant's placeholders; switching to a
+  // different outcome variant may have different placeholder keys, so we keep the
+  // extracted values as best-effort (openGenerator will just leave non-matching ones blank).
 }
 
 async function aiApplyToGenerator() {
