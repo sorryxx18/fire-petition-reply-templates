@@ -665,3 +665,80 @@ async function aiCopyDraft() {
     alert('複製失敗，請手動選取文字複製。');
   }
 }
+
+// ---------- Google登入（輕量版：不驗證JWT簽章，前端信任回傳的email，後端比對白名單）----------
+
+let loggedInUser = null;
+
+function decodeJwtPayload_(jwt) {
+  const base64Url = jwt.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const json = decodeURIComponent(atob(base64).split('').map(c =>
+    '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+  ).join(''));
+  return JSON.parse(json);
+}
+
+async function handleGoogleCredential(response) {
+  const payload = decodeJwtPayload_(response.credential);
+  const email = payload.email;
+  try {
+    const res = await fetch(`${GAS_URL}?action=checkUser&email=${encodeURIComponent(email)}`);
+    const data = await res.json();
+    if (!data.ok) {
+      alert('此Google帳號（' + email + '）不在白名單中，無法自動帶入承辦人資訊。');
+      return;
+    }
+    loggedInUser = { email: email, name: data.name, role: data.role };
+    try { localStorage.setItem('petitionAppUser', JSON.stringify(loggedInUser)); } catch (e) {}
+    updateLoginUi();
+  } catch (e) {
+    alert('登入驗證失敗：' + e.message);
+  }
+}
+
+function updateLoginUi() {
+  const badge = document.getElementById('loggedInBadge');
+  const btnSlot = document.getElementById('googleSignInBtn');
+  if (loggedInUser) {
+    badge.classList.remove('hidden');
+    btnSlot.classList.add('hidden');
+    document.getElementById('loggedInName').innerText = loggedInUser.name + (loggedInUser.role === 'admin' ? '（管理者）' : '');
+    const handlerInput = document.getElementById('genHandler');
+    if (handlerInput && !handlerInput.value) handlerInput.value = loggedInUser.name;
+  } else {
+    badge.classList.add('hidden');
+    btnSlot.classList.remove('hidden');
+  }
+}
+
+function signOutUser() {
+  loggedInUser = null;
+  try { localStorage.removeItem('petitionAppUser'); } catch (e) {}
+  updateLoginUi();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    const saved = localStorage.getItem('petitionAppUser');
+    if (saved) { loggedInUser = JSON.parse(saved); updateLoginUi(); }
+  } catch (e) {}
+
+  if (window.google && window.google.accounts && GOOGLE_CLIENT_ID && !GOOGLE_CLIENT_ID.startsWith('REPLACE_')) {
+    google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredential });
+    if (!loggedInUser) {
+      google.accounts.id.renderButton(document.getElementById('googleSignInBtn'), { theme: 'outline', size: 'medium', text: 'signin' });
+    }
+  }
+});
+
+// openGenerator also auto-fills 承辦人 when a user is already logged in (e.g. opening the
+// generator directly without re-triggering the login flow).
+const _origOpenGeneratorForLogin = openGenerator;
+openGenerator = async function(id) {
+  await _origOpenGeneratorForLogin(id);
+  if (loggedInUser) {
+    const handlerInput = document.getElementById('genHandler');
+    if (handlerInput && !handlerInput.value) handlerInput.value = loggedInUser.name;
+  }
+};
