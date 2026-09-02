@@ -63,7 +63,7 @@ function selectGateTheme(theme) {
   applyTheme(theme);
 }
 
-document.addEventListener('DOMContentLoaded', () => applyTheme(currentTheme()));
+document.addEventListener('DOMContentLoaded', () => { applyTheme(currentTheme()); setAiStep(1); });
 
 function renderTransferClausesHtml(clauses) {
   if (!clauses || !clauses.length) return '';
@@ -281,6 +281,7 @@ async function produceReply() {
     })
   });
 
+  setAiStep(4);
   showSuccessToast('已複製到剪貼簿，請貼到正式公文系統送出前再次確認案情細節。');
 }
 
@@ -553,6 +554,15 @@ async function pdfFirstPageToImage(file) {
   return canvas.toDataURL('image/jpeg', 0.85);
 }
 
+function setAiStep(n) {
+  document.querySelectorAll('#aiStepBar [data-ai-step]').forEach(el => {
+    const step = parseInt(el.dataset.aiStep, 10);
+    const active = step <= n;
+    el.querySelector('.step-num').classList.toggle('active', active);
+    el.querySelector('.step-label').classList.toggle('active', active);
+  });
+}
+
 async function aiClassifySubmit() {
   const statusEl = document.getElementById('aiFileStatus');
   const loadingMsg = document.getElementById('aiLoadingMsg');
@@ -608,6 +618,7 @@ async function aiClassifySubmit() {
 
   loadingMsg.classList.remove('hidden');
   document.getElementById('aiSubmitBtn').disabled = true;
+  setAiStep(2);
 
   try {
     payload.action = 'aiClassify';
@@ -640,18 +651,9 @@ function renderAiResult(data) {
     : '找不到明確對應的範本，請自行到範本套版搜尋。';
   document.getElementById('aiResultCaseText').innerText = data.caseText || '';
 
-  const selectEl = document.getElementById('aiTemplateSelect');
-  const options = data.category_options && data.category_options.length ? data.category_options
+  aiCurrentOptions = data.category_options && data.category_options.length ? data.category_options
     : (data.template_id ? [{ id: data.template_id, title: data.template_title, status: '' }] : []);
-  if (options.length) {
-    selectEl.classList.remove('hidden');
-    selectEl.innerHTML = options.map(o =>
-      `<option value="${escapeHtml(o.id)}" ${o.id === data.template_id ? 'selected' : ''}>${escapeHtml(o.title)}</option>`
-    ).join('');
-  } else {
-    selectEl.classList.add('hidden');
-    selectEl.innerHTML = '';
-  }
+  renderAiTemplateCards(data.template_id);
 
   const aiTransferBox = document.getElementById('aiResultTransferBox');
   const aiTransferHtml = renderTransferClausesHtml(data.transfer_clauses);
@@ -674,19 +676,39 @@ function renderAiResult(data) {
 
   document.getElementById('aiApplyBtn').classList.toggle('hidden', !data.template_id);
   document.getElementById('aiResultPanel').classList.remove('hidden');
+  setAiStep(3);
   document.getElementById('aiResultPanel').scrollIntoView({ behavior: 'smooth' });
 }
 
-function aiOnTemplateSelectChange() {
+let aiCurrentOptions = [];
+
+function renderAiTemplateCards(selectedId) {
+  const box = document.getElementById('aiTemplateCards');
+  if (!aiCurrentOptions.length) { box.innerHTML = ''; return; }
+  box.innerHTML = aiCurrentOptions.map(o => {
+    const isSel = o.id === selectedId;
+    return `
+    <div onclick="aiSelectTemplateCard('${escapeHtml(o.id)}')" data-template-id="${escapeHtml(o.id)}"
+      class="ai-template-card flex items-center justify-between px-4 py-2.5 border rounded-xl cursor-pointer transition ${isSel ? 'border-[var(--brand-primary)] bg-[var(--brand-primary-bg)]' : 'border-slate-200'}">
+      <div>
+        <p class="text-sm font-medium text-slate-800">${escapeHtml(o.title)}</p>
+        ${o.status ? `<p class="text-xs text-slate-400">${escapeHtml(o.status)}</p>` : ''}
+      </div>
+      <span class="ai-template-check w-5 h-5 rounded-full border-2 flex-shrink-0 ${isSel ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)]' : 'border-slate-300'}"></span>
+    </div>`;
+  }).join('');
+}
+
+function aiSelectTemplateCard(id) {
   if (!aiLastResult) return;
-  const selectEl = document.getElementById('aiTemplateSelect');
-  const selected = selectEl.options[selectEl.selectedIndex];
+  const selected = aiCurrentOptions.find(o => o.id === id);
   if (!selected) return;
-  aiLastResult.template_id = selected.value;
-  aiLastResult.template_title = selected.innerText;
+  aiLastResult.template_id = selected.id;
+  aiLastResult.template_title = selected.title;
   // fields were extracted for the AI-suggested variant's placeholders; switching to a
   // different outcome variant may have different placeholder keys, so we keep the
   // extracted values as best-effort (openGenerator will just leave non-matching ones blank).
+  renderAiTemplateCards(id);
 }
 
 async function aiApplyToGenerator() {
@@ -742,6 +764,7 @@ async function aiCopyDraft() {
   const text = document.getElementById('aiDraftText').value;
   try {
     await navigator.clipboard.writeText(text);
+    setAiStep(4);
     showSuccessToast('已複製到剪貼簿，請貼到正式公文系統前再次確認案情細節。');
   } catch (e) {
     alert('複製失敗，請手動選取文字複製。');

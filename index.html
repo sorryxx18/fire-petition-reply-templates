@@ -35,6 +35,8 @@
   .mascot-loading { animation: mascotPulse 1.4s ease-in-out infinite; }
   @keyframes mascotPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
   #successToast { transition: opacity 0.3s ease, transform 0.3s ease; }
+  #aiStepBar .step-num.active { background: var(--brand-primary); color: #fff; }
+  #aiStepBar .step-label.active { color: var(--brand-primary); font-weight: 600; }
 </style>
 </head>
 <body class="bg-gradient-to-br from-[var(--brand-bg-1)] via-[var(--brand-bg-2)] to-[var(--brand-bg-3)] min-h-screen">
@@ -121,6 +123,27 @@
 
     <!-- AI輔助分類 Tab -->
     <div id="aiTab">
+      <div class="flex items-center gap-1 mb-4 overflow-x-auto pb-1" id="aiStepBar">
+        <div class="flex items-center gap-1.5 text-xs whitespace-nowrap" data-ai-step="1">
+          <span class="step-num w-6 h-6 rounded-full flex items-center justify-center bg-slate-200 text-slate-500 font-semibold transition-colors">1</span>
+          <span class="step-label text-slate-400 transition-colors">準備案件</span>
+        </div>
+        <span class="text-slate-300 text-xs px-1">›</span>
+        <div class="flex items-center gap-1.5 text-xs whitespace-nowrap" data-ai-step="2">
+          <span class="step-num w-6 h-6 rounded-full flex items-center justify-center bg-slate-200 text-slate-500 font-semibold transition-colors">2</span>
+          <span class="step-label text-slate-400 transition-colors">AI判讀</span>
+        </div>
+        <span class="text-slate-300 text-xs px-1">›</span>
+        <div class="flex items-center gap-1.5 text-xs whitespace-nowrap" data-ai-step="3">
+          <span class="step-num w-6 h-6 rounded-full flex items-center justify-center bg-slate-200 text-slate-500 font-semibold transition-colors">3</span>
+          <span class="step-label text-slate-400 transition-colors">確認／套版</span>
+        </div>
+        <span class="text-slate-300 text-xs px-1">›</span>
+        <div class="flex items-center gap-1.5 text-xs whitespace-nowrap" data-ai-step="4">
+          <span class="step-num w-6 h-6 rounded-full flex items-center justify-center bg-slate-200 text-slate-500 font-semibold transition-colors">4</span>
+          <span class="step-label text-slate-400 transition-colors">完成</span>
+        </div>
+      </div>
       <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-4">
         <p class="text-slate-500 text-sm mb-3">上傳陳情案件的PDF或照片，或直接貼上文字。AI會判斷案情類別、提示是否應改分或加分其他局處，並可選用對應範本自動填出關鍵欄位。<strong class="text-slate-700">AI僅供輔助判斷，正式回覆與改分/加分決定前務必自行核對案情、案號與法規依據。</strong></p>
 
@@ -175,8 +198,8 @@
         <div class="border-t border-slate-100 pt-4 mt-2">
           <p class="text-xs font-semibold text-slate-400 mb-2">輔助：對應範本套版（可選用）</p>
           <p class="text-xs text-slate-500 mb-1" id="aiResultReasoning"></p>
-          <p class="text-xs text-slate-500 mb-1">AI僅判斷案件類別，實際檢查結果（合格/不合格等）請自行下拉選擇：</p>
-          <select id="aiTemplateSelect" onchange="aiOnTemplateSelectChange()" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm mb-3"></select>
+          <p class="text-xs text-slate-500 mb-1">AI僅判斷案件類別，實際檢查結果（合格/不合格等）請自行選擇：</p>
+          <div id="aiTemplateCards" class="space-y-2 mb-3"></div>
           <div id="aiResultFields" class="space-y-1 mb-4 text-sm"></div>
           <button id="aiApplyBtn" onclick="aiApplyToGenerator()" class="w-full bg-[var(--brand-secondary)] text-white rounded-xl py-2.5 font-medium transition-colors">採用此範本，前往填寫</button>
         </div>
