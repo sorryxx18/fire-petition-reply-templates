@@ -12,6 +12,12 @@ function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
+function todayRocDate() {
+  const now = new Date(Date.now() + 8 * 3600 * 1000); // Taiwan time
+  const rocYear = now.getUTCFullYear() - 1911;
+  return `${rocYear}年${now.getUTCMonth() + 1}月${now.getUTCDate()}日`;
+}
+
 function switchTab(tab) {
   const tabs = { gen: 'genTab', ai: 'aiTab', cases: 'casesTab', regs: 'regsTab', stats: 'statsTab' };
   const btns = { gen: 'tabBtnGen', ai: 'tabBtnAi', cases: 'tabBtnCases', regs: 'tabBtnRegs', stats: 'tabBtnStats' };
@@ -112,6 +118,15 @@ async function openGenerator(id) {
         class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm placeholder-input">
     </div>
   `).join('');
+
+  // Date fields default to today (Taiwan/ROC calendar) to cut down on manual typing —
+  // this is a same-day-inspection assumption, still fully editable if the real date differs.
+  (currentDetail.placeholders || []).forEach(p => {
+    if (p.type === 'date') {
+      const input = fieldsBox.querySelector(`[data-key="${p.key}"]`);
+      if (input) input.value = todayRocDate();
+    }
+  });
 
   fieldsBox.querySelectorAll('.placeholder-input').forEach(input => {
     input.addEventListener('input', updatePreview);
