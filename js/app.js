@@ -2,6 +2,56 @@ let genTemplates = [];
 let currentDetail = null;
 let currentPlaceholderValues = {};
 
+// ---------- 雙風格吉祥物切換（粉紫版 a / 米色動物版 b）----------
+const MASCOTS = {
+  a: {
+    hero: 'assets/img/mascot-hero.jpg',
+    aiLoading: 'assets/img/mascot-ai-loading.jpg',
+    success: 'assets/img/mascot-success.jpg',
+    empty: 'assets/img/mascot-empty-state.jpg'
+  },
+  b: {
+    hero: 'assets/img/mascot-b-hero.jpg',
+    aiLoading: 'assets/img/mascot-b-ai-loading.jpg',
+    success: 'assets/img/mascot-b-success.jpg',
+    empty: 'assets/img/mascot-b-empty-state.jpg'
+  }
+};
+
+function currentTheme() {
+  try { return localStorage.getItem('petitionAppTheme') === 'b' ? 'b' : 'a'; } catch (e) { return 'a'; }
+}
+
+function mascotSrc(key) {
+  return MASCOTS[currentTheme()][key];
+}
+
+function updateThemeToggleUi(theme) {
+  const btn = document.getElementById('themeToggleBtn');
+  if (btn) btn.innerText = theme === 'a' ? '切換風格（目前：粉紫）' : '切換風格（目前：米色）';
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  try { localStorage.setItem('petitionAppTheme', theme); } catch (e) {}
+  document.querySelectorAll('img[data-mascot]').forEach(img => {
+    const key = img.dataset.mascot;
+    if (MASCOTS[theme][key]) img.src = MASCOTS[theme][key];
+  });
+  updateThemeToggleUi(theme);
+}
+
+function toggleTheme() {
+  const next = currentTheme() === 'a' ? 'b' : 'a';
+  document.body.style.opacity = '0';
+  setTimeout(() => {
+    applyTheme(next);
+    document.body.style.opacity = '1';
+  }, 200);
+}
+
+document.addEventListener('DOMContentLoaded', () => applyTheme(currentTheme()));
+
 function renderTransferClausesHtml(clauses) {
   if (!clauses || !clauses.length) return '';
   return '🔀 改分／加分其他局處參考（依過往案例整理，請依實際案情判斷是否適用）：<br>' +
@@ -18,7 +68,7 @@ function showSuccessToast(message) {
     toast = document.createElement('div');
     toast.id = 'successToast';
     toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-white rounded-2xl shadow-xl border border-teal-200 px-5 py-3 flex items-center gap-3 max-w-sm transition-opacity duration-300';
-    toast.innerHTML = '<img src="assets/img/mascot-success.jpg" alt="完成" class="w-12 h-12 object-cover rounded-xl flex-shrink-0"><p id="successToastMsg" class="text-sm text-slate-700"></p>';
+    toast.innerHTML = `<img src="${mascotSrc('success')}" data-mascot="success" alt="完成" class="w-12 h-12 object-cover rounded-xl flex-shrink-0"><p id="successToastMsg" class="text-sm text-slate-700"></p>`;
     document.body.appendChild(toast);
   }
   document.getElementById('successToastMsg').innerText = message;
@@ -44,10 +94,10 @@ function switchTab(tab) {
     document.getElementById(tabs[key]).classList.toggle('hidden', key !== tab);
     const btn = document.getElementById(btns[key]);
     if (key === tab) {
-      btn.classList.add('border-pink-600', 'text-pink-600');
+      btn.classList.add('border-[var(--brand-primary)]', 'text-[var(--brand-primary)]');
       btn.classList.remove('border-transparent', 'text-slate-400');
     } else {
-      btn.classList.remove('border-pink-600', 'text-pink-600');
+      btn.classList.remove('border-[var(--brand-primary)]', 'text-[var(--brand-primary)]');
       btn.classList.add('border-transparent', 'text-slate-400');
     }
   });
@@ -75,13 +125,13 @@ async function loadGenTemplates() {
 function renderGenList(items) {
   const container = document.getElementById('genList');
   if (items.length === 0) {
-    container.innerHTML = '<div class="col-span-2 text-center py-8"><img src="assets/img/mascot-empty-state.jpg" alt="找不到範本" class="w-20 h-20 object-cover rounded-2xl mx-auto mb-2 shadow-sm"><p class="text-slate-400">找不到符合的範本。</p></div>';
+    container.innerHTML = `<div class="col-span-2 text-center py-8"><img src="${mascotSrc('empty')}" alt="找不到範本" class="w-20 h-20 object-cover rounded-2xl mx-auto mb-2 shadow-sm"><p class="text-slate-400">找不到符合的範本。</p></div>`;
     return;
   }
   container.innerHTML = items.map(t => `
-    <button onclick="openGenerator('${t.id}')" class="text-left bg-white rounded-xl border border-slate-200 p-4 hover:border-pink-300 transition">
+    <button onclick="openGenerator('${t.id}')" class="text-left bg-white rounded-xl border border-slate-200 p-4 hover:border-[var(--brand-primary-light)] transition">
       <div class="flex justify-between items-start mb-1">
-        <span class="text-xs font-bold text-pink-600 bg-pink-50 px-2 py-0.5 rounded-full">${escapeHtml(t.category)}</span>
+        <span class="text-xs font-bold text-[var(--brand-primary)] bg-[var(--brand-primary-bg)] px-2 py-0.5 rounded-full">${escapeHtml(t.category)}</span>
         <span class="text-xs text-slate-400">${escapeHtml(t.status || '')}</span>
       </div>
       <h3 class="font-semibold text-slate-800 text-sm">${escapeHtml(t.title)}</h3>
@@ -242,11 +292,11 @@ async function loadCases() {
 function renderCaseList(items) {
   const container = document.getElementById('caseList');
   if (items.length === 0) {
-    container.innerHTML = '<div class="text-center py-8"><img src="assets/img/mascot-empty-state.jpg" alt="找不到案例" class="w-20 h-20 object-cover rounded-2xl mx-auto mb-2 shadow-sm"><p class="text-slate-400">找不到符合的案例。</p></div>';
+    container.innerHTML = `<div class="text-center py-8"><img src="${mascotSrc('empty')}" alt="找不到案例" class="w-20 h-20 object-cover rounded-2xl mx-auto mb-2 shadow-sm"><p class="text-slate-400">找不到符合的案例。</p></div>`;
     return;
   }
   container.innerHTML = items.map(t => `
-    <button onclick="openCaseDetail('${t.id}')" class="w-full text-left bg-white rounded-xl border border-slate-200 px-4 py-3 hover:border-pink-300 transition">
+    <button onclick="openCaseDetail('${t.id}')" class="w-full text-left bg-white rounded-xl border border-slate-200 px-4 py-3 hover:border-[var(--brand-primary-light)] transition">
       <div class="flex justify-between items-start mb-1">
         <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">${escapeHtml(t.category)}</span>
         <span class="text-xs text-slate-400">${escapeHtml(t.status || '')}</span>
@@ -356,7 +406,7 @@ async function loadStats() {
 function renderStats(stats, templateMap) {
   const tbody = document.getElementById('statsTableBody');
   if (!stats.length) {
-    tbody.innerHTML = '<tr><td colspan="3" class="text-center py-8"><img src="assets/img/mascot-empty-state.jpg" alt="目前還沒有使用紀錄" class="w-20 h-20 object-cover rounded-2xl mx-auto mb-2 shadow-sm"><p class="text-slate-400">目前還沒有使用紀錄。</p></td></tr>';
+    tbody.innerHTML = `<tr><td colspan="3" class="text-center py-8"><img src="${mascotSrc('empty')}" alt="目前還沒有使用紀錄" class="w-20 h-20 object-cover rounded-2xl mx-auto mb-2 shadow-sm"><p class="text-slate-400">目前還沒有使用紀錄。</p></td></tr>`;
     return;
   }
   tbody.innerHTML = stats.map(s => `
