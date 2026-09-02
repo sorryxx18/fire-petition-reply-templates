@@ -2,6 +2,12 @@ let genTemplates = [];
 let currentDetail = null;
 let currentPlaceholderValues = {};
 
+function renderTransferClausesHtml(clauses) {
+  if (!clauses || !clauses.length) return '';
+  return '🔀 跨機關移辦/加會參考（依過往案例整理，請依實際案情判斷是否適用）：<br>' +
+    clauses.map(c => `・${escapeHtml(c.matter)} → ${escapeHtml(c.agency)}`).join('<br>');
+}
+
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
@@ -87,6 +93,15 @@ async function openGenerator(id) {
     flagsBox.innerHTML = '⚠️ 覆核提醒：<br>' + currentDetail.review_flags.map(f => `・${escapeHtml(f)}`).join('<br>');
   } else {
     flagsBox.classList.add('hidden');
+  }
+
+  const transferBox = document.getElementById('genTransferBox');
+  const transferHtml = renderTransferClausesHtml(currentDetail.transfer_clauses);
+  if (transferHtml) {
+    transferBox.classList.remove('hidden');
+    transferBox.innerHTML = transferHtml;
+  } else {
+    transferBox.classList.add('hidden');
   }
 
   const fieldsBox = document.getElementById('placeholderFields');
@@ -527,6 +542,15 @@ function renderAiResult(data) {
     : '找不到明確對應的範本，請自行到範本產生器搜尋。';
   document.getElementById('aiResultReasoning').innerText = data.reasoning || '';
   document.getElementById('aiResultCaseText').innerText = data.caseText || '';
+
+  const aiTransferBox = document.getElementById('aiResultTransferBox');
+  const aiTransferHtml = renderTransferClausesHtml(data.transfer_clauses);
+  if (aiTransferHtml) {
+    aiTransferBox.classList.remove('hidden');
+    aiTransferBox.innerHTML = aiTransferHtml;
+  } else {
+    aiTransferBox.classList.add('hidden');
+  }
 
   const fieldsBox = document.getElementById('aiResultFields');
   const fields = data.fields || {};
