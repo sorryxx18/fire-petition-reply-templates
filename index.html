@@ -97,6 +97,14 @@
 
         <div id="aiResultTransferBox" class="hidden mb-4 rounded-xl bg-indigo-50 border border-indigo-200 p-3 text-sm text-indigo-700"></div>
 
+        <button id="aiGenerateReplyBtn" onclick="aiGenerateReplyDraft()" class="w-full bg-slate-800 text-white rounded-xl py-2.5 font-medium mb-2">AI直接生成回覆草稿</button>
+        <p id="aiGenerateLoadingMsg" class="hidden text-center text-slate-400 text-sm mb-2">AI撰寫草稿中...</p>
+        <div id="aiDraftBox" class="hidden mb-4">
+          <p class="text-xs text-slate-400 mb-1">AI生成草稿（僅供參考，正式送出前務必自行核對修改）：</p>
+          <textarea id="aiDraftText" rows="10" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm leading-relaxed"></textarea>
+          <button onclick="aiCopyDraft()" class="w-full bg-emerald-600 text-white rounded-xl py-2 text-sm font-medium mt-2">複製草稿到剪貼簿</button>
+        </div>
+
         <details class="mb-4" open>
           <summary class="text-xs text-slate-400 cursor-pointer">查看AI讀取到的原文</summary>
           <div id="aiResultCaseText" class="text-xs text-slate-500 whitespace-pre-wrap mt-2 bg-slate-50 rounded-xl p-3"></div>

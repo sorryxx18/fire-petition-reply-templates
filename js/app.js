@@ -536,6 +536,7 @@ async function aiClassifySubmit() {
 }
 
 function renderAiResult(data) {
+  document.getElementById('aiDraftBox').classList.add('hidden');
   document.getElementById('aiResultCategory').innerText = data.category || '（無法判斷分類）';
   document.getElementById('aiResultTemplate').innerText = data.template_id
     ? '建議範本：' + (data.template_title || data.template_id)
@@ -578,4 +579,50 @@ async function aiApplyToGenerator() {
     if (input && fields[key]) input.value = fields[key];
   });
   updatePreview();
+}
+
+// ---------- AI直接生成回覆草稿 ----------
+
+async function aiGenerateReplyDraft() {
+  if (!aiLastResult || !aiLastResult.caseText) return;
+  const loadingMsg = document.getElementById('aiGenerateLoadingMsg');
+  const draftBox = document.getElementById('aiDraftBox');
+  const btn = document.getElementById('aiGenerateReplyBtn');
+  loadingMsg.classList.remove('hidden');
+  draftBox.classList.add('hidden');
+  btn.disabled = true;
+
+  try {
+    const payload = {
+      action: 'aiGenerateReply',
+      caseText: aiLastResult.caseText,
+      template_id: aiLastResult.template_id || null,
+      transfer_clauses: aiLastResult.transfer_clauses || []
+    };
+    const res = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(payload) });
+    const data = await res.json();
+    loadingMsg.classList.add('hidden');
+    btn.disabled = false;
+    if (!data.ok) {
+      alert('AI生成草稿失敗：' + (data.error || '未知錯誤'));
+      return;
+    }
+    document.getElementById('aiDraftText').value = data.draft;
+    draftBox.classList.remove('hidden');
+    draftBox.scrollIntoView({ behavior: 'smooth' });
+  } catch (e) {
+    loadingMsg.classList.add('hidden');
+    btn.disabled = false;
+    alert('連線失敗：' + e.message);
+  }
+}
+
+async function aiCopyDraft() {
+  const text = document.getElementById('aiDraftText').value;
+  try {
+    await navigator.clipboard.writeText(text);
+    alert('已複製到剪貼簿，請貼到正式公文系統前再次確認案情細節。');
+  } catch (e) {
+    alert('複製失敗，請手動選取文字複製。');
+  }
 }
