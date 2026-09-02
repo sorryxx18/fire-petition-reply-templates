@@ -7,8 +7,8 @@ function escapeHtml(s) {
 }
 
 function switchTab(tab) {
-  const tabs = { gen: 'genTab', cases: 'casesTab', regs: 'regsTab', stats: 'statsTab' };
-  const btns = { gen: 'tabBtnGen', cases: 'tabBtnCases', regs: 'tabBtnRegs', stats: 'tabBtnStats' };
+  const tabs = { gen: 'genTab', ai: 'aiTab', cases: 'casesTab', regs: 'regsTab', stats: 'statsTab' };
+  const btns = { gen: 'tabBtnGen', ai: 'tabBtnAi', cases: 'tabBtnCases', regs: 'tabBtnRegs', stats: 'tabBtnStats' };
   Object.keys(tabs).forEach(key => {
     document.getElementById(tabs[key]).classList.toggle('hidden', key !== tab);
     const btn = document.getElementById(btns[key]);
@@ -319,3 +319,160 @@ function renderStats(stats, templateMap) {
 }
 
 loadGenTemplates();
+
+// ---------- AI輔助分類 ----------
+
+if (window.pdfjsLib) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.js';
+}
+
+let aiLastResult = null;
+
+function readFileAsArrayBuffer(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function extractPdfText(file) {
+  const buf = await readFileAsArrayBuffer(file);
+  const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+  let text = '';
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    text += content.items.map(it => it.str).join('') + '\n';
+  }
+  return text.trim();
+}
+
+async function pdfFirstPageToImage(file) {
+  const buf = await readFileAsArrayBuffer(file);
+  const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+  const page = await pdf.getPage(1);
+  const viewport = page.getViewport({ scale: 2 });
+  const canvas = document.createElement('canvas');
+  canvas.width = viewport.width;
+  canvas.height = viewport.height;
+  await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+  return canvas.toDataURL('image/png');
+}
+
+async function aiClassifySubmit() {
+  const statusEl = document.getElementById('aiFileStatus');
+  const loadingMsg = document.getElementById('aiLoadingMsg');
+  const errorMsg = document.getElementById('aiErrorMsg');
+  const resultPanel = document.getElementById('aiResultPanel');
+  errorMsg.classList.add('hidden');
+  resultPanel.classList.add('hidden');
+
+  const file = document.getElementById('aiFileInput').files[0];
+  const pastedText = document.getElementById('aiTextInput').value.trim();
+
+  let payload = {};
+  try {
+    if (file) {
+      if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+        statusEl.innerText = '正在抽取PDF文字...';
+        const text = await extractPdfText(file);
+        if (text.length > 30) {
+          payload = { text: text };
+          statusEl.innerText = `已抽取 ${text.length} 字純文字（若判讀結果不理想，可能是掃描件，建議改用圖片上傳）。`;
+        } else {
+          statusEl.innerText = 'PDF幾乎沒有可抽取的文字，改用第一頁截圖辨識（掃描件模式）...';
+          const imageDataUrl = await pdfFirstPageToImage(file);
+          payload = { imageDataUrl: imageDataUrl };
+        }
+      } else if (file.type.startsWith('image/')) {
+        statusEl.innerText = '正在讀取圖片...';
+        const imageDataUrl = await readFileAsDataUrl(file);
+        payload = { imageDataUrl: imageDataUrl };
+      } else {
+        errorMsg.innerText = '不支援的檔案類型，請上傳PDF或圖片。';
+        errorMsg.classList.remove('hidden');
+        return;
+      }
+    } else if (pastedText) {
+      payload = { text: pastedText };
+    } else {
+      errorMsg.innerText = '請上傳檔案或貼上文字。';
+      errorMsg.classList.remove('hidden');
+      return;
+    }
+  } catch (e) {
+    errorMsg.innerText = '檔案讀取失敗：' + e.message;
+    errorMsg.classList.remove('hidden');
+    return;
+  }
+
+  loadingMsg.classList.remove('hidden');
+  document.getElementById('aiSubmitBtn').disabled = true;
+
+  try {
+    payload.action = 'aiClassify';
+    const res = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(payload) });
+    const data = await res.json();
+    loadingMsg.classList.add('hidden');
+    document.getElementById('aiSubmitBtn').disabled = false;
+    if (!data.ok) {
+      errorMsg.innerText = 'AI判讀失敗：' + (data.error || '未知錯誤');
+      errorMsg.classList.remove('hidden');
+      return;
+    }
+    aiLastResult = data;
+    renderAiResult(data);
+  } catch (e) {
+    loadingMsg.classList.add('hidden');
+    document.getElementById('aiSubmitBtn').disabled = false;
+    errorMsg.innerText = '連線失敗：' + e.message;
+    errorMsg.classList.remove('hidden');
+  }
+}
+
+function renderAiResult(data) {
+  document.getElementById('aiResultCategory').innerText = data.category || '（無法判斷分類）';
+  document.getElementById('aiResultTemplate').innerText = data.template_id
+    ? '建議範本：' + (data.template_title || data.template_id)
+    : '找不到明確對應的範本，請自行到範本產生器搜尋。';
+  document.getElementById('aiResultReasoning').innerText = data.reasoning || '';
+  document.getElementById('aiResultCaseText').innerText = data.caseText || '';
+
+  const fieldsBox = document.getElementById('aiResultFields');
+  const fields = data.fields || {};
+  const keys = Object.keys(fields);
+  if (keys.length === 0) {
+    fieldsBox.innerHTML = '';
+  } else {
+    fieldsBox.innerHTML = '<p class="text-xs font-medium text-slate-500 mb-1">AI擷取到的欄位（前往填寫後仍可修改）：</p>' +
+      keys.map(k => `<p class="text-slate-700">・${escapeHtml(k)}：${escapeHtml(fields[k] || '（未擷取到）')}</p>`).join('');
+  }
+
+  document.getElementById('aiApplyBtn').classList.toggle('hidden', !data.template_id);
+  document.getElementById('aiResultPanel').classList.remove('hidden');
+  document.getElementById('aiResultPanel').scrollIntoView({ behavior: 'smooth' });
+}
+
+async function aiApplyToGenerator() {
+  if (!aiLastResult || !aiLastResult.template_id) return;
+  switchTab('gen');
+  await openGenerator(aiLastResult.template_id);
+  const fields = aiLastResult.fields || {};
+  const fieldsBox = document.getElementById('placeholderFields');
+  Object.keys(fields).forEach(key => {
+    const input = fieldsBox.querySelector(`[data-key="${key}"]`);
+    if (input && fields[key]) input.value = fields[key];
+  });
+  updatePreview();
+}

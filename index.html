@@ -17,6 +17,7 @@
 
     <div class="flex gap-2 mb-6 border-b border-slate-200 flex-wrap">
       <button id="tabBtnGen" onclick="switchTab('gen')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-blue-600 text-blue-600">範本產生器</button>
+      <button id="tabBtnAi" onclick="switchTab('ai')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">AI輔助分類</button>
       <button id="tabBtnCases" onclick="switchTab('cases')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">案例參考</button>
       <button id="tabBtnRegs" onclick="switchTab('regs')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">法規追蹤</button>
       <button id="tabBtnStats" onclick="switchTab('stats')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">使用統計</button>
@@ -57,6 +58,50 @@
         <p id="validationMsg" class="text-xs text-red-500 mb-4 hidden">還有欄位尚未填寫，請完成後再產生正式回覆。</p>
 
         <button id="produceBtn" onclick="produceReply()" class="w-full bg-blue-600 text-white rounded-xl py-2.5 font-medium">產生正式回覆（複製到剪貼簿）</button>
+      </div>
+    </div>
+
+    <!-- AI輔助分類 Tab -->
+    <div id="aiTab" class="hidden">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-4">
+        <p class="text-slate-500 text-sm mb-3">上傳陳情案件的PDF或照片，或直接貼上文字，AI會建議分類與對應範本、並嘗試自動填出關鍵欄位。<strong class="text-slate-700">AI僅供輔助判斷，正式回覆前務必自行核對案情、案號與法規依據。</strong></p>
+
+        <div class="mb-3">
+          <label class="block text-sm font-medium text-slate-700 mb-1">上傳檔案（PDF或圖片）</label>
+          <input id="aiFileInput" type="file" accept=".pdf,image/*"
+            class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm">
+          <p id="aiFileStatus" class="text-xs text-slate-400 mt-1"></p>
+        </div>
+
+        <div class="mb-3">
+          <label class="block text-sm font-medium text-slate-700 mb-1">或直接貼上陳情案件文字</label>
+          <textarea id="aiTextInput" rows="6" placeholder="貼上陳情案件內文..."
+            class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm"></textarea>
+        </div>
+
+        <button id="aiSubmitBtn" onclick="aiClassifySubmit()" class="w-full bg-blue-600 text-white rounded-xl py-2.5 font-medium">AI判讀</button>
+        <p id="aiLoadingMsg" class="hidden text-center text-slate-400 text-sm mt-3">AI判讀中，PDF/圖片辨識可能需要一點時間...</p>
+        <p id="aiErrorMsg" class="hidden text-center text-red-500 text-sm mt-3"></p>
+      </div>
+
+      <div id="aiResultPanel" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+        <h3 class="text-lg font-bold text-slate-800 mb-1">AI判讀結果</h3>
+        <p class="text-xs text-slate-400 mb-4">請核對以下建議是否合理，確認後可一鍵帶入範本產生器繼續填寫。</p>
+
+        <div class="mb-3">
+          <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full" id="aiResultCategory"></span>
+        </div>
+        <p class="text-sm text-slate-800 font-semibold mb-1" id="aiResultTemplate"></p>
+        <p class="text-xs text-slate-500 mb-3" id="aiResultReasoning"></p>
+
+        <div id="aiResultFields" class="space-y-1 mb-4 text-sm"></div>
+
+        <details class="mb-4">
+          <summary class="text-xs text-slate-400 cursor-pointer">查看AI讀取到的原文</summary>
+          <div id="aiResultCaseText" class="text-xs text-slate-500 whitespace-pre-wrap mt-2 bg-slate-50 rounded-xl p-3"></div>
+        </details>
+
+        <button id="aiApplyBtn" onclick="aiApplyToGenerator()" class="w-full bg-emerald-600 text-white rounded-xl py-2.5 font-medium">採用此建議，前往範本產生器填寫</button>
       </div>
     </div>
 
@@ -108,6 +153,7 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.js"></script>
   <script src="js/config.js"></script>
   <script src="js/app.js"></script>
 </body>
