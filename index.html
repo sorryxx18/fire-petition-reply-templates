@@ -4,7 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>消防陳情小助理</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Zen Maru Gothic', '-apple-system', 'PingFang TC', 'Microsoft JhengHei', 'sans-serif'] },
+        borderRadius: { lg: '1rem', xl: '1.5rem', '2xl': '2rem' },
+        boxShadow: { sm: '0 6px 20px -8px rgba(0,0,0,0.10)' }
+      }
+    }
+  };
+</script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
   :root {
@@ -37,6 +51,14 @@
   #successToast { transition: opacity 0.3s ease, transform 0.3s ease; }
   #aiStepBar .step-num.active { background: var(--brand-primary); color: #fff; }
   #aiStepBar .step-label.active { color: var(--brand-primary); font-weight: 600; }
+
+  /* 讓卡片外殼的調性跟著吉祥物插圖的圓潤感走：柔和頂色條+淡淡底色暈染，取代原本純白制式卡片 */
+  .bg-white.rounded-2xl {
+    background: linear-gradient(180deg, #ffffff 0%, #ffffff 70%, var(--brand-primary-bg) 150%);
+    border-top: 3px solid var(--brand-primary-light);
+  }
+  button, .tab-btn { transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease; }
+  button:active { transform: scale(0.97); }
 </style>
 </head>
 <body class="bg-gradient-to-br from-[var(--brand-bg-1)] via-[var(--brand-bg-2)] to-[var(--brand-bg-3)] min-h-screen">
