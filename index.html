@@ -79,6 +79,7 @@
       <button id="tabBtnCases" onclick="switchTab('cases')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">案例參考</button>
       <button id="tabBtnRegs" onclick="switchTab('regs')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">法規追蹤</button>
       <button id="tabBtnStats" onclick="switchTab('stats')" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">使用統計</button>
+      <button id="tabBtnUsers" onclick="switchTab('users')" class="hidden tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-400">使用者管理</button>
     </div>
 
     <!-- 範本產生器 Tab -->
@@ -249,6 +250,27 @@
             </tr>
           </thead>
           <tbody id="statsTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 使用者管理 Tab（僅admin可見） -->
+    <div id="usersTab" class="hidden">
+      <p class="text-slate-500 text-sm mb-4">封鎖後該帳號下次登入會被降成僅能測試模式，不會刪除歷史使用紀錄；可以隨時解封。</p>
+      <div id="usersLoadingMsg" class="text-center text-slate-400 py-8">載入中...</div>
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-100 text-slate-600 text-left">
+            <tr>
+              <th class="px-4 py-2.5 font-semibold">Email</th>
+              <th class="px-4 py-2.5 font-semibold">姓名</th>
+              <th class="px-4 py-2.5 font-semibold">角色</th>
+              <th class="px-4 py-2.5 font-semibold">狀態</th>
+              <th class="px-4 py-2.5 font-semibold">建立時間</th>
+              <th class="px-4 py-2.5 font-semibold">操作</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody"></tbody>
         </table>
       </div>
     </div>

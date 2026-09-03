@@ -101,8 +101,8 @@ function todayRocDate() {
 }
 
 function switchTab(tab) {
-  const tabs = { gen: 'genTab', ai: 'aiTab', cases: 'casesTab', regs: 'regsTab', stats: 'statsTab' };
-  const btns = { gen: 'tabBtnGen', ai: 'tabBtnAi', cases: 'tabBtnCases', regs: 'tabBtnRegs', stats: 'tabBtnStats' };
+  const tabs = { gen: 'genTab', ai: 'aiTab', cases: 'casesTab', regs: 'regsTab', stats: 'statsTab', users: 'usersTab' };
+  const btns = { gen: 'tabBtnGen', ai: 'tabBtnAi', cases: 'tabBtnCases', regs: 'tabBtnRegs', stats: 'tabBtnStats', users: 'tabBtnUsers' };
   Object.keys(tabs).forEach(key => {
     document.getElementById(tabs[key]).classList.toggle('hidden', key !== tab);
     const btn = document.getElementById(btns[key]);
@@ -117,7 +117,8 @@ function switchTab(tab) {
   if (tab === 'ai') aiRefreshQuotaUi();
   if (tab === 'cases' && !casesLoaded) loadCases();
   if (tab === 'regs' && !regsLoaded) loadRegulations();
-  if (tab === 'stats' && !statsLoaded) loadStats();
+  if (tab === 'stats') loadStats();
+  if (tab === 'users') loadUsers();
 }
 
 // ---------- 範本產生器 ----------
@@ -277,6 +278,7 @@ async function produceReply() {
       templateId: currentDetail.id,
       caseNumber,
       handler: document.getElementById('genHandler').value.trim(),
+      email: loggedInUser ? loggedInUser.email : '',
       originalLength, finalLength, diffRatio
     })
   });
@@ -361,6 +363,7 @@ async function loadRegulations() {
 
 function renderRegs(regs, templates) {
   const tbody = document.getElementById('regsTableBody');
+  const isAdmin = loggedInUser && loggedInUser.role === 'admin';
   tbody.innerHTML = regs.map(r => {
     const name = r['法規名稱'];
     const status = r['狀態'];
@@ -371,25 +374,27 @@ function renderRegs(regs, templates) {
     const linkedList = linked.length
       ? linked.map(t => escapeHtml(t.title)).join('<br>')
       : '<span class="text-slate-300">無範本引用</span>';
+    const actionCell = isAdmin
+      ? `<button onclick="flagRegulation('${escapeHtml(name).replace(/'/g, "\\'")}')" class="text-xs text-amber-600 underline">標記待覆核</button>`
+      : '<span class="text-xs text-slate-300">僅管理者可操作</span>';
     return `
       <tr class="border-t border-slate-100">
         <td class="px-4 py-2.5 font-medium">${escapeHtml(name)}</td>
         <td class="px-4 py-2.5">${statusBadge}</td>
         <td class="px-4 py-2.5 text-xs">${linkedList}</td>
-        <td class="px-4 py-2.5">
-          <button onclick="flagRegulation('${escapeHtml(name).replace(/'/g, "\\'")}')" class="text-xs text-amber-600 underline">標記待覆核</button>
-        </td>
+        <td class="px-4 py-2.5">${actionCell}</td>
       </tr>
     `;
   }).join('');
 }
 
 async function flagRegulation(name) {
-  if (!confirm(`確定要把「${name}」標記為待覆核嗎？（需要管理密鑰）`)) return;
+  if (!loggedInUser) { alert('請先登入。'); return; }
+  if (!confirm(`確定要把「${name}」標記為待覆核嗎？`)) return;
   await fetch(GAS_URL, {
     method: 'POST',
     mode: 'no-cors',
-    body: JSON.stringify({ action: 'flagRegulation', key: ADMIN_KEY, regulation: name })
+    body: JSON.stringify({ action: 'flagRegulation', email: loggedInUser.email, regulation: name })
   });
   alert('已標記，重新整理頁面查看。');
   regsLoaded = false;
@@ -400,30 +405,44 @@ async function flagRegulation(name) {
 let statsLoaded = false;
 
 async function loadStats() {
+  const loadingMsg = document.getElementById('statsLoadingMsg');
+  const tbody = document.getElementById('statsTableBody');
+  if (!loggedInUser) {
+    loadingMsg.classList.add('hidden');
+    tbody.innerHTML = `<tr><td colspan="3" class="text-center py-8"><img src="${mascotSrc('empty')}" alt="登入後查看" class="w-20 h-20 object-cover rounded-2xl mx-auto mb-2 shadow-sm"><p class="text-slate-400">登入後才能查看你的使用紀錄。</p></td></tr>`;
+    return;
+  }
+  loadingMsg.classList.remove('hidden');
   try {
     const [statsRes, listRes] = await Promise.all([
-      fetch(`${GAS_URL}?action=usageStats&key=${ADMIN_KEY}`),
+      fetch(`${GAS_URL}?action=usageStats&email=${encodeURIComponent(loggedInUser.email)}`),
       fetch(`${GAS_URL}?action=list`)
     ]);
     const statsData = await statsRes.json();
     const listData = await listRes.json();
     statsLoaded = true;
-    document.getElementById('statsLoadingMsg').classList.add('hidden');
+    loadingMsg.classList.add('hidden');
+    if (!statsData.ok) {
+      tbody.innerHTML = `<tr><td colspan="3" class="text-center text-slate-400 py-8">${escapeHtml(statsData.error || '無法查看')}</td></tr>`;
+      return;
+    }
     const templateMap = {};
     listData.templates.forEach(t => { templateMap[t.id] = t.title; });
-    renderStats(statsData.stats, templateMap);
+    renderStats(statsData.stats, templateMap, statsData.isAdmin);
   } catch (e) {
-    document.getElementById('statsLoadingMsg').innerText = '載入失敗，請重新整理頁面再試一次。';
+    loadingMsg.classList.add('hidden');
+    tbody.innerHTML = '<tr><td colspan="3" class="text-center text-red-400 py-8">載入失敗，請重新整理頁面再試一次。</td></tr>';
   }
 }
 
-function renderStats(stats, templateMap) {
+function renderStats(stats, templateMap, isAdmin) {
   const tbody = document.getElementById('statsTableBody');
+  const scopeNote = isAdmin ? '（管理者視角：全部人的使用紀錄）' : '（僅顯示你自己的使用紀錄）';
   if (!stats.length) {
-    tbody.innerHTML = `<tr><td colspan="3" class="text-center py-8"><img src="${mascotSrc('empty')}" alt="目前還沒有使用紀錄" class="w-20 h-20 object-cover rounded-2xl mx-auto mb-2 shadow-sm"><p class="text-slate-400">目前還沒有使用紀錄。</p></td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="3" class="text-center py-8"><img src="${mascotSrc('empty')}" alt="目前還沒有使用紀錄" class="w-20 h-20 object-cover rounded-2xl mx-auto mb-2 shadow-sm"><p class="text-slate-400">目前還沒有使用紀錄。${scopeNote}</p></td></tr>`;
     return;
   }
-  tbody.innerHTML = stats.map(s => `
+  tbody.innerHTML = `<tr><td colspan="3" class="px-4 pt-2 pb-1 text-xs text-slate-400">${scopeNote}</td></tr>` + stats.map(s => `
     <tr class="border-t border-slate-100">
       <td class="px-4 py-2.5">${escapeHtml(templateMap[s.templateId] || s.templateId)}</td>
       <td class="px-4 py-2.5">${s.count}</td>
@@ -784,21 +803,44 @@ function decodeJwtPayload_(jwt) {
   return JSON.parse(json);
 }
 
+const BLACKLIST_MESSAGE = '你nono 只能給你測試喔，啾咪！\n（此帳號已被系統管理者停權，僅能使用測試模式）';
+
 async function handleGoogleCredential(response) {
   const payload = decodeJwtPayload_(response.credential);
   const email = payload.email;
   try {
     const res = await fetch(`${GAS_URL}?action=checkUser&email=${encodeURIComponent(email)}`);
     const data = await res.json();
-    if (!data.ok) {
-      alert('此Google帳號（' + email + '）不在白名單中，無法自動帶入承辦人資訊，先以測試模式繼續使用。');
+    if (data.ok) {
+      loggedInUser = { email: email, name: data.name, role: data.role };
+      try { localStorage.setItem('petitionAppUser', JSON.stringify(loggedInUser)); } catch (e) {}
+      updateLoginUi();
+      closeAccessGate();
+      return;
+    }
+    if (data.error === 'blacklisted') {
+      alert(BLACKLIST_MESSAGE);
       unlockTestMode();
       return;
     }
-    loggedInUser = { email: email, name: data.name, role: data.role };
-    try { localStorage.setItem('petitionAppUser', JSON.stringify(loggedInUser)); } catch (e) {}
-    updateLoginUi();
-    closeAccessGate();
+    if (data.error === 'not_registered') {
+      const name = (prompt('第一次使用，請輸入你的姓名（之後會自動帶入承辦人欄位）：') || '').trim();
+      if (!name) { unlockTestMode(); return; }
+      const regRes = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify({ action: 'registerUser', email, name }) });
+      const regData = await regRes.json();
+      if (!regData.ok) {
+        alert(regData.error === 'blacklisted' ? BLACKLIST_MESSAGE : ('註冊失敗：' + (regData.error || '未知錯誤')));
+        unlockTestMode();
+        return;
+      }
+      loggedInUser = { email: email, name: regData.name, role: regData.role };
+      try { localStorage.setItem('petitionAppUser', JSON.stringify(loggedInUser)); } catch (e) {}
+      updateLoginUi();
+      closeAccessGate();
+      return;
+    }
+    alert('登入驗證失敗，先以測試模式繼續使用。');
+    unlockTestMode();
   } catch (e) {
     alert('登入驗證失敗：' + e.message);
   }
@@ -807,16 +849,83 @@ async function handleGoogleCredential(response) {
 function updateLoginUi() {
   const badge = document.getElementById('loggedInBadge');
   const btnSlot = document.getElementById('googleSignInBtn');
+  const usersTabBtn = document.getElementById('tabBtnUsers');
   if (loggedInUser) {
     badge.classList.remove('hidden');
     btnSlot.classList.add('hidden');
     document.getElementById('loggedInName').innerText = loggedInUser.name + (loggedInUser.role === 'admin' ? '（管理者）' : '');
     const handlerInput = document.getElementById('genHandler');
     if (handlerInput && !handlerInput.value) handlerInput.value = loggedInUser.name;
+    if (usersTabBtn) usersTabBtn.classList.toggle('hidden', loggedInUser.role !== 'admin');
   } else {
     badge.classList.add('hidden');
     btnSlot.classList.remove('hidden');
+    if (usersTabBtn) usersTabBtn.classList.add('hidden');
   }
+}
+
+// ---------- 使用者管理（僅admin看得到這個分頁，後端也會再驗證一次角色）----------
+let usersLoaded = false;
+
+async function loadUsers() {
+  if (!loggedInUser || loggedInUser.role !== 'admin') return;
+  const loadingMsg = document.getElementById('usersLoadingMsg');
+  loadingMsg.classList.remove('hidden');
+  try {
+    const res = await fetch(`${GAS_URL}?action=listUsers&email=${encodeURIComponent(loggedInUser.email)}`);
+    const data = await res.json();
+    loadingMsg.classList.add('hidden');
+    if (!data.ok) {
+      document.getElementById('usersTableBody').innerHTML = `<tr><td colspan="6" class="text-center text-slate-400 py-8">${escapeHtml(data.error || '無法查看')}</td></tr>`;
+      return;
+    }
+    usersLoaded = true;
+    renderUsers(data.users);
+  } catch (e) {
+    loadingMsg.classList.add('hidden');
+    document.getElementById('usersTableBody').innerHTML = '<tr><td colspan="6" class="text-center text-red-400 py-8">載入失敗，請重新整理頁面再試一次。</td></tr>';
+  }
+}
+
+function renderUsers(users) {
+  const tbody = document.getElementById('usersTableBody');
+  if (!users.length) {
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center text-slate-400 py-8">目前還沒有註冊使用者。</td></tr>';
+    return;
+  }
+  tbody.innerHTML = users.map(u => {
+    const isBlacklisted = u.status === 'blacklisted';
+    const statusBadge = isBlacklisted
+      ? '<span class="text-xs font-bold text-red-600 bg-red-50 px-2.5 py-1 rounded-full">已封鎖</span>'
+      : '<span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">正常</span>';
+    const isSelf = loggedInUser && u.email.toLowerCase() === loggedInUser.email.toLowerCase();
+    const actionCell = isSelf
+      ? '<span class="text-xs text-slate-300">（你自己）</span>'
+      : `<button onclick="toggleUserBlacklist('${escapeHtml(u.email).replace(/'/g, "\\'")}', ${!isBlacklisted})" class="text-xs underline ${isBlacklisted ? 'text-emerald-600' : 'text-red-600'}">${isBlacklisted ? '解除封鎖' : '封鎖'}</button>`;
+    return `
+      <tr class="border-t border-slate-100">
+        <td class="px-4 py-2.5 font-medium">${escapeHtml(u.email)}</td>
+        <td class="px-4 py-2.5">${escapeHtml(u.name)}</td>
+        <td class="px-4 py-2.5">${escapeHtml(u.role)}</td>
+        <td class="px-4 py-2.5">${statusBadge}</td>
+        <td class="px-4 py-2.5 text-xs text-slate-400">${escapeHtml(u.created_at || '')}</td>
+        <td class="px-4 py-2.5">${actionCell}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+async function toggleUserBlacklist(targetEmail, blacklisted) {
+  if (!loggedInUser) return;
+  const verb = blacklisted ? '封鎖' : '解除封鎖';
+  if (!confirm(`確定要${verb}「${targetEmail}」嗎？`)) return;
+  const res = await fetch(GAS_URL, {
+    method: 'POST',
+    body: JSON.stringify({ action: 'blacklistUser', adminEmail: loggedInUser.email, targetEmail, blacklisted })
+  });
+  const data = await res.json();
+  if (!data.ok) { alert('操作失敗：' + (data.error || '未知錯誤')); return; }
+  loadUsers();
 }
 
 function signOutUser() {
@@ -858,14 +967,37 @@ function checkAccessGate() {
   if (alreadyOk) closeAccessGate();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  let cachedUser = null;
   try {
     const saved = localStorage.getItem('petitionAppUser');
-    if (saved) { loggedInUser = JSON.parse(saved); updateLoginUi(); }
+    if (saved) { cachedUser = JSON.parse(saved); loggedInUser = cachedUser; updateLoginUi(); }
   } catch (e) {}
 
   checkAccessGate();
   initGoogleSignIn_(40); // ~6s of retrying at 150ms intervals before giving up
+
+  // Re-validate the cached login against the backend on every visit — otherwise a
+  // blacklist only takes effect the next time someone re-does the Google OAuth flow,
+  // not for a session restored purely from localStorage.
+  if (cachedUser) {
+    try {
+      const res = await fetch(`${GAS_URL}?action=checkUser&email=${encodeURIComponent(cachedUser.email)}`);
+      const data = await res.json();
+      if (data.ok) {
+        loggedInUser = { email: cachedUser.email, name: data.name, role: data.role };
+        try { localStorage.setItem('petitionAppUser', JSON.stringify(loggedInUser)); } catch (e) {}
+        updateLoginUi();
+      } else {
+        loggedInUser = null;
+        try { localStorage.removeItem('petitionAppUser'); } catch (e) {}
+        updateLoginUi();
+        if (data.error === 'blacklisted') alert(BLACKLIST_MESSAGE);
+      }
+    } catch (e) {
+      // Network hiccup — keep the cached session rather than locking the user out.
+    }
+  }
 });
 
 // openGenerator also auto-fills 承辦人 when a user is already logged in (e.g. opening the
