@@ -59,6 +59,29 @@
   }
   button, .tab-btn { transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease; }
   button:active { transform: scale(0.97); }
+
+  /* 各風格專屬情境背景圖（刷淡過），只在該分頁可見時顯示；卡片本身不透明，文字可讀性不受影響 */
+  #genTab, #aiTab, #casesTab, #regsTab, #statsTab, #usersTab {
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    border-radius: 1.75rem;
+    padding: 1.25rem;
+    margin: 0 -1.25rem;
+  }
+  html[data-theme="a"] #genTab { background-image: url('assets/img/bg-a-work.jpg'); }
+  html[data-theme="a"] #aiTab { background-image: url('assets/img/bg-a-ai.jpg'); }
+  html[data-theme="a"] #casesTab { background-image: url('assets/img/bg-a-cases.jpg'); }
+  html[data-theme="a"] #regsTab,
+  html[data-theme="a"] #statsTab,
+  html[data-theme="a"] #usersTab { background-image: url('assets/img/bg-a-success.jpg'); }
+
+  html[data-theme="b"] #genTab { background-image: url('assets/img/bg-work.jpg'); }
+  html[data-theme="b"] #aiTab { background-image: url('assets/img/bg-send.jpg'); }
+  html[data-theme="b"] #casesTab { background-image: url('assets/img/bg-read.jpg'); }
+  html[data-theme="b"] #regsTab,
+  html[data-theme="b"] #statsTab,
+  html[data-theme="b"] #usersTab { background-image: url('assets/img/bg-garden.jpg'); }
 </style>
 </head>
 <body class="bg-gradient-to-br from-[var(--brand-bg-1)] via-[var(--brand-bg-2)] to-[var(--brand-bg-3)] min-h-screen">
