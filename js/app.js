@@ -638,11 +638,17 @@ async function aiClassifySubmit() {
   loadingMsg.classList.remove('hidden');
   document.getElementById('aiSubmitBtn').disabled = true;
   setAiStep(2);
+  const loadingTextEl = document.getElementById('aiLoadingText');
+  loadingTextEl.innerText = 'AI判讀中，PDF/圖片辨識可能需要一點時間...';
+  const busyTimer = setTimeout(() => {
+    loadingTextEl.innerText = 'AI服務目前可能比較忙碌，系統正在自動重試中，請再稍等一下...';
+  }, 3500);
 
   try {
     payload.action = 'aiClassify';
     const res = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(payload) });
     const data = await res.json();
+    clearTimeout(busyTimer);
     loadingMsg.classList.add('hidden');
     document.getElementById('aiSubmitBtn').disabled = false;
     if (!data.ok) {
@@ -655,6 +661,7 @@ async function aiClassifySubmit() {
     aiRefreshQuotaUi();
     renderAiResult(data);
   } catch (e) {
+    clearTimeout(busyTimer);
     loadingMsg.classList.add('hidden');
     document.getElementById('aiSubmitBtn').disabled = false;
     errorMsg.innerText = '連線失敗：' + e.message + '（若持續失敗，可改用文字貼上，或换一張較小的圖片再試）';
@@ -753,6 +760,11 @@ async function aiGenerateReplyDraft() {
   loadingMsg.classList.remove('hidden');
   draftBox.classList.add('hidden');
   btn.disabled = true;
+  const generateLoadingTextEl = document.getElementById('aiGenerateLoadingText');
+  generateLoadingTextEl.innerText = 'AI撰寫草稿中...';
+  const busyTimer = setTimeout(() => {
+    generateLoadingTextEl.innerText = 'AI服務目前可能比較忙碌，系統正在自動重試中，請再稍等一下...';
+  }, 3500);
 
   try {
     const payload = {
@@ -763,6 +775,7 @@ async function aiGenerateReplyDraft() {
     };
     const res = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(payload) });
     const data = await res.json();
+    clearTimeout(busyTimer);
     loadingMsg.classList.add('hidden');
     btn.disabled = false;
     if (!data.ok) {
@@ -773,6 +786,7 @@ async function aiGenerateReplyDraft() {
     draftBox.classList.remove('hidden');
     draftBox.scrollIntoView({ behavior: 'smooth' });
   } catch (e) {
+    clearTimeout(busyTimer);
     loadingMsg.classList.add('hidden');
     btn.disabled = false;
     alert('連線失敗：' + e.message);
