@@ -71,6 +71,20 @@ function renderTransferClausesHtml(clauses) {
     clauses.map(c => `・${escapeHtml(c.matter)} → ${escapeHtml(c.agency)}`).join('<br>');
 }
 
+function renderSimilarCasesHtml(data) {
+  const parts = [];
+  const addrCases = data.similar_address_cases || [];
+  if (addrCases.length) {
+    parts.push('📍 相同地址類似案例（共' + addrCases.length + '筆，僅供參考，請自行核對是否為同一標的）：<br>' +
+      addrCases.map(c => `・${escapeHtml(c.title)}（${escapeHtml(c.address)}）`).join('<br>'));
+  }
+  const sc = data.similar_case;
+  if (sc) {
+    parts.push('📄 案情最相似的歷史案例參考：<b>' + escapeHtml(sc.title) + '</b><br>' + escapeHtml(sc.excerpt) + '...');
+  }
+  return parts.join('<hr class="my-2 border-slate-200">');
+}
+
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
@@ -688,6 +702,15 @@ function renderAiResult(data) {
     aiTransferBox.innerHTML = aiTransferHtml;
   } else {
     aiTransferBox.classList.add('hidden');
+  }
+
+  const aiSimilarBox = document.getElementById('aiResultSimilarBox');
+  const aiSimilarHtml = renderSimilarCasesHtml(data);
+  if (aiSimilarHtml) {
+    aiSimilarBox.classList.remove('hidden');
+    aiSimilarBox.innerHTML = aiSimilarHtml;
+  } else {
+    aiSimilarBox.classList.add('hidden');
   }
 
   const fieldsBox = document.getElementById('aiResultFields');
