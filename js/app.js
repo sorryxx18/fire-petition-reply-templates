@@ -882,17 +882,44 @@ function renderAiAskAnswer(answer) {
   let html = escapeHtml(mainText).replace(/\n/g, '<br>');
   if (suggestion) {
     html += '<div class="mt-2 pt-2 border-t border-slate-200"><p class="text-xs text-slate-500 mb-1">建議加入：</p><p class="text-slate-800">' +
-      escapeHtml(suggestion) + '</p><button onclick="aiInsertAskSuggestion()" class="mt-2 bg-[var(--brand-primary)] text-white rounded-xl px-3 py-1.5 text-xs font-medium transition-colors">加入草稿</button></div>';
+      escapeHtml(suggestion) + '</p><button id="aiInsertSuggestionBtn" onclick="aiInsertAskSuggestion()" class="mt-2 bg-[var(--brand-primary)] text-white rounded-xl px-3 py-1.5 text-xs font-medium transition-colors">整合進草稿</button></div>';
   }
   answerBox.innerHTML = html;
   answerBox.classList.remove('hidden');
 }
 
-function aiInsertAskSuggestion() {
+// 不是機械式把建議文字貼在草稿最後面，而是把這項事實交還AI，讓它參考同類案件風格，
+// 整合進草稿最適當的位置、必要時調整鄰近句子銜接，重新生成完整全文。
+async function aiInsertAskSuggestion() {
   if (!aiAskSuggestion) return;
-  const ta = document.getElementById('aiDraftText');
-  ta.value = ta.value.replace(/\s+$/, '') + '\n' + aiAskSuggestion;
-  showSuccessToast('已加入草稿末尾，請自行調整位置與文字。');
+  const btn = document.getElementById('aiInsertSuggestionBtn');
+  const originalLabel = btn ? btn.innerText : '';
+  if (btn) { btn.disabled = true; btn.innerText = 'AI整合中...'; }
+
+  try {
+    const draftText = document.getElementById('aiDraftText').value;
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'aiRefineDraft',
+        draftText: draftText,
+        factToAdd: aiAskSuggestion,
+        template_id: (aiLastResult && aiLastResult.template_id) || null
+      })
+    });
+    const data = await res.json();
+    if (!data.ok) {
+      alert('整合失敗：' + (data.error || '未知錯誤'));
+      if (btn) { btn.disabled = false; btn.innerText = originalLabel; }
+      return;
+    }
+    document.getElementById('aiDraftText').value = data.draft;
+    showSuccessToast('已將建議內容整合進草稿，請再次核對全文。');
+    if (btn) { btn.disabled = true; btn.innerText = '已整合'; }
+  } catch (e) {
+    alert('連線失敗：' + e.message);
+    if (btn) { btn.disabled = false; btn.innerText = originalLabel; }
+  }
 }
 
 // ---------- Google登入（輕量版：不驗證JWT簽章，前端信任回傳的email，後端比對白名單）----------
