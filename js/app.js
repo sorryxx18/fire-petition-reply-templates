@@ -469,8 +469,21 @@ loadGenTemplates();
 
 // ---------- AI輔助分類 ----------
 
-if (window.pdfjsLib) {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.js';
+// pdf.js從v6開始只發行ES module格式，改用<script type="module">非同步載入到window.pdfjsLib，
+// 跟這支主程式(非module script)的載入時序是分開的，所以不能在頂層直接假設它已經就緒，
+// 要在真正使用前輪詢等待（跟GSI登入按鈕那個load-order race condition用同一套解法）。
+let _pdfJsWorkerReady = false;
+async function ensurePdfJsReady_() {
+  let retries = 60; // ~6s of retrying at 100ms intervals before giving up
+  while (!window.pdfjsLib && retries > 0) {
+    await new Promise(r => setTimeout(r, 100));
+    retries--;
+  }
+  if (!window.pdfjsLib) throw new Error('PDF解析元件載入失敗，請重新整理頁面再試一次');
+  if (!_pdfJsWorkerReady) {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/6.3.289/pdf.worker.min.mjs';
+    _pdfJsWorkerReady = true;
+  }
 }
 
 let aiLastResult = null;
@@ -564,6 +577,7 @@ function resizeImageToDataUrl(file, maxWidth = 1600, quality = 0.85) {
 }
 
 async function extractPdfText(file) {
+  await ensurePdfJsReady_();
   const buf = await readFileAsArrayBuffer(file);
   const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
   let text = '';
@@ -576,6 +590,7 @@ async function extractPdfText(file) {
 }
 
 async function pdfFirstPageToImage(file) {
+  await ensurePdfJsReady_();
   const buf = await readFileAsArrayBuffer(file);
   const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
   const page = await pdf.getPage(1);

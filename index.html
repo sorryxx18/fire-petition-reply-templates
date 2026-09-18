@@ -387,7 +387,10 @@
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.js"></script>
+  <script type="module">
+    import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/6.3.289/pdf.min.mjs';
+    window.pdfjsLib = pdfjsLib;
+  </script>
   <script src="js/config.js"></script>
   <script src="js/app.js"></script>
 </body>
