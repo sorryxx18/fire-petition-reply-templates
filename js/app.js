@@ -827,6 +827,74 @@ async function aiCopyDraft() {
   }
 }
 
+// ---------- AI詢問（對照草稿+參考案例回答承辦人的疑問，並可能給建議插入文字） ----------
+
+let aiAskSuggestion = null;
+
+async function aiAskQuestion() {
+  const input = document.getElementById('aiAskInput');
+  const question = input.value.trim();
+  if (!question) return;
+  const loadingMsg = document.getElementById('aiAskLoadingMsg');
+  const answerBox = document.getElementById('aiAskAnswerBox');
+  const askBtn = document.getElementById('aiAskBtn');
+  loadingMsg.classList.remove('hidden');
+  answerBox.classList.add('hidden');
+  askBtn.disabled = true;
+  aiAskSuggestion = null;
+
+  try {
+    const draftText = document.getElementById('aiDraftText').value;
+    const referenceCaseId = (aiLastResult && aiLastResult.similar_case) ? aiLastResult.similar_case.id : null;
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'aiAskQuestion', draftText: draftText, referenceCaseId: referenceCaseId, question: question })
+    });
+    const data = await res.json();
+    loadingMsg.classList.add('hidden');
+    askBtn.disabled = false;
+    if (!data.ok) {
+      answerBox.classList.remove('hidden');
+      answerBox.innerHTML = '查詢失敗：' + escapeHtml(data.error || '未知錯誤');
+      return;
+    }
+    renderAiAskAnswer(data.answer);
+  } catch (e) {
+    loadingMsg.classList.add('hidden');
+    askBtn.disabled = false;
+    answerBox.classList.remove('hidden');
+    answerBox.innerHTML = '連線失敗：' + escapeHtml(e.message);
+  }
+}
+
+function renderAiAskAnswer(answer) {
+  const answerBox = document.getElementById('aiAskAnswerBox');
+  const marker = '建議加入：';
+  const idx = answer.indexOf(marker);
+  let mainText = answer;
+  let suggestion = null;
+  if (idx >= 0) {
+    mainText = answer.slice(0, idx).trim();
+    suggestion = answer.slice(idx + marker.length).trim();
+  }
+  aiAskSuggestion = suggestion;
+
+  let html = escapeHtml(mainText).replace(/\n/g, '<br>');
+  if (suggestion) {
+    html += '<div class="mt-2 pt-2 border-t border-slate-200"><p class="text-xs text-slate-500 mb-1">建議加入：</p><p class="text-slate-800">' +
+      escapeHtml(suggestion) + '</p><button onclick="aiInsertAskSuggestion()" class="mt-2 bg-[var(--brand-primary)] text-white rounded-xl px-3 py-1.5 text-xs font-medium transition-colors">加入草稿</button></div>';
+  }
+  answerBox.innerHTML = html;
+  answerBox.classList.remove('hidden');
+}
+
+function aiInsertAskSuggestion() {
+  if (!aiAskSuggestion) return;
+  const ta = document.getElementById('aiDraftText');
+  ta.value = ta.value.replace(/\s+$/, '') + '\n' + aiAskSuggestion;
+  showSuccessToast('已加入草稿末尾，請自行調整位置與文字。');
+}
+
 // ---------- Google登入（輕量版：不驗證JWT簽章，前端信任回傳的email，後端比對白名單）----------
 
 let loggedInUser = null;
