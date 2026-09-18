@@ -951,6 +951,7 @@ function decodeJwtPayload_(jwt) {
 }
 
 const BLACKLIST_MESSAGE = '你nono 只能給你測試喔，啾咪！\n（此帳號已被系統管理者停權，僅能使用測試模式）';
+const PENDING_MESSAGE = '申請已送出，正在等候管理者審核，審核通過前先以測試模式使用喔！';
 
 async function handleGoogleCredential(response) {
   const payload = decodeJwtPayload_(response.credential);
@@ -970,11 +971,21 @@ async function handleGoogleCredential(response) {
       unlockTestMode();
       return;
     }
+    if (data.error === 'pending') {
+      alert(PENDING_MESSAGE);
+      unlockTestMode();
+      return;
+    }
     if (data.error === 'not_registered') {
       const name = (prompt('第一次使用，請輸入你的姓名（之後會自動帶入承辦人欄位）：') || '').trim();
       if (!name) { unlockTestMode(); return; }
       const regRes = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify({ action: 'registerUser', email, name }) });
       const regData = await regRes.json();
+      if (regData.error === 'pending') {
+        alert(PENDING_MESSAGE);
+        unlockTestMode();
+        return;
+      }
       if (!regData.ok) {
         alert(regData.error === 'blacklisted' ? BLACKLIST_MESSAGE : ('註冊失敗：' + (regData.error || '未知錯誤')));
         unlockTestMode();
@@ -1045,13 +1056,21 @@ function renderUsers(users) {
   }
   tbody.innerHTML = users.map(u => {
     const isBlacklisted = u.status === 'blacklisted';
-    const statusBadge = isBlacklisted
+    const isPending = u.status === 'pending';
+    const statusBadge = isPending
+      ? '<span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full">待審核</span>'
+      : isBlacklisted
       ? '<span class="text-xs font-bold text-red-600 bg-red-50 px-2.5 py-1 rounded-full">已封鎖</span>'
       : '<span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">正常</span>';
     const isSelf = loggedInUser && u.email.toLowerCase() === loggedInUser.email.toLowerCase();
-    const actionCell = isSelf
+    const normalActionCell = isSelf
       ? '<span class="text-xs text-slate-300">（你自己）</span>'
       : `<button onclick="toggleUserBlacklist('${escapeHtml(u.email).replace(/'/g, "\\'")}', ${!isBlacklisted})" class="text-xs underline ${isBlacklisted ? 'text-emerald-600' : 'text-red-600'}">${isBlacklisted ? '解除封鎖' : '封鎖'}</button>`;
+    const actionCell = isSelf
+      ? normalActionCell
+      : isPending
+      ? `<button onclick="toggleUserBlacklist('${escapeHtml(u.email).replace(/'/g, "\\'")}', false)" class="text-xs underline text-emerald-600 mr-2">核准</button><button onclick="toggleUserBlacklist('${escapeHtml(u.email).replace(/'/g, "\\'")}', true)" class="text-xs underline text-red-600">拒絕</button>`
+      : normalActionCell;
     return `
       <tr class="border-t border-slate-100">
         <td class="px-4 py-2.5 font-medium">${escapeHtml(u.email)}</td>
@@ -1143,6 +1162,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         try { localStorage.removeItem('petitionAppUser'); } catch (e) {}
         updateLoginUi();
         if (data.error === 'blacklisted') alert(BLACKLIST_MESSAGE);
+        if (data.error === 'pending') alert(PENDING_MESSAGE);
       }
     } catch (e) {
       // Network hiccup — keep the cached session rather than locking the user out.
