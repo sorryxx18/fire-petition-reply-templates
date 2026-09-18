@@ -115,8 +115,8 @@ function todayRocDate() {
 }
 
 function switchTab(tab) {
-  const tabs = { gen: 'genTab', ai: 'aiTab', cases: 'casesTab', regs: 'regsTab', stats: 'statsTab', users: 'usersTab' };
-  const btns = { gen: 'tabBtnGen', ai: 'tabBtnAi', cases: 'tabBtnCases', regs: 'tabBtnRegs', stats: 'tabBtnStats', users: 'tabBtnUsers' };
+  const tabs = { gen: 'genTab', ai: 'aiTab', cases: 'casesTab', regs: 'regsTab', stats: 'statsTab', users: 'usersTab', addcase: 'addcaseTab' };
+  const btns = { gen: 'tabBtnGen', ai: 'tabBtnAi', cases: 'tabBtnCases', regs: 'tabBtnRegs', stats: 'tabBtnStats', users: 'tabBtnUsers', addcase: 'tabBtnAddCase' };
   Object.keys(tabs).forEach(key => {
     document.getElementById(tabs[key]).classList.toggle('hidden', key !== tab);
     const btn = document.getElementById(btns[key]);
@@ -982,6 +982,7 @@ function updateLoginUi() {
   const badge = document.getElementById('loggedInBadge');
   const btnSlot = document.getElementById('googleSignInBtn');
   const usersTabBtn = document.getElementById('tabBtnUsers');
+  const addCaseTabBtn = document.getElementById('tabBtnAddCase');
   if (loggedInUser) {
     badge.classList.remove('hidden');
     btnSlot.classList.add('hidden');
@@ -989,10 +990,12 @@ function updateLoginUi() {
     const handlerInput = document.getElementById('genHandler');
     if (handlerInput && !handlerInput.value) handlerInput.value = loggedInUser.name;
     if (usersTabBtn) usersTabBtn.classList.toggle('hidden', loggedInUser.role !== 'admin');
+    if (addCaseTabBtn) addCaseTabBtn.classList.toggle('hidden', loggedInUser.role !== 'admin');
   } else {
     badge.classList.add('hidden');
     btnSlot.classList.remove('hidden');
     if (usersTabBtn) usersTabBtn.classList.add('hidden');
+    if (addCaseTabBtn) addCaseTabBtn.classList.add('hidden');
   }
 }
 
@@ -1142,3 +1145,108 @@ openGenerator = async function(id) {
     if (handlerInput && !handlerInput.value) handlerInput.value = loggedInUser.name;
   }
 };
+
+// ---------- 新增案例（僅admin，上傳PDF→AI解析→確認才寫入試算表）----------
+
+let addCaseParsedReplyText = '';
+
+async function aiAddCaseParse() {
+  const statusEl = document.getElementById('addCaseFileStatus');
+  const loadingMsg = document.getElementById('addCaseParseLoadingMsg');
+  const errorMsg = document.getElementById('addCaseErrorMsg');
+  const preview = document.getElementById('addCasePreview');
+  errorMsg.classList.add('hidden');
+  preview.classList.add('hidden');
+
+  const petitionFile = document.getElementById('addCasePetitionFile').files[0];
+  const replyFile = document.getElementById('addCaseReplyFile').files[0];
+  if (!replyFile) {
+    errorMsg.innerText = '請上傳回覆文件PDF';
+    errorMsg.classList.remove('hidden');
+    return;
+  }
+
+  loadingMsg.classList.remove('hidden');
+  document.getElementById('addCaseParseBtn').disabled = true;
+
+  try {
+    statusEl.innerText = '正在抽取PDF文字...';
+    const replyText = await extractPdfText(replyFile);
+    const petitionText = petitionFile ? await extractPdfText(petitionFile) : '';
+    if (replyText.length < 30) {
+      throw new Error('回覆文件抽不到足夠文字，可能是掃描件，這個功能目前只支援可複製文字的PDF');
+    }
+    statusEl.innerText = `已抽取回覆文件 ${replyText.length} 字` + (petitionText ? `、陳情文件 ${petitionText.length} 字` : '') + '，AI解析中...';
+
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'aiParseNewCase', petitionText: petitionText, replyText: replyText })
+    });
+    const data = await res.json();
+    loadingMsg.classList.add('hidden');
+    document.getElementById('addCaseParseBtn').disabled = false;
+    if (!data.ok) {
+      errorMsg.innerText = 'AI解析失敗：' + (data.error || '未知錯誤');
+      errorMsg.classList.remove('hidden');
+      return;
+    }
+
+    addCaseParsedReplyText = replyText;
+    document.getElementById('addCaseTitle').value = data.title || '';
+    document.getElementById('addCaseCategory').value = data.category || '';
+    document.getElementById('addCaseKeywords').value = (data.keywords || []).join('、');
+    document.getElementById('addCaseAddress').value = data.address || '';
+    document.getElementById('addCaseResponseText').value = replyText;
+    preview.classList.remove('hidden');
+    preview.scrollIntoView({ behavior: 'smooth' });
+  } catch (e) {
+    loadingMsg.classList.add('hidden');
+    document.getElementById('addCaseParseBtn').disabled = false;
+    errorMsg.innerText = e.message;
+    errorMsg.classList.remove('hidden');
+  }
+}
+
+async function aiAddCaseConfirm() {
+  if (!loggedInUser || loggedInUser.role !== 'admin') {
+    alert('僅管理者可以新增案例');
+    return;
+  }
+  const title = document.getElementById('addCaseTitle').value.trim();
+  const category = document.getElementById('addCaseCategory').value.trim();
+  const keywords = document.getElementById('addCaseKeywords').value.split('、').map(s => s.trim()).filter(Boolean);
+  const address = document.getElementById('addCaseAddress').value.trim();
+  const responseText = document.getElementById('addCaseResponseText').value.trim();
+  if (!title || !category || !responseText) {
+    alert('標題、分類、回覆全文為必填');
+    return;
+  }
+
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'addCase',
+        email: loggedInUser.email,
+        title: title,
+        category: category,
+        keywords: keywords,
+        address: address,
+        response_text: responseText
+      })
+    });
+    const data = await res.json();
+    if (!data.ok) {
+      alert('新增失敗：' + (data.error || '未知錯誤'));
+      return;
+    }
+    showSuccessToast('已新增案例（ID: ' + data.id + '），案例庫下次讀取就會看到。');
+    document.getElementById('addCasePreview').classList.add('hidden');
+    document.getElementById('addCasePetitionFile').value = '';
+    document.getElementById('addCaseReplyFile').value = '';
+    document.getElementById('addCaseFileStatus').innerText = '';
+    casesLoaded = false; // force re-fetch next time 案例參考 tab is opened
+  } catch (e) {
+    alert('連線失敗：' + e.message);
+  }
+}
