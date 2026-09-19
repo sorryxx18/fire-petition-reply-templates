@@ -72,6 +72,11 @@ function renderTransferClausesHtml(clauses) {
 }
 
 function renderSimilarCasesHtml(data) {
+  // 未登入時後端根本不會回傳相似案例的地址/摘要內容（不只是前端藏），這裡固定顯示同一句話，
+  // 不管實際上有沒有比對到都一樣，避免被拿去反推「有顯示=有資料，沒顯示=沒有資料」。
+  if (data.similar_info_login_required) {
+    return '📍 本系統會比對歷史類案地址與案情，登入後可查看比對結果；如需查詢本局歷史類案處理紀錄，建議可循公文系統調卷。';
+  }
   const parts = [];
   const addrCases = data.similar_address_cases || [];
   if (addrCases.length) {
@@ -114,6 +119,12 @@ function todayRocDate() {
   return `${rocYear}年${now.getUTCMonth() + 1}月${now.getUTCDate()}日`;
 }
 
+// 案例參考(case_example)的地址/全文要登入才看得到，這個小工具統一組出email查詢字串加在list/detail呼叫後面，
+// 未登入時回傳空字串（後端看不到email參數就當作未登入處理，跟這裡回傳空字串效果一致）。
+function loginEmailParam_() {
+  return loggedInUser ? '&email=' + encodeURIComponent(loggedInUser.email) : '';
+}
+
 function switchTab(tab) {
   const tabs = { gen: 'genTab', ai: 'aiTab', cases: 'casesTab', regs: 'regsTab', stats: 'statsTab', users: 'usersTab', addcase: 'addcaseTab' };
   const btns = { gen: 'tabBtnGen', ai: 'tabBtnAi', cases: 'tabBtnCases', regs: 'tabBtnRegs', stats: 'tabBtnStats', users: 'tabBtnUsers', addcase: 'tabBtnAddCase' };
@@ -139,7 +150,7 @@ function switchTab(tab) {
 
 async function loadGenTemplates() {
   try {
-    const res = await fetch(`${GAS_URL}?action=list`);
+    const res = await fetch(`${GAS_URL}?action=list${loginEmailParam_()}`);
     const data = await res.json();
     if (!data.ok) throw new Error(data.error);
     genTemplates = data.templates.filter(t => t.type === 'standard');
@@ -181,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function openGenerator(id) {
-  const res = await fetch(`${GAS_URL}?action=detail&id=${encodeURIComponent(id)}`);
+  const res = await fetch(`${GAS_URL}?action=detail&id=${encodeURIComponent(id)}${loginEmailParam_()}`);
   const data = await res.json();
   if (!data.ok) { alert(data.error || '載入失敗'); return; }
   currentDetail = data.template;
@@ -306,8 +317,15 @@ let allCases = [];
 let casesLoaded = false;
 
 async function loadCases() {
+  // 案例參考含真實陳情地址與案情內容，未登入時後端list本來就不會回傳case_example這些列，
+  // 這裡額外提前擋一次，直接顯示登入提示，不用等一次空的fetch往返。
+  if (!loggedInUser) {
+    document.getElementById('caseLoadingMsg').classList.add('hidden');
+    document.getElementById('caseList').innerHTML = `<div class="text-center py-8"><img src="${mascotSrc('empty')}" alt="登入後查看" class="w-20 h-20 object-cover rounded-2xl mx-auto mb-2 shadow-sm"><p class="text-slate-400">案例參考含真實陳情地址與案情內容，登入後才能查看。</p></div>`;
+    return;
+  }
   try {
-    const res = await fetch(`${GAS_URL}?action=list`);
+    const res = await fetch(`${GAS_URL}?action=list${loginEmailParam_()}`);
     const data = await res.json();
     if (!data.ok) throw new Error(data.error);
     allCases = data.templates.filter(t => t.type === 'case_example');
@@ -349,9 +367,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function openCaseDetail(id) {
-  const res = await fetch(`${GAS_URL}?action=detail&id=${encodeURIComponent(id)}`);
+  const res = await fetch(`${GAS_URL}?action=detail&id=${encodeURIComponent(id)}${loginEmailParam_()}`);
   const data = await res.json();
-  if (!data.ok) { alert(data.error); return; }
+  if (!data.ok) {
+    alert(data.error === 'login_required' ? '這則案例含真實陳情地址與案情細節，登入後才能查看完整內容。' : data.error);
+    return;
+  }
   const t = data.template;
   alert(`${t.title}\n\n${t.response_text}`);
 }
@@ -363,7 +384,7 @@ async function loadRegulations() {
   try {
     const [regRes, listRes] = await Promise.all([
       fetch(`${GAS_URL}?action=regulations`),
-      fetch(`${GAS_URL}?action=list`)
+      fetch(`${GAS_URL}?action=list${loginEmailParam_()}`)
     ]);
     const regData = await regRes.json();
     const listData = await listRes.json();
@@ -430,7 +451,7 @@ async function loadStats() {
   try {
     const [statsRes, listRes] = await Promise.all([
       fetch(`${GAS_URL}?action=usageStats&email=${encodeURIComponent(loggedInUser.email)}`),
-      fetch(`${GAS_URL}?action=list`)
+      fetch(`${GAS_URL}?action=list${loginEmailParam_()}`)
     ]);
     const statsData = await statsRes.json();
     const listData = await listRes.json();
@@ -675,6 +696,7 @@ async function aiClassifySubmit() {
 
   try {
     payload.action = 'aiClassify';
+    payload.email = loggedInUser ? loggedInUser.email : '';
     const res = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(payload) });
     const data = await res.json();
     clearTimeout(busyTimer);
@@ -863,7 +885,7 @@ async function aiAskQuestion() {
     const referenceCaseId = (aiLastResult && aiLastResult.similar_case) ? aiLastResult.similar_case.id : null;
     const res = await fetch(GAS_URL, {
       method: 'POST',
-      body: JSON.stringify({ action: 'aiAskQuestion', draftText: draftText, referenceCaseId: referenceCaseId, question: question })
+      body: JSON.stringify({ action: 'aiAskQuestion', draftText: draftText, referenceCaseId: referenceCaseId, question: question, email: loggedInUser ? loggedInUser.email : '' })
     });
     const data = await res.json();
     loadingMsg.classList.add('hidden');
