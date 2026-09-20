@@ -844,6 +844,7 @@ async function aiGenerateReplyDraft() {
     }
     document.getElementById('aiDraftText').value = data.draft;
     aiInitialDraftText = data.draft;
+    aiAskHistory = [];
     draftBox.classList.remove('hidden');
     draftBox.scrollIntoView({ behavior: 'smooth' });
   } catch (e) {
@@ -895,6 +896,7 @@ async function aiCopyDraft() {
 // ---------- AI詢問（對照草稿+參考案例回答承辦人的疑問，並可能給建議插入文字） ----------
 
 let aiAskSuggestion = null;
+let aiAskHistory = [];
 
 async function aiAskQuestion() {
   const input = document.getElementById('aiAskInput');
@@ -913,7 +915,7 @@ async function aiAskQuestion() {
     const referenceCaseId = (aiLastResult && aiLastResult.similar_case) ? aiLastResult.similar_case.id : null;
     const res = await fetch(GAS_URL, {
       method: 'POST',
-      body: JSON.stringify({ action: 'aiAskQuestion', draftText: draftText, referenceCaseId: referenceCaseId, question: question, email: loggedInUser ? loggedInUser.email : '' })
+      body: JSON.stringify({ action: 'aiAskQuestion', draftText: draftText, referenceCaseId: referenceCaseId, question: question, history: aiAskHistory, email: loggedInUser ? loggedInUser.email : '' })
     });
     const data = await res.json();
     loadingMsg.classList.add('hidden');
@@ -923,6 +925,8 @@ async function aiAskQuestion() {
       answerBox.innerHTML = '查詢失敗：' + escapeHtml(data.error || '未知錯誤');
       return;
     }
+    aiAskHistory.push({ question: question, answer: data.answer });
+    input.value = '';
     renderAiAskAnswer(data.answer);
   } catch (e) {
     loadingMsg.classList.add('hidden');
