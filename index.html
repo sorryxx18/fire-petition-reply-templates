@@ -246,6 +246,11 @@
         <div id="aiDraftBox" class="hidden mb-4">
           <p class="text-xs text-slate-400 mb-1">AI生成草稿（僅供參考，正式送出前務必自行核對修改）：</p>
           <textarea id="aiDraftText" rows="10" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm leading-relaxed"></textarea>
+
+          <label class="block text-sm font-medium text-slate-700 mb-1 mt-3">案號（複製前必填）</label>
+          <input id="aiCaseNumber" type="text" placeholder="例如：115年O月OO日OO字第OOOOOOOO號"
+            class="w-full border border-slate-300 rounded-xl px-3 py-2 mb-2 text-sm">
+
           <button onclick="aiCopyDraft()" class="w-full bg-[var(--brand-secondary)] text-white rounded-xl py-2 text-sm font-medium mt-2 transition-colors">複製草稿到剪貼簿</button>
 
           <div class="mt-3 pt-3 border-t border-slate-200">
@@ -392,6 +397,6 @@
     window.pdfjsLib = pdfjsLib;
   </script>
   <script src="js/config.js"></script>
-  <script src="js/app.js?v=20260920b"></script>
+  <script src="js/app.js?v=20260920c"></script>
 </body>
 </html>

@@ -843,6 +843,7 @@ async function aiGenerateReplyDraft() {
       return;
     }
     document.getElementById('aiDraftText').value = data.draft;
+    aiInitialDraftText = data.draft;
     draftBox.classList.remove('hidden');
     draftBox.scrollIntoView({ behavior: 'smooth' });
   } catch (e) {
@@ -853,10 +854,37 @@ async function aiGenerateReplyDraft() {
   }
 }
 
+let aiInitialDraftText = '';
+
 async function aiCopyDraft() {
+  const caseNumber = document.getElementById('aiCaseNumber').value.trim();
+  if (!caseNumber) { alert('請填寫案號。'); return; }
   const text = document.getElementById('aiDraftText').value;
   try {
     await navigator.clipboard.writeText(text);
+
+    const originalLength = aiInitialDraftText.length;
+    const finalLength = text.length;
+    let diffChars = 0;
+    const maxLen = Math.max(originalLength, finalLength);
+    for (let i = 0; i < maxLen; i++) {
+      if (aiInitialDraftText[i] !== text[i]) diffChars++;
+    }
+    const diffRatio = maxLen ? diffChars / maxLen : 0;
+
+    await fetch(GAS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({
+        action: 'logUsage',
+        templateId: (aiLastResult && aiLastResult.template_id) || '',
+        caseNumber: caseNumber,
+        handler: loggedInUser ? loggedInUser.name : '',
+        email: loggedInUser ? loggedInUser.email : '',
+        originalLength: originalLength, finalLength: finalLength, diffRatio: diffRatio
+      })
+    });
+
     setAiStep(4);
     showSuccessToast('已複製到剪貼簿，請貼到正式公文系統前再次確認案情細節。');
   } catch (e) {
