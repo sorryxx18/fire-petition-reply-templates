@@ -906,7 +906,7 @@ async function aiAskQuestion() {
 
 function renderAiAskAnswer(answer) {
   const answerBox = document.getElementById('aiAskAnswerBox');
-  const marker = '建議加入：';
+  const marker = '建議調整：';
   const idx = answer.indexOf(marker);
   let mainText = answer;
   let suggestion = null;
@@ -918,7 +918,7 @@ function renderAiAskAnswer(answer) {
 
   let html = escapeHtml(mainText).replace(/\n/g, '<br>');
   if (suggestion) {
-    html += '<div class="mt-2 pt-2 border-t border-slate-200"><p class="text-xs text-slate-500 mb-1">建議加入：</p><p class="text-slate-800">' +
+    html += '<div class="mt-2 pt-2 border-t border-slate-200"><p class="text-xs text-slate-500 mb-1">建議調整：</p><p class="text-slate-800">' +
       escapeHtml(suggestion) + '</p><button id="aiInsertSuggestionBtn" onclick="aiInsertAskSuggestion()" class="mt-2 bg-[var(--brand-primary)] text-white rounded-xl px-3 py-1.5 text-xs font-medium transition-colors">整合進草稿</button></div>';
   }
   answerBox.innerHTML = html;
