@@ -83,11 +83,61 @@ function renderSimilarCasesHtml(data) {
     parts.push('📍 相同地址類似案例（共' + addrCases.length + '筆，僅供參考，請自行核對是否為同一標的）：<br>' +
       addrCases.map(c => `・${escapeHtml(c.title)}（${escapeHtml(c.address)}）`).join('<br>'));
   }
-  const sc = data.similar_case;
-  if (sc) {
-    parts.push('📄 案情最相似的歷史案例參考：<b>' + escapeHtml(sc.title) + '</b><br>' + escapeHtml(sc.excerpt) + '...');
+  // 2026-09-22起：後端改成最多回傳3則相似度＋新舊排序後的候選案例（similar_cases陣列，不再只給1則），
+  // 這裡改成分類卡片，點開用共用modal看全文（不再只有150字摘要），資料存在aiLastResult.similar_cases，
+  // 點擊時用index去查，不把整段全文塞進onclick字串裡（避免轉義問題）。
+  const cases = data.similar_cases || [];
+  if (cases.length) {
+    parts.push('📄 案情相似的歷史案例參考（點卡片看全文，依相似度＋新舊排序）：<br>' +
+      '<div class="space-y-2 mt-1">' + cases.map((c, i) => `
+        <button type="button" onclick="openSimilarCase(${i})" class="w-full text-left bg-white rounded-xl border border-slate-200 px-3 py-2 hover:border-[var(--brand-primary-light)] transition">
+          <div class="flex justify-between items-center mb-0.5">
+            <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">${escapeHtml(c.category || '')}</span>
+            <span class="text-xs text-slate-400">${escapeHtml(c.created_at || '原始批次')}</span>
+          </div>
+          <p class="text-sm font-medium text-slate-800">${escapeHtml(c.title)}</p>
+        </button>`).join('') + '</div>');
   }
   return parts.join('<hr class="my-2 border-slate-200">');
+}
+
+// 共用的案例詳情modal，取代原本「案例參考」分頁跟這裡都各自用alert彈窗顯示全文的舊做法。
+function showCaseModal(title, category, responseText) {
+  let modal = document.getElementById('caseDetailModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'caseDetailModal';
+    modal.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm px-4';
+    modal.innerHTML = `
+      <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full max-h-[80vh] flex flex-col">
+        <div class="flex items-start justify-between px-5 py-4 border-b border-slate-100 flex-shrink-0">
+          <div>
+            <span id="caseDetailModalCategory" class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full"></span>
+            <h3 id="caseDetailModalTitle" class="font-semibold text-slate-800 mt-1"></h3>
+          </div>
+          <button type="button" onclick="closeCaseModal()" class="text-slate-400 hover:text-slate-600 text-2xl leading-none px-1">&times;</button>
+        </div>
+        <div id="caseDetailModalBody" class="px-5 py-4 overflow-y-auto text-sm text-slate-700 whitespace-pre-wrap leading-relaxed"></div>
+      </div>`;
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeCaseModal(); });
+    document.body.appendChild(modal);
+  }
+  document.getElementById('caseDetailModalCategory').innerText = category || '';
+  document.getElementById('caseDetailModalTitle').innerText = title || '';
+  document.getElementById('caseDetailModalBody').innerText = responseText || '';
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+}
+
+function closeCaseModal() {
+  const modal = document.getElementById('caseDetailModal');
+  if (modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+}
+
+function openSimilarCase(i) {
+  const c = aiLastResult && aiLastResult.similar_cases && aiLastResult.similar_cases[i];
+  if (!c) return;
+  showCaseModal(c.title, c.category, c.response_text);
 }
 
 function escapeHtml(s) {
@@ -343,15 +393,39 @@ function renderCaseList(items) {
     container.innerHTML = `<div class="text-center py-8"><img src="${mascotSrc('empty')}" alt="找不到案例" class="w-20 h-20 object-cover rounded-2xl mx-auto mb-2 shadow-sm"><p class="text-slate-400">找不到符合的案例。</p></div>`;
     return;
   }
+  // 已被取代的案例：留著顯示（不隱藏），加灰色標籤+稍微降低透明度；只有admin看得到「標記/取消標記」按鈕，
+  // 可以在匯入當下之外事後回頭手動標記（跟markSuperseded_/setCaseSuperseded共用同一套後端邏輯）。
+  const isAdmin = loggedInUser && loggedInUser.role === 'admin';
   container.innerHTML = items.map(t => `
-    <button onclick="openCaseDetail('${t.id}')" class="w-full text-left bg-white rounded-xl border border-slate-200 px-4 py-3 hover:border-[var(--brand-primary-light)] transition">
-      <div class="flex justify-between items-start mb-1">
-        <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">${escapeHtml(t.category)}</span>
-        <span class="text-xs text-slate-400">${escapeHtml(t.status || '')}</span>
-      </div>
-      <h3 class="font-semibold text-slate-800 text-sm">${escapeHtml(t.title)}</h3>
-    </button>
+    <div class="bg-white rounded-xl border ${t.superseded_by ? 'border-slate-100 opacity-60' : 'border-slate-200'} px-4 py-3 hover:border-[var(--brand-primary-light)] transition">
+      <button type="button" onclick="openCaseDetail('${t.id}')" class="w-full text-left">
+        <div class="flex justify-between items-start mb-1">
+          <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">${escapeHtml(t.category)}</span>
+          <span class="text-xs text-slate-400">${t.superseded_by ? '已被取代' : escapeHtml(t.status || '')}</span>
+        </div>
+        <h3 class="font-semibold text-slate-800 text-sm">${escapeHtml(t.title)}</h3>
+      </button>
+      ${isAdmin ? `<button type="button" onclick="toggleCaseSuperseded('${t.id}', ${t.superseded_by ? 'true' : 'false'})" class="text-xs text-slate-400 underline mt-1">${t.superseded_by ? '取消標記已被取代' : '標記為已被取代'}</button>` : ''}
+    </div>
   `).join('');
+}
+
+async function toggleCaseSuperseded(id, currentlySuperseded) {
+  if (!loggedInUser || loggedInUser.role !== 'admin') return;
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'setCaseSuperseded', email: loggedInUser.email, targetId: id,
+        clear: currentlySuperseded, supersededBy: '(手動標記)'
+      })
+    });
+    const data = await res.json();
+    if (!data.ok) { alert('操作失敗：' + (data.error || '未知錯誤')); return; }
+    await loadCases();
+  } catch (e) {
+    alert('連線失敗：' + e.message);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -374,7 +448,7 @@ async function openCaseDetail(id) {
     return;
   }
   const t = data.template;
-  alert(`${t.title}\n\n${t.response_text}`);
+  showCaseModal(t.title, t.category, t.response_text);
 }
 
 // ---------- 法規追蹤 ----------
@@ -831,7 +905,8 @@ async function aiGenerateReplyDraft() {
       action: 'aiGenerateReply',
       caseText: aiLastResult.caseText,
       template_id: aiLastResult.template_id || null,
-      transfer_clauses: aiLastResult.transfer_clauses || []
+      transfer_clauses: aiLastResult.transfer_clauses || [],
+      similar_cases: aiLastResult.similar_cases || []
     };
     const res = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(payload) });
     const data = await res.json();
@@ -858,8 +933,9 @@ async function aiGenerateReplyDraft() {
 let aiInitialDraftText = '';
 
 async function aiCopyDraft() {
+  // 2026-09-22起案號改為非必填：使用者反饋回查用案號沒意義，之後要查用途改成AI比對案情/地址/關鍵字，
+  // 不靠人工填的案號，所以這裡不再擋複製，欄位留著、填了才會存進usage_log。
   const caseNumber = document.getElementById('aiCaseNumber').value.trim();
-  if (!caseNumber) { alert('請填寫案號。'); return; }
   const text = document.getElementById('aiDraftText').value;
   try {
     await navigator.clipboard.writeText(text);
@@ -912,7 +988,7 @@ async function aiAskQuestion() {
 
   try {
     const draftText = document.getElementById('aiDraftText').value;
-    const referenceCaseId = (aiLastResult && aiLastResult.similar_case) ? aiLastResult.similar_case.id : null;
+    const referenceCaseId = (aiLastResult && aiLastResult.similar_cases && aiLastResult.similar_cases[0]) ? aiLastResult.similar_cases[0].id : null;
     const res = await fetch(GAS_URL, {
       method: 'POST',
       body: JSON.stringify({ action: 'aiAskQuestion', draftText: draftText, referenceCaseId: referenceCaseId, question: question, history: aiAskHistory, email: loggedInUser ? loggedInUser.email : '' })
@@ -1238,6 +1314,7 @@ openGenerator = async function(id) {
 // ---------- 新增案例（僅admin，上傳PDF→AI解析→確認才寫入試算表）----------
 
 let addCaseParsedReplyText = '';
+let addCaseDuplicateId = null;
 
 async function aiAddCaseParse() {
   const statusEl = document.getElementById('addCaseFileStatus');
@@ -1288,6 +1365,27 @@ async function aiAddCaseParse() {
     document.getElementById('addCaseResponseText').value = replyText;
     preview.classList.remove('hidden');
     preview.scrollIntoView({ behavior: 'smooth' });
+
+    // 匯入前先比對既有案例庫是否有疑似重複（同類陳情+回覆內容實質相同），非阻斷性檢查，
+    // 查不到/查詢失敗都不影響正常匯入流程，只是少了這個提醒。
+    addCaseDuplicateId = null;
+    document.getElementById('addCaseDupWarning').classList.add('hidden');
+    try {
+      const dupRes = await fetch(GAS_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+          action: 'aiCheckDuplicate', email: loggedInUser ? loggedInUser.email : '',
+          title: data.title || '', category: data.category || '', response_text: replyText
+        })
+      });
+      const dupData = await dupRes.json();
+      if (dupData.ok && dupData.duplicate) {
+        addCaseDuplicateId = dupData.duplicate.id;
+        document.getElementById('addCaseDupText').innerText =
+          `⚠️ 疑似跟既有案例「${dupData.duplicate.title}」（${dupData.duplicate.created_at}匯入）重複：${dupData.duplicate.reason || ''}`;
+        document.getElementById('addCaseDupWarning').classList.remove('hidden');
+      }
+    } catch (e) { /* 非關鍵檢查，失敗就不顯示警告 */ }
   } catch (e) {
     loadingMsg.classList.add('hidden');
     document.getElementById('addCaseParseBtn').disabled = false;
@@ -1311,6 +1409,9 @@ async function aiAddCaseConfirm() {
     return;
   }
 
+  const supersedeId = (addCaseDuplicateId && document.getElementById('addCaseDupSupersede').checked)
+    ? addCaseDuplicateId : null;
+
   try {
     const res = await fetch(GAS_URL, {
       method: 'POST',
@@ -1321,7 +1422,8 @@ async function aiAddCaseConfirm() {
         category: category,
         keywords: keywords,
         address: address,
-        response_text: responseText
+        response_text: responseText,
+        supersedeId: supersedeId
       })
     });
     const data = await res.json();
@@ -1329,8 +1431,10 @@ async function aiAddCaseConfirm() {
       alert('新增失敗：' + (data.error || '未知錯誤'));
       return;
     }
-    showSuccessToast('已新增案例（ID: ' + data.id + '），案例庫下次讀取就會看到。');
+    showSuccessToast('已新增案例（ID: ' + data.id + '），案例庫下次讀取就會看到。' + (supersedeId ? '舊案例已標記為已被取代。' : ''));
     document.getElementById('addCasePreview').classList.add('hidden');
+    document.getElementById('addCaseDupWarning').classList.add('hidden');
+    addCaseDuplicateId = null;
     document.getElementById('addCasePetitionFile').value = '';
     document.getElementById('addCaseReplyFile').value = '';
     document.getElementById('addCaseFileStatus').innerText = '';
