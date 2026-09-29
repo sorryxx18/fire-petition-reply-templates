@@ -395,7 +395,7 @@ function renderCaseList(items) {
   }
   // 已被取代的案例：留著顯示（不隱藏），加灰色標籤+稍微降低透明度；只有admin看得到「標記/取消標記」按鈕，
   // 可以在匯入當下之外事後回頭手動標記（跟markSuperseded_/setCaseSuperseded共用同一套後端邏輯）。
-  const isAdmin = loggedInUser && loggedInUser.role === 'admin';
+  const isAdmin = canEditCases();
   container.innerHTML = items.map(t => `
     <div class="bg-white rounded-xl border ${t.superseded_by ? 'border-slate-100 opacity-60' : 'border-slate-200'} px-4 py-3 hover:border-[var(--brand-primary-light)] transition">
       <button type="button" onclick="openCaseDetail('${t.id}')" class="w-full text-left">
@@ -411,7 +411,7 @@ function renderCaseList(items) {
 }
 
 async function toggleCaseSuperseded(id, currentlySuperseded) {
-  if (!loggedInUser || loggedInUser.role !== 'admin') return;
+  if (!canEditCases()) return;
   try {
     const res = await fetch(GAS_URL, {
       method: 'POST',
@@ -1142,11 +1142,11 @@ function updateLoginUi() {
   if (loggedInUser) {
     badge.classList.remove('hidden');
     btnSlot.classList.add('hidden');
-    document.getElementById('loggedInName').innerText = loggedInUser.name + (loggedInUser.role === 'admin' ? '（管理者）' : '');
+    document.getElementById('loggedInName').innerText = loggedInUser.name + (loggedInUser.role === 'admin' ? '（管理者）' : loggedInUser.role === 'editor' ? '（案例編輯）' : '');
     const handlerInput = document.getElementById('genHandler');
     if (handlerInput && !handlerInput.value) handlerInput.value = loggedInUser.name;
     if (usersTabBtn) usersTabBtn.classList.toggle('hidden', loggedInUser.role !== 'admin');
-    if (addCaseTabBtn) addCaseTabBtn.classList.toggle('hidden', loggedInUser.role !== 'admin');
+    if (addCaseTabBtn) addCaseTabBtn.classList.toggle('hidden', !canEditCases());
   } else {
     badge.classList.add('hidden');
     btnSlot.classList.remove('hidden');
@@ -1205,7 +1205,9 @@ function renderUsers(users) {
       <tr class="border-t border-slate-100">
         <td class="px-4 py-2.5 font-medium">${escapeHtml(u.email)}</td>
         <td class="px-4 py-2.5">${escapeHtml(u.name)}</td>
-        <td class="px-4 py-2.5">${escapeHtml(u.role)}</td>
+        <td class="px-4 py-2.5">${isSelf ? escapeHtml(u.role) : `<select onchange="changeUserRole('${escapeHtml(u.email).replace(/'/g, "\\'")}', this)" data-prev="${escapeHtml(u.role)}" class="text-xs border border-slate-300 rounded-lg px-1.5 py-1">
+          ${[['user', '一般使用者'], ['editor', '案例編輯'], ['admin', '管理者']].map(([v, l]) => `<option value="${v}" ${u.role === v ? 'selected' : ''}>${l}</option>`).join('')}
+        </select>`}</td>
         <td class="px-4 py-2.5">${statusBadge}</td>
         <td class="px-4 py-2.5 text-xs text-slate-400">${escapeHtml(u.created_at || '')}</td>
         <td class="px-4 py-2.5">${actionCell}</td>
@@ -1225,6 +1227,24 @@ async function toggleUserBlacklist(targetEmail, blacklisted) {
   const data = await res.json();
   if (!data.ok) { alert('操作失敗：' + (data.error || '未知錯誤')); return; }
   loadUsers();
+}
+
+async function changeUserRole(targetEmail, selectEl) {
+  const role = selectEl.value;
+  const label = { user: '一般使用者', editor: '案例編輯', admin: '管理者' }[role];
+  if (!confirm(`確定要把「${targetEmail}」改成「${label}」嗎？`)) { selectEl.value = selectEl.dataset.prev; return; }
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'setUserRole', adminEmail: loggedInUser.email, targetEmail, role })
+    });
+    const data = await res.json();
+    if (!data.ok) { alert('操作失敗：' + (data.error || '未知錯誤')); selectEl.value = selectEl.dataset.prev; return; }
+    loadUsers();
+  } catch (e) {
+    alert('連線失敗：' + e.message);
+    selectEl.value = selectEl.dataset.prev;
+  }
 }
 
 function signOutUser() {
@@ -1311,7 +1331,12 @@ openGenerator = async function(id) {
   }
 };
 
-// ---------- 新增案例（僅admin，上傳PDF→AI解析→確認才寫入試算表）----------
+// ---------- 新增案例（admin或editor，上傳PDF→AI解析→確認才寫入試算表）----------
+
+// editor（例如二大公用帳號）可以管理案例庫，但沒有使用者管理/全部使用紀錄等admin權限
+function canEditCases() {
+  return !!loggedInUser && (loggedInUser.role === 'admin' || loggedInUser.role === 'editor');
+}
 
 let addCaseParsedReplyText = '';
 let addCaseDuplicateId = null;
@@ -1346,7 +1371,7 @@ async function aiAddCaseParse() {
 
     const res = await fetch(GAS_URL, {
       method: 'POST',
-      body: JSON.stringify({ action: 'aiParseNewCase', petitionText: petitionText, replyText: replyText })
+      body: JSON.stringify({ action: 'aiParseNewCase', email: loggedInUser ? loggedInUser.email : '', petitionText: petitionText, replyText: replyText })
     });
     const data = await res.json();
     loadingMsg.classList.add('hidden');
@@ -1357,12 +1382,16 @@ async function aiAddCaseParse() {
       return;
     }
 
+    const cleanedText = data.cleaned_reply_text || replyText;
     addCaseParsedReplyText = replyText;
     document.getElementById('addCaseTitle').value = data.title || '';
     document.getElementById('addCaseCategory').value = data.category || '';
     document.getElementById('addCaseKeywords').value = (data.keywords || []).join('、');
     document.getElementById('addCaseAddress').value = data.address || '';
-    document.getElementById('addCaseResponseText').value = replyText;
+    document.getElementById('addCaseResponseText').value = cleanedText;
+    document.getElementById('addCaseRawText').innerText = replyText;
+    document.getElementById('addCaseRawBox').classList.toggle('hidden', !data.cleaned);
+    document.getElementById('addCaseCleanNote').classList.toggle('hidden', !data.cleaned);
     preview.classList.remove('hidden');
     preview.scrollIntoView({ behavior: 'smooth' });
 
@@ -1375,7 +1404,7 @@ async function aiAddCaseParse() {
         method: 'POST',
         body: JSON.stringify({
           action: 'aiCheckDuplicate', email: loggedInUser ? loggedInUser.email : '',
-          title: data.title || '', category: data.category || '', response_text: replyText
+          title: data.title || '', category: data.category || '', response_text: cleanedText
         })
       });
       const dupData = await dupRes.json();
@@ -1394,9 +1423,14 @@ async function aiAddCaseParse() {
   }
 }
 
+function addCaseUseRawText() {
+  if (!confirm('確定要把回覆全文換回OCR原始文字嗎？（目前框內的修改會被覆蓋）')) return;
+  document.getElementById('addCaseResponseText').value = addCaseParsedReplyText;
+}
+
 async function aiAddCaseConfirm() {
-  if (!loggedInUser || loggedInUser.role !== 'admin') {
-    alert('僅管理者可以新增案例');
+  if (!canEditCases()) {
+    alert('僅管理者或案例編輯可以新增案例');
     return;
   }
   const title = document.getElementById('addCaseTitle').value.trim();
