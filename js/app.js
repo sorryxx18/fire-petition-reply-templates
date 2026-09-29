@@ -140,6 +140,90 @@ function openSimilarCase(i) {
   showCaseModal(c.title, c.category, c.response_text);
 }
 
+// ---------- AI智能搜尋（案例參考分頁上方）----------
+let smartSearchCases = [];
+let smartSearchPhrases = [];
+
+async function runSmartSearch() {
+  const question = document.getElementById('smartSearchBox').value.trim();
+  const resultBox = document.getElementById('smartSearchResult');
+  const loading = document.getElementById('smartSearchLoading');
+  const btn = document.getElementById('smartSearchBtn');
+  if (!question) return;
+  if (!loggedInUser) {
+    resultBox.innerHTML = '<p class="text-sm text-slate-500">AI 智能搜尋需要登入後才能使用（案例含真實地址與店名）。</p>';
+    resultBox.classList.remove('hidden');
+    return;
+  }
+  resultBox.classList.add('hidden');
+  loading.classList.remove('hidden');
+  btn.disabled = true;
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'aiSmartSearch', email: loggedInUser.email, question: question })
+    });
+    const data = await res.json();
+    if (!data.ok) {
+      const msg = data.error === 'login_required' ? '登入狀態失效或帳號尚未核准，請重新登入。' : ('搜尋失敗：' + (data.error || '未知錯誤') + '（AI 忙碌時請稍後再試一次）');
+      resultBox.innerHTML = `<p class="text-sm text-red-500">${escapeHtml(msg)}</p>`;
+    } else {
+      smartSearchCases = data.cases || [];
+      smartSearchPhrases = data.phrases || [];
+      renderSmartSearch(data);
+    }
+  } catch (e) {
+    resultBox.innerHTML = `<p class="text-sm text-red-500">連線失敗：${escapeHtml(e.message)}</p>`;
+  }
+  loading.classList.add('hidden');
+  btn.disabled = false;
+  resultBox.classList.remove('hidden');
+}
+
+function renderSmartSearch(data) {
+  const phrasesHtml = smartSearchPhrases.length ? `
+    <div class="mt-3">
+      <p class="text-xs font-bold text-slate-500 mb-1">可沿用的固定句子</p>
+      ${smartSearchPhrases.map((p, i) => `
+        <div class="flex gap-2 items-start bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 mb-1.5">
+          <p class="flex-1 text-sm text-slate-700 leading-relaxed">${escapeHtml(p)}</p>
+          <button type="button" onclick="copySmartPhrase(${i})" class="text-xs text-[var(--brand-primary)] underline flex-shrink-0">複製</button>
+        </div>`).join('')}
+    </div>` : '';
+  const casesHtml = smartSearchCases.length ? `
+    <div class="mt-3">
+      <p class="text-xs font-bold text-slate-500 mb-1">找到的案例（${smartSearchCases.length}則，點開看全文）</p>
+      <div class="space-y-1.5">
+      ${smartSearchCases.map((c, i) => `
+        <button type="button" onclick="openSmartCase(${i})" class="w-full text-left bg-white rounded-xl border ${c.used ? 'border-[var(--brand-primary)]' : 'border-slate-200'} px-3 py-2 hover:border-[var(--brand-primary-light)] transition">
+          <div class="flex justify-between items-start gap-2 mb-0.5">
+            <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">${escapeHtml(c.category || '')}</span>
+            <span class="text-xs text-slate-400 flex-shrink-0">${c.used ? '<b class="text-[var(--brand-primary)]">AI引用</b>・' : ''}${c.type === 'standard' ? '制式範本' : escapeHtml(c.created_at || '')}</span>
+          </div>
+          <p class="font-semibold text-slate-800 text-sm">${escapeHtml(c.title || '')}</p>
+          ${c.address ? `<p class="text-xs text-slate-400">${escapeHtml(c.address)}</p>` : ''}
+        </button>`).join('')}
+      </div>
+    </div>` : '';
+  document.getElementById('smartSearchResult').innerHTML = `
+    <div class="rounded-xl bg-[var(--brand-bg-1)] border border-slate-200 px-3 py-2.5 text-sm text-slate-800 leading-relaxed whitespace-pre-wrap">${escapeHtml(data.answer || '')}</div>
+    ${phrasesHtml}${casesHtml}`;
+}
+
+function openSmartCase(i) {
+  const c = smartSearchCases[i];
+  if (c) showCaseModal(c.title, c.category, c.response_text);
+}
+
+async function copySmartPhrase(i) {
+  try {
+    await navigator.clipboard.writeText(smartSearchPhrases[i] || '');
+    showSuccessToast('已複製，貼到草稿後記得把○○○換成本案內容。');
+  } catch (e) {
+    alert('複製失敗，請手動選取文字複製。');
+  }
+}
+
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
@@ -989,9 +1073,14 @@ async function aiAskQuestion() {
   try {
     const draftText = document.getElementById('aiDraftText').value;
     const referenceCaseId = (aiLastResult && aiLastResult.similar_cases && aiLastResult.similar_cases[0]) ? aiLastResult.similar_cases[0].id : null;
+    // 判讀時算出的相似案例＋同路段前案都交給後端當參考（後端另外會依問題搜尋整個案例庫）
+    const referenceCaseIds = aiLastResult ? [].concat(
+      (aiLastResult.similar_address_cases || []).map(c => c.id),
+      (aiLastResult.similar_cases || []).map(c => c.id)
+    ).filter((id, i, arr) => id && arr.indexOf(id) === i) : [];
     const res = await fetch(GAS_URL, {
       method: 'POST',
-      body: JSON.stringify({ action: 'aiAskQuestion', draftText: draftText, referenceCaseId: referenceCaseId, question: question, history: aiAskHistory, email: loggedInUser ? loggedInUser.email : '' })
+      body: JSON.stringify({ action: 'aiAskQuestion', draftText: draftText, referenceCaseId: referenceCaseId, referenceCaseIds: referenceCaseIds, question: question, history: aiAskHistory, email: loggedInUser ? loggedInUser.email : '' })
     });
     const data = await res.json();
     loadingMsg.classList.add('hidden');

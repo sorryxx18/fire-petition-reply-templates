@@ -254,7 +254,7 @@
           <button onclick="aiCopyDraft()" class="w-full bg-[var(--brand-secondary)] text-white rounded-xl py-2 text-sm font-medium mt-2 transition-colors">複製草稿到剪貼簿</button>
 
           <div class="mt-3 pt-3 border-t border-slate-200">
-            <p class="text-xs text-slate-400 mb-1">有想確認的地方可以問AI（例如：有提到滅火器複查期限嗎）：</p>
+            <p class="text-xs text-slate-400 mb-1">有想確認的地方可以問AI（例如：有提到滅火器複查期限嗎？這個地址以前有沒有陳情過？類似案子的制式寫法？）：</p>
             <div class="flex gap-2">
               <input id="aiAskInput" type="text" placeholder="輸入問題..." class="flex-1 border border-slate-300 rounded-xl px-3 py-2 text-sm">
               <button id="aiAskBtn" onclick="aiAskQuestion()" class="bg-[var(--brand-secondary)] text-white rounded-xl px-4 text-sm font-medium transition-colors">送出</button>
@@ -282,6 +282,30 @@
 
     <!-- 案例參考 Tab -->
     <div id="casesTab" class="hidden">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-4">
+        <h3 class="font-semibold text-slate-800 mb-2">🔍 AI 智能搜尋</h3>
+        <div class="flex gap-2">
+          <input id="smartSearchBox" type="text" placeholder="用白話問，例如：中坡南路255號以前有沒有陳情過？"
+            onkeydown="if(event.key==='Enter')runSmartSearch()"
+            class="flex-1 min-w-0 border border-slate-300 rounded-xl px-3 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
+          <button id="smartSearchBtn" onclick="runSmartSearch()" class="bg-[var(--brand-primary)] text-white rounded-xl px-4 py-2.5 font-medium flex-shrink-0">搜尋</button>
+        </div>
+        <details class="mt-2 text-xs text-slate-500">
+          <summary class="cursor-pointer underline">怎麼用？</summary>
+          <div class="mt-2 space-y-1.5 leading-relaxed">
+            <p>直接用平常講話的方式問，AI 會自己抓出地址、關鍵字，去整個案例庫找，再用幾句話回答並標出是哪一則案例。</p>
+            <p>・<b>查前案</b>：「信義區中坡南路255號以前有沒有陳情過？」（地址打路名就可以，不用完整）</p>
+            <p>・<b>查制式寫法</b>：「瓦斯桶串接不合格的制式寫法」→ 會整理出可沿用的固定句子，按「複製」直接用</p>
+            <p>・<b>查怎麼處理</b>：「頂樓違建堵住逃生通道要改分給誰？」</p>
+            <p>・<b>查同類案子</b>：「有沒有住警器沒裝的案子？」</p>
+            <p>找到的案例會列在下面，點卡片看全文；標「AI引用」的是回答裡用到的。找不到就換個說法或少打幾個字。</p>
+            <p>判讀完生成草稿後，下方「問AI」也能問前案或制式寫法，會一起查案例庫。</p>
+            <p class="text-slate-400">※ 需要登入才能用；AI 只根據案例庫回答，重要內容仍請點開原文確認。</p>
+          </div>
+        </details>
+        <div id="smartSearchLoading" class="hidden mt-3 text-sm text-slate-500">AI 搜尋中，約需 5~15 秒…<div class="ai-progress-bar mt-2"></div></div>
+        <div id="smartSearchResult" class="hidden mt-3"></div>
+      </div>
       <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-4">
         <input id="caseSearchBox" type="text" placeholder="輸入關鍵字、場所、法規搜尋案例..."
           class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
@@ -411,6 +435,6 @@
     window.pdfjsLib = pdfjsLib;
   </script>
   <script src="js/config.js"></script>
-  <script src="js/app.js?v=20260929b"></script>
+  <script src="js/app.js?v=20260929c"></script>
 </body>
 </html>
