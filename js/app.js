@@ -1404,15 +1404,27 @@ async function aiAddCaseParse() {
         method: 'POST',
         body: JSON.stringify({
           action: 'aiCheckDuplicate', email: loggedInUser ? loggedInUser.email : '',
-          title: data.title || '', category: data.category || '', response_text: cleanedText
+          title: data.title || '', category: data.category || '', address: data.address || '', response_text: cleanedText
         })
       });
       const dupData = await dupRes.json();
       if (dupData.ok && dupData.duplicate) {
-        addCaseDuplicateId = dupData.duplicate.id;
-        document.getElementById('addCaseDupText').innerText =
-          `⚠️ 疑似跟既有案例「${dupData.duplicate.title}」（${dupData.duplicate.created_at}匯入）重複：${dupData.duplicate.reason || ''}`;
-        document.getElementById('addCaseDupWarning').classList.remove('hidden');
+        const dup = dupData.duplicate;
+        addCaseDuplicateId = dup.id;
+        const box = document.getElementById('addCaseDupWarning');
+        const sameCase = dup.level === 'same_case';
+        // 紅色=同一件案子重複匯入（建議不要匯，取代勾選預設不勾）；黃色=同類制式稿（沿用原本行為，預設勾選取代舊的）
+        box.className = sameCase
+          ? 'mb-4 rounded-xl bg-red-50 border border-red-300 p-3 text-sm text-red-800'
+          : 'mb-4 rounded-xl bg-amber-50 border border-amber-200 p-3 text-sm text-amber-800';
+        document.getElementById('addCaseDupText').innerText = sameCase
+          ? `🔴 同一件案子已經匯入過：「${dup.title}」（${dup.created_at}匯入）。${dup.reason || ''}\n建議不要重複匯入；如果這次的版本比較完整，才勾選下面改用新版。`
+          : `🟡 同類制式稿：跟既有案例「${dup.title}」（${dup.created_at}匯入）回覆邏輯相同，只是案情細節不同。${dup.reason || ''}`;
+        document.getElementById('addCaseDupSupersede').checked = !sameCase;
+        document.getElementById('addCaseDupSupersedeLabel').innerText = sameCase
+          ? '改用這次的新版，並把舊的標記為「已被取代」（舊的不會刪除）'
+          : '標記舊案例為「已被取代」（不會刪除，仍可查詢參考，但AI比對/生成時不再優先選用）';
+        box.classList.remove('hidden');
       }
     } catch (e) { /* 非關鍵檢查，失敗就不顯示警告 */ }
   } catch (e) {
