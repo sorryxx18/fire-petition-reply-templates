@@ -206,13 +206,24 @@ function renderSmartSearch(data) {
       </div>
     </div>` : '';
   document.getElementById('smartSearchResult').innerHTML = `
-    <div class="rounded-xl bg-[var(--brand-bg-1)] border border-slate-200 px-3 py-2.5 text-sm text-slate-800 leading-relaxed whitespace-pre-wrap">${escapeHtml(data.answer || '')}</div>
+    <div class="rounded-xl bg-[var(--brand-bg-1)] border border-slate-200 px-3 py-2.5 text-sm text-slate-800 leading-relaxed whitespace-pre-wrap">${renderSmartAnswer(data.answer || '')}</div>
     ${phrasesHtml}${casesHtml}`;
+}
+
+// 後端把AI回答裡的出處換成[[case:id]]，這裡渲染成「標題（日期）」連結，點下去開全文
+function renderSmartAnswer(answer) {
+  return escapeHtml(answer).replace(/\[\[case:([^\]]+)\]\]/g, (m, id) => {
+    const i = smartSearchCases.findIndex(c => String(c.id) === id);
+    if (i === -1) return '';
+    const c = smartSearchCases[i];
+    const when = c.type === 'standard' ? '制式範本・原始批次' : (c.created_at || '');
+    return `<button type="button" onclick="openSmartCase(${i})" class="inline text-[var(--brand-primary)] underline font-semibold">${escapeHtml(c.title || '')}（${escapeHtml(when)}）</button>`;
+  });
 }
 
 function openSmartCase(i) {
   const c = smartSearchCases[i];
-  if (c) showCaseModal(c.title, c.category, c.response_text);
+  if (c) showCaseModal(c.title + '（' + (c.type === 'standard' ? '制式範本・原始批次' : (c.created_at || '')) + '）', c.category, c.response_text);
 }
 
 async function copySmartPhrase(i) {
