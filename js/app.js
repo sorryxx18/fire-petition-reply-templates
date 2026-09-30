@@ -157,7 +157,7 @@ async function runSmartSearch() {
   }
   resultBox.classList.add('hidden');
   loading.classList.remove('hidden');
-  btn.disabled = true;
+  btnBusy(btn, '搜尋中');
   try {
     const res = await fetch(GAS_URL, {
       method: 'POST',
@@ -176,7 +176,7 @@ async function runSmartSearch() {
     resultBox.innerHTML = `<p class="text-sm text-red-500">連線失敗：${escapeHtml(e.message)}</p>`;
   }
   loading.classList.add('hidden');
-  btn.disabled = false;
+  btnIdle(btn);
   resultBox.classList.remove('hidden');
 }
 
@@ -233,6 +233,20 @@ async function copySmartPhrase(i) {
   } catch (e) {
     alert('複製失敗，請手動選取文字複製。');
   }
+}
+
+// 按鈕等待中：停用＋轉圈圈＋文字，結束後還原原本內容
+function btnBusy(btn, label) {
+  if (!btn) return;
+  if (btn._idleHtml === undefined) btn._idleHtml = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = `<span class="spin mr-1.5"></span>${escapeHtml(label)}`;
+}
+
+function btnIdle(btn) {
+  if (!btn) return;
+  btn.disabled = false;
+  if (btn._idleHtml !== undefined) { btn.innerHTML = btn._idleHtml; delete btn._idleHtml; }
 }
 
 function escapeHtml(s) {
@@ -1138,8 +1152,7 @@ function renderAiAskAnswer(answer) {
 async function aiInsertAskSuggestion() {
   if (!aiAskSuggestion) return;
   const btn = document.getElementById('aiInsertSuggestionBtn');
-  const originalLabel = btn ? btn.innerText : '';
-  if (btn) { btn.disabled = true; btn.innerText = 'AI整合中...'; }
+  btnBusy(btn, 'AI整合進草稿中…');
 
   try {
     const draftText = document.getElementById('aiDraftText').value;
@@ -1155,15 +1168,15 @@ async function aiInsertAskSuggestion() {
     const data = await res.json();
     if (!data.ok) {
       alert('整合失敗：' + (data.error || '未知錯誤'));
-      if (btn) { btn.disabled = false; btn.innerText = originalLabel; }
+      btnIdle(btn);
       return;
     }
     document.getElementById('aiDraftText').value = data.draft;
     showSuccessToast('已將建議內容整合進草稿，請再次核對全文。');
-    if (btn) { btn.disabled = true; btn.innerText = '已整合'; }
+    if (btn) { delete btn._idleHtml; btn.disabled = true; btn.innerText = '已整合'; }
   } catch (e) {
     alert('連線失敗：' + e.message);
-    if (btn) { btn.disabled = false; btn.innerText = originalLabel; }
+    btnIdle(btn);
   }
 }
 
@@ -1499,6 +1512,8 @@ async function aiAddCaseParse() {
     // 查不到/查詢失敗都不影響正常匯入流程，只是少了這個提醒。
     addCaseDuplicateId = null;
     document.getElementById('addCaseDupWarning').classList.add('hidden');
+    const dupChecking = document.getElementById('addCaseDupChecking');
+    dupChecking.classList.remove('hidden');
     try {
       const dupRes = await fetch(GAS_URL, {
         method: 'POST',
@@ -1527,6 +1542,7 @@ async function aiAddCaseParse() {
         box.classList.remove('hidden');
       }
     } catch (e) { /* 非關鍵檢查，失敗就不顯示警告 */ }
+    dupChecking.classList.add('hidden');
   } catch (e) {
     loadingMsg.classList.add('hidden');
     document.getElementById('addCaseParseBtn').disabled = false;
@@ -1558,6 +1574,8 @@ async function aiAddCaseConfirm() {
   const supersedeId = (addCaseDuplicateId && document.getElementById('addCaseDupSupersede').checked)
     ? addCaseDuplicateId : null;
 
+  const confirmBtn = document.getElementById('addCaseConfirmBtn');
+  btnBusy(confirmBtn, '寫入案例庫中…');
   try {
     const res = await fetch(GAS_URL, {
       method: 'POST',
@@ -1588,4 +1606,5 @@ async function aiAddCaseConfirm() {
   } catch (e) {
     alert('連線失敗：' + e.message);
   }
+  btnIdle(confirmBtn);
 }
